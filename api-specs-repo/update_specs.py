@@ -23,7 +23,7 @@ api_specs = {
 # Directory to save the fetched specs
 specs_dir = "api-specs-repo/specs"
 # File to store ETags
-etag_file = "etags.json"
+etag_file = "api-specs-repo/etags.json"
 
 # Ensure the directory exists
 os.makedirs(specs_dir, exist_ok=True)
