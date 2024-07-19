@@ -21,7 +21,7 @@ api_specs = {
 }
 
 # Directory to save the fetched specs
-specs_dir = "specs"
+specs_dir = "api-specs-repo/specs"
 # File to store ETags
 etag_file = "etags.json"
 
