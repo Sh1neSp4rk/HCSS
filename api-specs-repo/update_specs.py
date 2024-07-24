@@ -1,6 +1,8 @@
 import requests
 import os
 import json
+from pathlib import Path
+import yaml
 
 # Define API specification URLs
 api_specs = {
@@ -35,6 +37,9 @@ if os.path.exists(etag_file):
 else:
     etags = {}
 
+# Create a dictionary to store the endpoints
+endpoints = {}
+
 for name, url in api_specs.items():
     try:
         # Get the last known ETag
@@ -63,8 +68,22 @@ for name, url in api_specs.items():
         with open(file_path, "wb") as file:
             file.write(response.content)
         
+        # Parse the OpenAPI YAML file
+        with open(file_path, "r") as file:
+            openapi_yaml = yaml.safe_load(file)
+
+        # Extract the endpoints
+        for path, methods in openapi_yaml["paths"].items():
+            for method, _ in methods.items():
+                endpoint = f"{method.upper()} {path}"
+                if name not in endpoints:
+                    endpoints[name] = {}
+                if method.upper() not in endpoints[name]:
+                    endpoints[name][method.upper()] = []
+                endpoints[name][method.upper()].append(endpoint)
+
         print(f"Updated {name} specification.")
-        
+
     except Exception as e:
         print(f"Failed to update {name}: {e}")
 
@@ -72,4 +91,17 @@ for name, url in api_specs.items():
 with open(etag_file, "w") as f:
     json.dump(etags, f)
 
-print("All specifications checked and updated.")
+# Create the Markdown file
+markdown_file = Path("Endpoints.md")
+if not markdown_file.exists() or len(endpoints) > 0:
+    with open("Endpoints.md", "w") as f:
+        for name, methods in endpoints.items():
+            f.write(f"### {name}\n")
+            for method, endpoints in methods.items():
+                f.write(f"#### {method}\n")
+                for endpoint in endpoints:
+                    f.write(f"* {endpoint}\n")
+            f.write("\n")
+    print("Endpoints.md file updated.")
+else:
+    print("No changes to Endpoints.md file.")
