@@ -80,7 +80,22 @@ for name, url in api_specs.items():
                     endpoints[name] = {}
                 if method.upper() not in endpoints[name]:
                     endpoints[name][method.upper()] = []
-                endpoints[name][method.upper()].append(endpoint)
+                
+                # Construct the full URL
+                if 'openapi' in openapi_yaml:
+                    # OpenAPI format
+                    server_url = openapi_yaml['servers'][0]['url']
+                    full_url = server_url + path
+                elif 'swagger' in openapi_yaml:
+                    # Swagger format
+                    host = openapi_yaml['host']
+                    base_path = openapi_yaml.get('basePath', '')
+                    scheme = openapi_yaml['schemes'][0]
+                    full_url = f"{scheme}://{host}{base_path}{path}"
+                else:
+                    raise ValueError(f"Unknown format for {name}")
+
+                endpoints[name][method.upper()].append(full_url)
 
         print(f"Updated {name} specification.")
 
@@ -97,10 +112,10 @@ if not markdown_file.exists() or len(endpoints) > 0:
     with open("Endpoints.md", "w") as f:
         for name, methods in endpoints.items():
             f.write(f"### {name}\n")
-            for method, endpoints in methods.items():
+            for method, urls in methods.items():
                 f.write(f"#### {method}\n")
-                for endpoint in endpoints:
-                    f.write(f"* {endpoint}\n")
+                for url in urls:
+                    f.write(f"* {url}\n")
             f.write("\n")
     print("Endpoints.md file updated.")
 else:
