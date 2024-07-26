@@ -1,0 +1,219 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "HCSS Drive API",
+        "description": "Manage HCSS Files",
+        "contact": {
+            "name": "Heavy Construction Systems Specialists, Inc. (HCSS)",
+            "url": "https://support.hcss.com/",
+            "email": "support@hcss.com"
+        },
+        "version": "1",
+        "termsOfService": "https://support.hcss.com.",
+        "license": {
+            "name": "EULA",
+            "url": "https://support.hcss.com."
+        }
+    },
+    "servers": [
+        {
+            "url": "https://api.hcssapps.com/attachments"
+        }
+    ],
+    "security": [
+        {
+            "bearer": [
+                "attachments:write",
+                "attachments:read"
+            ]
+        }
+    ],
+    "paths": {
+        "/api/v1/Files/{fileId}": {
+            "get": {
+                "tags": [
+                    "Files"
+                ],
+                "summary": "Returns metadata for a file.",
+                "description": "The metadata returned can be used to download the files with the links that expire after one hour.",
+                "operationId": "Get",
+                "parameters": [
+                    {
+                        "name": "fileId",
+                        "in": "path",
+                        "description": "The unique identifier of the file.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FileDetailV2"
+                                },
+                                "example": {
+                                    "fileUri": "https://files.hcss.app/e968e41b-2a6b-445b-accb-379bd6fda540",
+                                    "thumbnailUri": "https://files.hcss.app/b4470276-bfe4-4841-9e4b-fc101cf2cc57",
+                                    "previewUri": "https://files.hcss.app/dc619245-0e84-412b-9c7e-f71267ede01d",
+                                    "id": "745b6547-861c-4617-9e8d-2ac9ce32a170",
+                                    "name": "Brown.jpeg",
+                                    "jobId": "8f12a543-280e-4ed8-8b10-e8273e39e4b0"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized Access"
+                    },
+                    "403": {
+                        "description": "Forbidden Request"
+                    }
+                }
+            }
+        },
+        "/api/v1/Files": {
+            "post": {
+                "tags": [
+                    "Files"
+                ],
+                "summary": "Creates a new file.",
+                "description": "Returns a unique identifier for the newly created file",
+                "operationId": "Post",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "BusinessUnitId",
+                                    "File",
+                                    "JobId"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "File": {
+                                        "type": "string",
+                                        "description": "The binary data of the file.",
+                                        "format": "binary"
+                                    },
+                                    "BusinessUnitId": {
+                                        "type": "string",
+                                        "description": "The unique identifier of the business unit.",
+                                        "format": "uuid"
+                                    },
+                                    "JobId": {
+                                        "type": "string",
+                                        "description": "The unique identifier of the job.",
+                                        "format": "uuid"
+                                    }
+                                }
+                            },
+                            "encoding": {
+                                "File": {
+                                    "style": "form"
+                                },
+                                "BusinessUnitId": {
+                                    "style": "form"
+                                },
+                                "JobId": {
+                                    "style": "form"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized Access"
+                    },
+                    "403": {
+                        "description": "Forbidden Request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "FileDetailV2": {
+                "type": "object",
+                "properties": {
+                    "fileUri": {
+                        "type": "string",
+                        "description": "A link to the file. \r\nThe link is temporary and expires after 1 hour.",
+                        "format": "uri",
+                        "nullable": true
+                    },
+                    "thumbnailUri": {
+                        "type": "string",
+                        "description": "A link to the thumbnail image, if the original uploaded file was also an image.\r\nThe link is temporary and expires after 1 hour.",
+                        "format": "uri",
+                        "nullable": true
+                    },
+                    "previewUri": {
+                        "type": "string",
+                        "description": "A link to the preview image, if the original uploaded file was also an image.\r\nThe link is temporary and expires after 1 hour.",
+                        "format": "uri",
+                        "nullable": true
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The unique identifier of the file.",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the file.",
+                        "nullable": true
+                    },
+                    "jobId": {
+                        "type": "string",
+                        "description": "The unique identifier of job that is associated with the file.",
+                        "format": "uuid",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "oauth2",
+                "description": "oauth2",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+                        "scopes": {
+                            "attachments:write": "attachments:write",
+                            "attachments:read": "attachments:read"
+                        }
+                    },
+                    "authorizationCode": {
+                        "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+                        "authorizationUrl": "https://api.hcssapps.com/identity/connect/authorize",
+                        "scopes": {
+                            "attachments:write": "attachments:write",
+                            "attachments:read": "attachments:read"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

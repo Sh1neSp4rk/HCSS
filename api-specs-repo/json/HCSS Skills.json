@@ -1,0 +1,993 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "Skills.ExternalApi",
+        "description": "A skills management system. Operations require the \"skills:read\" or \"skills:write\" scope.",
+        "termsOfService": "https://support.hcss.com.",
+        "contact": {
+            "name": "Heavy Construction Systems Specialists, Inc. (HCSS)",
+            "url": "https://support.hcss.com/",
+            "email": "support@hcss.com"
+        },
+        "license": {
+            "name": "EULA",
+            "url": "https://support.hcss.com."
+        }
+    },
+    "host": "api.hcssapps.com",
+    "basePath": "/skills/api",
+    "schemes": [
+        "https"
+    ],
+    "security": [
+        {
+            "bearer": [
+                "skills:read",
+                "skills:write"
+            ]
+        }
+    ],
+    "paths": {
+        "/v1/employeeSkills/employee/{employeeCode}": {
+            "get": {
+                "tags": [
+                    "EmployeeSkills"
+                ],
+                "summary": "Returns all skills that the specified employee has.",
+                "description": "Returns all skills that the specified employee has.\r\n\r\nA response header called \"Pagination-MorePagesAvailable\" will be sent in the response with a value of \"yes\" or \"no\", indicating whether more pages are available after\r\nthis one.  That is, if the header value is \"yes\", the client should request the next page.",
+                "operationId": "EmployeeSkills_GetByEmployee",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "employeeCode",
+                        "in": "path",
+                        "description": "The employee code",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "dateAfterUtc",
+                        "in": "query",
+                        "description": "Limits the results to employee skills that have been updated after the specified UTC time.",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of results returned.  Default 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The page offset.  The response header \"Pagination-MorePagesAvailable\" indicates whether the call should be made again with an incremented offset.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "usePayrollCode",
+                        "in": "query",
+                        "description": "Specifies whether or not to include the HeavyJob payroll code for each employee in the response. The default value is false.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiEmployeeSkill"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/v1/employeeSkills/skill/{courseCodeOrName}": {
+            "get": {
+                "tags": [
+                    "EmployeeSkills"
+                ],
+                "summary": "Returns all employees having the specified skill.",
+                "description": "Returns all employees having the specified skill.\r\n\r\nA response header called \"Pagination-MorePagesAvailable\" will be sent in the response with a value of \"yes\" or \"no\", indicating whether more pages are available after\r\nthis one.  That is, if the header value is \"yes\", the client should request the next page.",
+                "operationId": "EmployeeSkills_GetBySkill",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "courseCodeOrName",
+                        "in": "path",
+                        "description": "The course code or skill name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "dateAfterUtc",
+                        "in": "query",
+                        "description": "Limits the results to employee skills that have been updated after the specified UTC time.",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of results returned.  Default 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The page offset.  The response header \"Pagination-MorePagesAvailable\" indicates whether the call should be made again with an incremented offset.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "usePayrollCode",
+                        "in": "query",
+                        "description": "Specifies whether or not to include the HeavyJob payroll code for each employee in the response. The default value is false.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiEmployeeSkill"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/v1/employeeSkills": {
+            "get": {
+                "tags": [
+                    "EmployeeSkills"
+                ],
+                "summary": "Gets the cartesian product of employees and skills.",
+                "description": "Returns a cross join of employees and skills, with each result representing a single skill for a single employee.  For example, if there are 10 employees and\r\neach employee has 10 skills, this call will return 100 results.\r\n\r\nA response header called \"Pagination-MorePagesAvailable\" will be sent in the response with a value of \"yes\" or \"no\", indicating whether more pages are available after\r\nthis one.  That is, if the header value is \"yes\", the client should request the next page.",
+                "operationId": "EmployeeSkills_Get",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateAfterUtc",
+                        "in": "query",
+                        "description": "Limits the results to employee skills that have been updated after the specified UTC time.",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of results returned.  Default 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The page offset.  The response header \"Pagination-MorePagesAvailable\" indicates whether the call should be made again with an incremented offset.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "includeDismissed",
+                        "in": "query",
+                        "description": "Specifies whether or not to include dismissed skills in the response. The default value is false.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "usePayrollCode",
+                        "in": "query",
+                        "description": "Specifies whether or not to include the HeavyJob payroll code for each employee in the response. The default value is false.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiEmployeeSkill"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EmployeeSkills"
+                ],
+                "summary": "Creates or updates a skill for an existing employee, using the skill's course code or name as a unique identifier.",
+                "description": "Creates or updates a skill for an existing employee, using the skill's course code or name as a unique identifier.\r\n\r\nIf the skill does not exist, it is simply created.  If the skill already exists, the old skill is \"dismissed\" but retained\r\nfor record-keeping, and a new, non-dismissed skill is created.",
+                "operationId": "EmployeeSkills_Post",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "skill",
+                        "in": "body",
+                        "description": "The skill to be upserted for an existing employee.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApiEmployeeSkill"
+                        }
+                    },
+                    {
+                        "name": "usePayrollCode",
+                        "in": "query",
+                        "description": "Specifies whether or not to use the HeavyJob payroll code as the unique identifier for an employee. If true, EmployeePayrollCode is required and will be used instead of EmployeeCode to identify the employee that should receive the skill. The default value is false.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/employeeSkills/import": {
+            "post": {
+                "tags": [
+                    "EmployeeSkills"
+                ],
+                "summary": "Imports a list of employee skills, using the skill's course code or name as a unique identifier on each employee.",
+                "description": "Imports a list of employee skills, using the skill's course code or name as a unique identifier on each employee.\r\n\r\nThis call does not create any new employees; all specified employee codes must belong to pre-existing employees.\r\n\r\nIf the skill does not exist for a particular employee, it is simply created.  If the skill already exists, the old\r\nskill is \"dismissed\" but retained for record-keeping, and a new, non-dismissed skill is created.",
+                "operationId": "EmployeeSkills_Import",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "employeeSkills",
+                        "in": "body",
+                        "description": "A list of employee skills",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiEmployeeSkill"
+                            }
+                        }
+                    },
+                    {
+                        "name": "usePayrollCode",
+                        "in": "query",
+                        "description": "Specifies whether or not to use the HeavyJob payroll code as the unique identifier for an employee. If true, EmployeePayrollCode is required and will be used instead of EmployeeCode to identify the employee that should receive the skill. The default value is false.",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/v1/skills/{courseCodeOrName}": {
+            "get": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Gets a single skill by course code or by skill name.",
+                "description": "Gets a single skill by course code or by skill name.",
+                "operationId": "Skills_Get",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "courseCodeOrName",
+                        "in": "path",
+                        "description": "The course code or skill name.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "$ref": "#/definitions/ApiSkill"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Updates an existing skill, using the course code or skill name as a unique identifier.",
+                "description": "Updates an existing skill, using the course code or skill name as a unique identifier.  If the skill does not already exist,\r\nthis call will return an error.",
+                "operationId": "Skills_Put",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "courseCodeOrName",
+                        "in": "path",
+                        "description": "The course code or skill name.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "skill",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApiSkill"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Deletes a skill by course code or skill name.",
+                "description": "Deletes a skill by course code or skill name.  This method will not dismiss (i.e., soft delete) the skill; it\r\nis permanently removed.  The skill will also be removed from all employees.",
+                "operationId": "Skills_Delete",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "courseCodeOrName",
+                        "in": "path",
+                        "description": "The course code or skill name.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/skills": {
+            "get": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Gets a list of skills.",
+                "description": "Gets a list of skills.\r\n\r\nA response header called \"Pagination-MorePagesAvailable\" will be sent in the response with a value of \"yes\" or \"no\", indicating whether more pages are available after\r\nthis one.  That is, if the header value is \"yes\", the client should request the next page.",
+                "operationId": "Skills_GetList",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "dateAfterUtc",
+                        "in": "query",
+                        "description": "Limits the results to skills that have been updated after the specified UTC time.",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of results returned.  Default 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The page offset.  The response header \"Pagination-MorePagesAvailable\" indicates whether the call should be made again with an incremented offset.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiSkill"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Create a new skill, using the course code or skill name as a unique identifier.",
+                "description": "Create a new skill, using the course code or skill name as a unique identifier.  If the skill already exists,\r\nthis call will return an error.",
+                "operationId": "Skills_Post",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "skill",
+                        "in": "body",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApiSkill"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/skills/import": {
+            "post": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Imports a list of skills, using the course code or name as a unique identifier for each skill.",
+                "description": "Imports a list of skills, using the course code or name as a unique identifier for each skill.  Blank or null names are treated as equivalent.",
+                "operationId": "Skills_Import",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "skills",
+                        "in": "body",
+                        "description": "A list of skills",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApiSkill"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UpsertSkillResult"
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UpsertSkillResult"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ApiEmployeeSkill": {
+            "required": [
+                "EmployeeCode"
+            ],
+            "type": "object",
+            "properties": {
+                "EmployeeCode": {
+                    "description": "A unique string identifier for this employee",
+                    "type": "string"
+                },
+                "EmployeePayrollCode": {
+                    "description": "The payroll code for the employee from HeavyJob. This value is only provided or used if the usePayrollCode\r\nURL parameter is specified.",
+                    "type": "string"
+                },
+                "SkillName": {
+                    "description": "The display name for the skill",
+                    "type": "string"
+                },
+                "CourseCode": {
+                    "description": "A unique string identifier for this skill's course code, can be the course name or course number in your LMS system, if this is not specified SkillName will be used unique identifier",
+                    "type": "string"
+                },
+                "CertificationDate": {
+                    "format": "date-time",
+                    "description": "A datetime of when the employee was certified in this skill",
+                    "type": "string"
+                },
+                "ExpirationDate": {
+                    "format": "date-time",
+                    "description": "A datetime of when this skill expires for this employee",
+                    "type": "string"
+                },
+                "TrainingTime": {
+                    "format": "int32",
+                    "description": "TrainingTime is the amount of minutes it took the employee to complete the skill",
+                    "type": "integer"
+                },
+                "Note": {
+                    "description": "Note or description for this employee's skill",
+                    "type": "string"
+                },
+                "IsDismissed": {
+                    "description": "If the employee skill has been archived/dismissed if it is invalid, no longer in use, can be manually archived in Skills system",
+                    "type": "boolean"
+                },
+                "LastModified": {
+                    "format": "date-time",
+                    "description": "Optional: when the employee skill was last modified",
+                    "type": "string"
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "description": "Optional: when the employee skill was created",
+                    "type": "string"
+                },
+                "Attachments": {
+                    "description": "Attachments to the employees skill",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ApiESAttachment"
+                    }
+                }
+            }
+        },
+        "ApiESAttachment": {
+            "description": "A POCO representing an arbitrary attachment on an employee skill.",
+            "required": [
+                "AttachmentUrl",
+                "Name"
+            ],
+            "type": "object",
+            "properties": {
+                "AttachmentUrl": {
+                    "description": "Url of the attachment",
+                    "type": "string"
+                },
+                "Name": {
+                    "description": "Display name of the attachment",
+                    "type": "string"
+                }
+            }
+        },
+        "ApiSkill": {
+            "description": "A POCO representing a skill from the skills API.",
+            "required": [
+                "Description",
+                "HasExpiration",
+                "SkillType"
+            ],
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "description": "Display name of the skill",
+                    "type": "string"
+                },
+                "Description": {
+                    "description": "Description of the skill",
+                    "type": "string"
+                },
+                "HasExpiration": {
+                    "description": "Boolean whether or not the skill expires",
+                    "type": "boolean"
+                },
+                "ExpirationAlertThreshold": {
+                    "format": "int32",
+                    "description": "Threshold of days to the set Expiration when a skill changes to expiring",
+                    "type": "integer"
+                },
+                "ExpiresAfter": {
+                    "format": "int32",
+                    "description": "Quantity of time units the skill expires after",
+                    "type": "integer"
+                },
+                "ExpiresAfterUnits": {
+                    "description": "Enum for time units Days = 1, Months = 2, Years = 3",
+                    "enum": [
+                        "Unknown",
+                        "Days",
+                        "Months",
+                        "Years"
+                    ],
+                    "type": "string"
+                },
+                "TrainingTime": {
+                    "format": "int32",
+                    "description": "The amount of time in minutes the skill takes to complete, will be used in the Safety system as default training meeting duration if skill meetings are enabled",
+                    "type": "integer"
+                },
+                "EnableTrainingMeetings": {
+                    "description": "If training meetings for this skill are enabled (turns on the skill meeting integration)",
+                    "type": "boolean"
+                },
+                "SkillType": {
+                    "description": "A type to group skills by",
+                    "type": "string"
+                },
+                "CourseCode": {
+                    "description": "A unique string identifier for the course related to the skill, could be a course name or course number",
+                    "type": "string"
+                },
+                "IsPrivate": {
+                    "description": "Boolean to determine if skill is public or private",
+                    "type": "boolean"
+                },
+                "LastModified": {
+                    "format": "date-time",
+                    "description": "When the skill was last modified",
+                    "type": "string"
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "description": "When the skill was created",
+                    "type": "string"
+                },
+                "Attachments": {
+                    "description": "Attachments to the skill",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ApiAttachment"
+                    }
+                }
+            }
+        },
+        "ApiAttachment": {
+            "description": "A POCO representing an arbitrary attachment on a skill.",
+            "required": [
+                "AttachmentUrl",
+                "Name",
+                "MimeType"
+            ],
+            "type": "object",
+            "properties": {
+                "AttachmentUrl": {
+                    "description": "Url of the attachment",
+                    "type": "string"
+                },
+                "Name": {
+                    "description": "Display name of the attachment",
+                    "type": "string"
+                },
+                "MimeType": {
+                    "description": "MimeType examples: application/pdf image/png image/jpeg",
+                    "type": "string"
+                }
+            }
+        },
+        "UpsertSkillResult": {
+            "type": "object",
+            "properties": {
+                "SubmittedSkill": {
+                    "$ref": "#/definitions/ApiSkill"
+                },
+                "Error": {
+                    "type": "boolean"
+                },
+                "ErrorMessage": {
+                    "type": "string"
+                },
+                "Code": {
+                    "enum": [
+                        "Continue",
+                        "SwitchingProtocols",
+                        "OK",
+                        "Created",
+                        "Accepted",
+                        "NonAuthoritativeInformation",
+                        "NoContent",
+                        "ResetContent",
+                        "PartialContent",
+                        "MultipleChoices",
+                        "Ambiguous",
+                        "MovedPermanently",
+                        "Moved",
+                        "Found",
+                        "Redirect",
+                        "SeeOther",
+                        "RedirectMethod",
+                        "NotModified",
+                        "UseProxy",
+                        "Unused",
+                        "TemporaryRedirect",
+                        "RedirectKeepVerb",
+                        "BadRequest",
+                        "Unauthorized",
+                        "PaymentRequired",
+                        "Forbidden",
+                        "NotFound",
+                        "MethodNotAllowed",
+                        "NotAcceptable",
+                        "ProxyAuthenticationRequired",
+                        "RequestTimeout",
+                        "Conflict",
+                        "Gone",
+                        "LengthRequired",
+                        "PreconditionFailed",
+                        "RequestEntityTooLarge",
+                        "RequestUriTooLong",
+                        "UnsupportedMediaType",
+                        "RequestedRangeNotSatisfiable",
+                        "ExpectationFailed",
+                        "UpgradeRequired",
+                        "InternalServerError",
+                        "NotImplemented",
+                        "BadGateway",
+                        "ServiceUnavailable",
+                        "GatewayTimeout",
+                        "HttpVersionNotSupported"
+                    ],
+                    "type": "string"
+                },
+                "SavedSkill": {
+                    "$ref": "#/definitions/SK_Skill"
+                },
+                "SkillInserted": {
+                    "type": "boolean"
+                },
+                "AttachmentsToCopyByUrl": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/SF_Attachment"
+                    }
+                }
+            }
+        },
+        "SK_Skill": {
+            "required": [
+                "Name",
+                "Description",
+                "HasExpiration",
+                "IsPrivate",
+                "ExpirationAlertThreshold",
+                "CreatedByApplication"
+            ],
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "IsDeleted": {
+                    "type": "boolean"
+                },
+                "DeletedBy": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "DeletedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "CreatedByID": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ModifiedByID": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "AllowSync": {
+                    "type": "boolean"
+                },
+                "SyncTimestamp": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        },
+        "SF_Attachment": {
+            "required": [
+                "AttachmentUrl",
+                "Name",
+                "Discriminator",
+                "MimeType",
+                "IsCanned"
+            ],
+            "type": "object",
+            "properties": {
+                "AttachedToItemID": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "AttachmentUrl": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "ThumbnailUrl": {
+                    "type": "string"
+                },
+                "ExternalSourceUrl": {
+                    "type": "string"
+                },
+                "ID": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "IsDeleted": {
+                    "type": "boolean"
+                },
+                "DeletedBy": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "DeletedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "CreatedByID": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ModifiedByID": {
+                    "format": "uuid",
+                    "type": "string",
+                    "example": "00000000-0000-0000-0000-000000000000"
+                },
+                "AllowSync": {
+                    "type": "boolean"
+                },
+                "SyncTimestamp": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "bearer": {
+            "type": "oauth2",
+            "description": "OAuth2 Client Credentials Flow",
+            "flow": "application",
+            "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+            "scopes": {
+                "skills:read": "skills:read",
+                "skills:write": "skills:write"
+            }
+        },
+        "authcode": {
+            "type": "oauth2",
+            "description": "OAuth2 Authorization Code",
+            "flow": "accessCode",
+            "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+            "authorizationUrl": "https://api.hcssapps.com/identity/connect/authorize",
+            "scopes": {
+                "skills:read": "skills:read",
+                "skills:write": "skills:write"
+            }
+        }
+    }
+}
