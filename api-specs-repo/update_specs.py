@@ -24,11 +24,13 @@ api_specs = {
 
 # Directory to save the fetched specs
 specs_dir = "api-specs-repo/specs"
+json_dir = "api-specs-repo/json"
 # File to store ETags
 etag_file = "api-specs-repo/etags.json"
 
-# Ensure the directory exists
+# Ensure the directories exist
 os.makedirs(specs_dir, exist_ok=True)
+os.makedirs(json_dir, exist_ok=True)
 
 # Load existing ETags from file
 if os.path.exists(etag_file):
@@ -72,6 +74,11 @@ for name, url in api_specs.items():
         with open(file_path, "r") as file:
             openapi_yaml = yaml.safe_load(file)
 
+        # Save the JSON version of the API specification to a file
+        json_file_path = os.path.join(json_dir, f"{name}.json")
+        with open(json_file_path, "w") as file:
+            json.dump(openapi_yaml, file, indent=4)
+
         # Extract the endpoints
         for path, methods in openapi_yaml["paths"].items():
             for method, _ in methods.items():
@@ -81,42 +88,27 @@ for name, url in api_specs.items():
                 if method.upper() not in endpoints[name]:
                     endpoints[name][method.upper()] = []
                 
-                # Construct the full URL
+                                # Construct the full URL
                 if 'openapi' in openapi_yaml:
-                    # OpenAPI format
-                    server_url = openapi_yaml['servers'][0]['url']
-                    full_url = server_url + path
-                elif 'swagger' in openapi_yaml:
-                    # Swagger format
-                    host = openapi_yaml['host']
-                    base_path = openapi_yaml.get('basePath', '')
-                    scheme = openapi_yaml['schemes'][0]
-                    full_url = f"{scheme}://{host}{base_path}{path}"
+                    # OpenAPI 3.0
+                    if 'servers' in openapi_yaml:
+                        server_url = openapi_yaml['servers'][0]['url']
+                    else:
+                        server_url = ''
                 else:
-                    raise ValueError(f"Unknown format for {name}")
+                    # OpenAPI 2.0
+                    server_url = openapi_yaml['host'] + openapi_yaml['basePath']
 
+                full_url = server_url + path.replace('{', '{{').replace('}', '}}')
                 endpoints[name][method.upper()].append(full_url)
 
-        print(f"Updated {name} specification.")
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching {name}: {e}")
 
-    except Exception as e:
-        print(f"Failed to update {name}: {e}")
-
-# Save updated ETags to file
+# Save the ETags to a file
 with open(etag_file, "w") as f:
-    json.dump(etags, f)
+    json.dump(etags, f, indent=4)
 
-# Create the Markdown file
-markdown_file = Path("Endpoints.md")
-if not markdown_file.exists() or len(endpoints) > 0:
-    with open("Endpoints.md", "w") as f:
-        for name, methods in endpoints.items():
-            f.write(f"### {name}\n")
-            for method, urls in methods.items():
-                f.write(f"#### {method}\n")
-                for url in urls:
-                    f.write(f"* {url}\n")
-            f.write("\n")
-    print("Endpoints.md file updated.")
-else:
-    print("No changes to Endpoints.md file.")
+# Save the endpoints to a file
+with open("endpoints.json", "w") as f:
+    json.dump(endpoints, f, indent=4)
