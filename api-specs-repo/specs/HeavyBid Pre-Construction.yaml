@@ -826,6 +826,11 @@ components:
       properties:
         isLocked:
           type: boolean
+        filterValues:
+          type: array
+          nullable: true
+          items:
+            type: string
     QueryFilter:
       type: object
       additionalProperties: false
