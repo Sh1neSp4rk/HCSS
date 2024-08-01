@@ -8,26 +8,26 @@ on:
 jobs:
   update-specs:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    
+
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
         python-version: '3.x'
-    
+
     - name: Install dependencies
       run: |
-        pip install requests pyyaml
-    
+        pip install -r requirements.txt
+
     - name: List files
       run: ls -R # Debugging step to verify file locations
 
     - name: Run update script
       run: python api-specs-repo/update_specs.py
-    
+
     - name: Commit and push changes
       uses: EndBug/add-and-commit@v9
       with:
