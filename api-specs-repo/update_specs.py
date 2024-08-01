@@ -42,6 +42,39 @@ else:
 # Create a dictionary to store the endpoints
 endpoints = {}
 
+def extract_endpoints(file_path, name):
+    """Extract endpoints from the OpenAPI YAML file and update the endpoints dictionary."""
+    try:
+        # Parse the OpenAPI YAML file
+        with open(file_path, "r") as file:
+            openapi_yaml = yaml.safe_load(file)
+        
+        # Extract the endpoints
+        for path, methods in openapi_yaml.get("paths", {}).items():
+            for method, _ in methods.items():
+                endpoint = f"{method.upper()} {path}"
+                if name not in endpoints:
+                    endpoints[name] = {}
+                if method.upper() not in endpoints[name]:
+                    endpoints[name][method.upper()] = []
+
+                # Construct the full URL
+                server_url = ''
+                if 'openapi' in openapi_yaml:
+                    # OpenAPI 3.0
+                    if 'servers' in openapi_yaml and openapi_yaml['servers']:
+                        server_url = openapi_yaml['servers'][0]['url']
+                if not server_url:
+                    # OpenAPI 2.0
+                    server_url = openapi_yaml.get('host', '') + openapi_yaml.get('basePath', '')
+
+                full_url = server_url + path.replace('{', '{{').replace('}', '}}')
+                endpoints[name][method.upper()].append(full_url)
+
+    except Exception as e:
+        print(f"Error processing {name}: {e}")
+
+# Fetch and save API specifications, then extract endpoints
 for name, url in api_specs.items():
     try:
         # Get the last known ETag
@@ -70,36 +103,8 @@ for name, url in api_specs.items():
         with open(file_path, "wb") as file:
             file.write(response.content)
         
-        # Parse the OpenAPI YAML file
-        with open(file_path, "r") as file:
-            openapi_yaml = yaml.safe_load(file)
-
-        # Save the JSON version of the API specification to a file
-        json_file_path = os.path.join(json_dir, f"{name}.json")
-        with open(json_file_path, "w") as file:
-            json.dump(openapi_yaml, file, indent=4)
-
-        # Extract the endpoints
-        for path, methods in openapi_yaml.get("paths", {}).items():
-            for method, _ in methods.items():
-                endpoint = f"{method.upper()} {path}"
-                if name not in endpoints:
-                    endpoints[name] = {}
-                if method.upper() not in endpoints[name]:
-                    endpoints[name][method.upper()] = []
-                
-                # Construct the full URL
-                server_url = ''
-                if 'openapi' in openapi_yaml:
-                    # OpenAPI 3.0
-                    if 'servers' in openapi_yaml and openapi_yaml['servers']:
-                        server_url = openapi_yaml['servers'][0]['url']
-                if not server_url:
-                    # OpenAPI 2.0
-                    server_url = openapi_yaml.get('host', '') + openapi_yaml.get('basePath', '')
-
-                full_url = server_url + path.replace('{', '{{').replace('}', '}}')
-                endpoints[name][method.upper()].append(full_url)
+        # Extract endpoints from the saved file
+        extract_endpoints(file_path, name)
 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching {name}: {e}")
@@ -109,5 +114,16 @@ with open(etag_file, "w") as f:
     json.dump(etags, f, indent=4)
 
 # Save the endpoints to a file
+with open("endpoints.json", "w") as f:
+    json.dump(endpoints, f, indent=4)
+
+# Extract endpoints from all existing API specification files
+for file_name in os.listdir(specs_dir):
+    if file_name.endswith(".yaml"):
+        file_path = os.path.join(specs_dir, file_name)
+        name = file_name.rsplit('.', 1)[0]  # Get the name without extension
+        extract_endpoints(file_path, name)
+
+# Save the endpoints to a file after processing all files
 with open("endpoints.json", "w") as f:
     json.dump(endpoints, f, indent=4)
