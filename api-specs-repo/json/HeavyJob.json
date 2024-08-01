@@ -14807,9 +14807,14 @@
                         "description": "List of cost code Tag Ids",
                         "nullable": true
                     },
+                    "includeDeleted": {
+                        "type": "boolean",
+                        "description": "Include deleted cost codes.",
+                        "nullable": true
+                    },
                     "cursor": {
                         "type": "string",
-                        "description": "Optional.  \r\nWhen there are additional results, the metadata nextCursor field\r\nshould be passed to retrieve the next page of results.",
+                        "description": "Optional.\r\nWhen there are additional results, the metadata nextCursor field\r\nshould be passed to retrieve the next page of results.",
                         "nullable": true
                     },
                     "limit": {
@@ -30613,7 +30618,8 @@
                     "copyTimecardWarnings",
                     "copyHeavyBidEstimateCode",
                     "copyNotes",
-                    "copyJobAccountingValues"
+                    "copyJobAccountingValues",
+                    "copyMSEs"
                 ],
                 "type": "string",
                 "description": "An enum for all job copy options"
