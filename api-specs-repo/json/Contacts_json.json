@@ -1,0 +1,2941 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "HCSS Contacts API",
+    "description": "Manage HCSS Vendor Contacts",
+    "contact": {
+      "name": "Heavy Construction Systems Specialists, Inc. (HCSS)",
+      "url": "https://support.hcss.com/",
+      "email": "support@hcss.com"
+    },
+    "version": "1.0",
+    "termsOfService": "https://support.hcss.com.",
+    "license": {
+      "name": "EULA",
+      "url": "https://support.hcss.com."
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.hcssapps.com/contacts"
+    }
+  ],
+  "security": [
+    {
+      "bearer": [
+        "contacts:write",
+        "contacts:read"
+      ]
+    }
+  ],
+  "paths": {
+    "/api/v1/products/{contactId}/products": {
+      "delete": {
+        "tags": [
+          "ContactProducts"
+        ],
+        "summary": "Deletes an existing product that is associated with a contact, scoped by the company/business unit of the current user",
+        "description": "Deletes the product and dissociate it from a contact",
+        "operationId": "DeleteContactProduct",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "The contact's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The product",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteContactProductDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteContactProductDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteContactProductDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteContactProductDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ContactProducts"
+        ],
+        "summary": "Returns a list of all products associated with a contact, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetContactProducts",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "The contact's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactProductDto"
+                  }
+                },
+                "example": [
+                  {
+                    "vendorProductId": "c44ebe89-ed24-4ed2-801f-e948d951de42",
+                    "productTypeId": "6624cd00-b5be-44bf-9955-dfbac76f03a8",
+                    "productTypeCode": "CONC",
+                    "code": "ASPH",
+                    "regionCode": "EAST",
+                    "date": "2024-03-27T18:46:49.962338Z"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ContactProducts"
+        ],
+        "summary": "Creates a new product to be associated with a contact, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "CreateContactProducts",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "The contact's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The product",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContactProductDto"
+              },
+              "example": {
+                "vendorId": "14d92f9d-df1a-4e94-9b25-b8ac362298d7",
+                "contactId": "29969bf7-9ca3-4c62-a2ff-32cb33daad71",
+                "vendorProductId": "5e4494e1-eb59-4c52-9aee-7400ea3a74ab"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/contacts/{contactId}": {
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Deletes an existing contact, scoped by the company/business unit of the current user",
+        "description": "Deletes the contact and dissociate it from a vendor",
+        "operationId": "DeleteContact",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "The contact's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Returns a contact with the provided id, scoped by the company/business unit of the current user",
+        "description": "The contact that is associated with a vendor",
+        "operationId": "GetContactById",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "The contact's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactDto"
+                },
+                "example": {
+                  "id": "4133084c-38fe-4364-88e5-64ff5753cadd",
+                  "companyId": "395c067c-b097-4070-8569-ed055a6a815b",
+                  "companyName": "Petersons Construction INC",
+                  "firstName": "Charles",
+                  "lastName": "Petersons",
+                  "title": "Manager",
+                  "phoneNumber": "800-277-2828",
+                  "faxNumber": "800-278-2727",
+                  "cellPhoneNumber": "281-268-7648",
+                  "emailAddress": "charles@petersons-construction.com",
+                  "isMainContact": true,
+                  "note": "Main contact",
+                  "role": "Customer Success",
+                  "lastContacted": "2024-03-27T18:46:49.9698891Z",
+                  "vendorLocationId": "33ebfc1c-c35c-48c6-86b8-585d832833e2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Updates a contact, scoped by the company/business unit of the current user",
+        "description": "Updates an existing contact that is associated with a vendor",
+        "operationId": "UpdateContact",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "The contact's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "vendorId",
+            "in": "query",
+            "description": "The vendor's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "moveVendorContact",
+            "in": "query",
+            "description": "Option to move the contact to another vendor",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The contact",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVendorContactDto"
+              },
+              "example": {
+                "vendorId": "6f2cd86e-21d0-4486-afd0-f4ac24648f4d",
+                "contactId": "81a25b86-9cd0-4436-aa6a-9e0ac8ed22ec",
+                "firstName": "Charles",
+                "lastName": "Petersons",
+                "title": "Manager",
+                "phoneNumber": "800-277-2828",
+                "faxNumber": "800-278-2727",
+                "cellPhoneNumber": "281-268-7648",
+                "emailAddress": "charles@petersons-construction.com",
+                "note": "Main contact",
+                "isMainContact": true,
+                "role": "Customer Success",
+                "lastContacted": "2024-03-27T18:46:49.974655Z",
+                "vendorLocationId": "bbee94d6-20e9-4fd4-8ba5-18c9f2da0b23"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/offices/{officeId}": {
+      "delete": {
+        "tags": [
+          "Offices"
+        ],
+        "summary": "Deletes an existing office, scoped by the company/business unit of the current user",
+        "description": "Deletes the office and dissociate it from a vendor",
+        "operationId": "DeleteOffice",
+        "parameters": [
+          {
+            "name": "officeId",
+            "in": "path",
+            "description": "The office's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Offices"
+        ],
+        "summary": "Returns an office with the provided id, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetOfficeById",
+        "parameters": [
+          {
+            "name": "officeId",
+            "in": "path",
+            "description": "The office's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetVendorLocationDto"
+                },
+                "example": {
+                  "vendorId": "4b1cf9a0-bbc9-4afa-b18d-c75744fed885",
+                  "id": "204060a1-ef8e-42e8-9fb9-8c9461949eb9",
+                  "address": {
+                    "addressLine1": "123 Main St",
+                    "addressLine2": "Suite 100",
+                    "building": "1A",
+                    "city": "Houston",
+                    "stateProvince": "Texas",
+                    "countryRegion": "South",
+                    "postalCode": "77007"
+                  },
+                  "phoneNumber": "800-277-2828",
+                  "faxNumber": "800-278-2727",
+                  "webAddress": "contact@petersons-construction.com",
+                  "region": {
+                    "id": "dd46662b-91ef-499c-a48c-5cd0bdb9ac39",
+                    "code": "HOU",
+                    "description": "Houston"
+                  },
+                  "nickname": "Main Office",
+                  "isQualified": true,
+                  "isBlacklisted": false,
+                  "communicationMethod": "Email",
+                  "isPrimary": true,
+                  "isAlternate": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Offices"
+        ],
+        "summary": "Updates an existing office, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "UpdateOffice",
+        "parameters": [
+          {
+            "name": "officeId",
+            "in": "path",
+            "description": "The office's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The office",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVendorLocationDto"
+              },
+              "example": {
+                "vendorId": "db53bb75-7403-4019-b042-343bb79a75a3",
+                "id": "a5a2a420-75ae-4330-b571-a443ce4e6695",
+                "address": {
+                  "addressLine1": "123 Main St",
+                  "addressLine2": "Suite 100",
+                  "building": "1A",
+                  "city": "Houston",
+                  "stateProvince": "Texas",
+                  "countryRegion": "South",
+                  "postalCode": "77007"
+                },
+                "phoneNumber": "800-277-2828",
+                "faxNumber": "800-278-2727",
+                "webAddress": "contact@petersons-construction.com",
+                "regionId": "e392849d-d1c0-4bdc-ab63-59567faebcd1",
+                "nickname": "Main Office",
+                "isQualified": true,
+                "isBlacklisted": false,
+                "communicationMethod": "Email"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/producttypes/{productTypeId}": {
+      "delete": {
+        "tags": [
+          "ProductTypes"
+        ],
+        "summary": "Deletes an existing product type, scoped by the company/business unit of the current user",
+        "description": "Removes the product type",
+        "operationId": "DeleteProductType",
+        "parameters": [
+          {
+            "name": "productTypeId",
+            "in": "path",
+            "description": "The product type guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ProductTypes"
+        ],
+        "summary": "Returns a product type by id, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetProductTypeById",
+        "parameters": [
+          {
+            "name": "productTypeId",
+            "in": "path",
+            "description": "The product type's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductTypeDto"
+                },
+                "example": {
+                  "id": "c153e03f-1061-4655-b5b9-564dbc270c85",
+                  "code": "ASPH",
+                  "description": "Asphalt"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProductTypes"
+        ],
+        "summary": "Updates an existing product type, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "UpdateProductType",
+        "parameters": [
+          {
+            "name": "productTypeId",
+            "in": "path",
+            "description": "The product type's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The product type",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductTypeDto"
+              },
+              "example": {
+                "id": "c4566343-ebad-48b2-a23c-02578aa4197b",
+                "code": "CONC",
+                "description": "Concrete"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Vendors/{vendorId}": {
+      "delete": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Deletes an existing vendor by id, scoped by the company/business unit of the current user",
+        "description": "Deletes the vendor and all associated products, contacts, and offices",
+        "operationId": "DeleteVendor",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "The vendor guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Returns a vendor with the provided id, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetVendorById",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "The vendor guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VendorDto"
+                },
+                "example": {
+                  "id": "8d667081-974b-4ebc-bbb5-ccb898166e09",
+                  "businessUnitId": "4ab62450-6efc-4a9a-ac62-3d25bcf6a92a",
+                  "name": "Petersons Construction INC",
+                  "webAddress": "contact@petersons-construction.com",
+                  "code": "PETERSONS",
+                  "type": {
+                    "id": "41c28e7c-1e28-492a-8c08-1f046f7c8202",
+                    "code": "SUB",
+                    "description": "Subcontractor"
+                  },
+                  "isBonded": false,
+                  "bondRate": 0,
+                  "note": "Specializing in Concrete",
+                  "experienceModificationRating": 1,
+                  "isUnion": false,
+                  "rating": 1
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Updates an existing vendor by id, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "UpdateVendor",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "The vendor guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The vendor",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVendorDto"
+              },
+              "example": {
+                "id": "c4f65254-b3c8-4f26-84e3-dfc113345326",
+                "code": "PETERSONS",
+                "name": "Petersons Construction INC",
+                "typeId": "85d1dd31-746c-4e59-8919-e9751d7e3895",
+                "regionId": "1ab24196-f83c-445e-9ec8-a2229454af52",
+                "communicationMethod": "Email",
+                "webAddress": "contact@petersons-construction.com",
+                "isBonded": false,
+                "bondRate": 0,
+                "note": "Specializing in Concrete",
+                "isUnion": false,
+                "experienceModificationRating": 1,
+                "rating": 1,
+                "accountingCode": "PETERSONS-ACC1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Vendors/{vendorId}/products/{productId}": {
+      "delete": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Deletes an existing product, scoped by the company/business unit of the current user",
+        "description": "Deletes a product that is currently associated with a vendor",
+        "operationId": "DeleteVendorProduct",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "The vendor's guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "The product's guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/contacts": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Returns a list of all contacts that are associated with a vendor, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetAllContacts",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "query",
+            "description": "The vendor's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactDto"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "2487ed5e-05ba-4a72-8f3d-df95efcd4343",
+                    "companyId": "e45ef9e8-ae86-4b22-a3e6-11fd84e17f4b",
+                    "companyName": "Petersons Construction INC",
+                    "firstName": "Charles",
+                    "lastName": "Petersons",
+                    "title": "Manager",
+                    "phoneNumber": "800-277-2828",
+                    "faxNumber": "800-278-2727",
+                    "cellPhoneNumber": "281-268-7648",
+                    "emailAddress": "charles@petersons-construction.com",
+                    "isMainContact": true,
+                    "note": "Main contact",
+                    "role": "Customer Success",
+                    "lastContacted": "2024-03-27T18:46:50.0180783Z",
+                    "vendorLocationId": "d2b9c22b-c066-4a7c-bb00-e98950168300"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Creates a new contact for a vendor, scoped by the company/business unit of the current user",
+        "description": "Creates a contact that would be associated to a vendor",
+        "operationId": "CreateContact",
+        "parameters": [
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The contact",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorContactDto"
+              },
+              "example": {
+                "vendorId": "ae41c6c1-5239-4640-9dd2-2e3d2168e1b4",
+                "firstName": "Charles",
+                "lastName": "Petersons",
+                "title": "Manager",
+                "phoneNumber": "800-277-2828",
+                "faxNumber": "800-278-2727",
+                "cellPhoneNumber": "281-268-7648",
+                "emailAddress": "charles@petersons-construction.com",
+                "note": "Main contact",
+                "isMainContact": true,
+                "role": "Customer Success",
+                "lastContacted": "2024-03-27T18:46:50.0215495Z",
+                "vendorLocationId": "e011c154-289d-48f3-884e-7875f45ed93a",
+                "products": [
+                  {
+                    "vendorProductId": "02e33f48-d841-41c1-ac59-bd3de116607f",
+                    "productTypeId": "0f692736-8c1c-4f80-bf60-913bde10d071",
+                    "productTypeCode": "ASPH",
+                    "code": "ASPH",
+                    "regionCode": "EAST",
+                    "date": "2024-03-27T18:46:50.0215534Z"
+                  },
+                  {
+                    "vendorProductId": "1cace8ab-7b51-4c0e-9097-adf9da56141a",
+                    "productTypeId": "29c25593-7cad-46fa-a098-b1be168edb4e",
+                    "productTypeCode": "CONC",
+                    "code": "CONC",
+                    "regionCode": "WEST",
+                    "date": "2024-03-27T18:46:50.0215539Z"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/offices": {
+      "get": {
+        "tags": [
+          "Offices"
+        ],
+        "summary": "Returns a list of all offices of a vendor, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetAllOffices",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "query",
+            "description": "The vendor's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetVendorLocationDto"
+                  }
+                },
+                "example": [
+                  {
+                    "vendorId": "da4655b8-3fda-4216-a765-39c20e480189",
+                    "id": "08d36ae4-7982-4086-9c5c-c537c44b96b3",
+                    "address": {
+                      "addressLine1": "123 Main St",
+                      "addressLine2": "Suite 100",
+                      "building": "1A",
+                      "city": "Houston",
+                      "stateProvince": "Texas",
+                      "countryRegion": "South",
+                      "postalCode": "77007"
+                    },
+                    "phoneNumber": "800-277-2828",
+                    "faxNumber": "800-278-2727",
+                    "webAddress": "contact@petersons-construction.com",
+                    "region": {
+                      "id": "50c9ecfe-55e3-4934-9a22-48044ccbe1ee",
+                      "code": "HOU",
+                      "description": "Houston"
+                    },
+                    "nickname": "Main Office",
+                    "isQualified": true,
+                    "isBlacklisted": false,
+                    "communicationMethod": "Email",
+                    "isPrimary": true,
+                    "isAlternate": false
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Offices"
+        ],
+        "summary": "Creates a new office, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "CreateOffice",
+        "parameters": [
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The office",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorLocationDto"
+              },
+              "example": {
+                "vendorId": "3b5d38a0-73d6-4762-b298-1fa4f8c40ed9",
+                "address": {
+                  "addressLine1": "123 Main St",
+                  "addressLine2": "Suite 100",
+                  "building": "1A",
+                  "city": "Houston",
+                  "stateProvince": "Texas",
+                  "countryRegion": "South",
+                  "postalCode": "77007"
+                },
+                "phoneNumber": "800-277-2828",
+                "faxNumber": "800-278-2727",
+                "webAddress": "contact@petersons-construction.com",
+                "regionId": "f3f652ed-d048-4a02-be92-984b9207cecf",
+                "nickname": "Main Office",
+                "isQualified": true,
+                "isBlacklisted": false,
+                "communicationMethod": "Email"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorLocationDto"
+              },
+              "example": {
+                "vendorId": "3b5d38a0-73d6-4762-b298-1fa4f8c40ed9",
+                "address": {
+                  "addressLine1": "123 Main St",
+                  "addressLine2": "Suite 100",
+                  "building": "1A",
+                  "city": "Houston",
+                  "stateProvince": "Texas",
+                  "countryRegion": "South",
+                  "postalCode": "77007"
+                },
+                "phoneNumber": "800-277-2828",
+                "faxNumber": "800-278-2727",
+                "webAddress": "contact@petersons-construction.com",
+                "regionId": "f3f652ed-d048-4a02-be92-984b9207cecf",
+                "nickname": "Main Office",
+                "isQualified": true,
+                "isBlacklisted": false,
+                "communicationMethod": "Email"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorLocationDto"
+              },
+              "example": {
+                "vendorId": "3b5d38a0-73d6-4762-b298-1fa4f8c40ed9",
+                "address": {
+                  "addressLine1": "123 Main St",
+                  "addressLine2": "Suite 100",
+                  "building": "1A",
+                  "city": "Houston",
+                  "stateProvince": "Texas",
+                  "countryRegion": "South",
+                  "postalCode": "77007"
+                },
+                "phoneNumber": "800-277-2828",
+                "faxNumber": "800-278-2727",
+                "webAddress": "contact@petersons-construction.com",
+                "regionId": "f3f652ed-d048-4a02-be92-984b9207cecf",
+                "nickname": "Main Office",
+                "isQualified": true,
+                "isBlacklisted": false,
+                "communicationMethod": "Email"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorLocationDto"
+              },
+              "example": {
+                "vendorId": "3b5d38a0-73d6-4762-b298-1fa4f8c40ed9",
+                "address": {
+                  "addressLine1": "123 Main St",
+                  "addressLine2": "Suite 100",
+                  "building": "1A",
+                  "city": "Houston",
+                  "stateProvince": "Texas",
+                  "countryRegion": "South",
+                  "postalCode": "77007"
+                },
+                "phoneNumber": "800-277-2828",
+                "faxNumber": "800-278-2727",
+                "webAddress": "contact@petersons-construction.com",
+                "regionId": "f3f652ed-d048-4a02-be92-984b9207cecf",
+                "nickname": "Main Office",
+                "isQualified": true,
+                "isBlacklisted": false,
+                "communicationMethod": "Email"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Returns a list of all products, scoped to the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetProducts",
+        "parameters": [
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VendorProductDto"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "31911fc3-b702-461a-a5c4-989780a88016",
+                    "productTypeId": "183f664c-63f5-4a34-a799-532352efa9a1",
+                    "vendorId": "9f53db2e-be36-45f2-88ed-8b368ea301a7"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/products/{productTypeId}/contacts": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Returns a list of all contacts associated with a product type, scoped to the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetProductContacts",
+        "parameters": [
+          {
+            "name": "productTypeId",
+            "in": "path",
+            "description": "The product type's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactDto"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "ed75f5e0-903a-4493-999f-0ce8317031de",
+                    "companyId": "b8545b62-d99a-4d07-b64d-c2b121cd3987",
+                    "companyName": "Petersons Construction INC",
+                    "firstName": "Charles",
+                    "lastName": "Petersons",
+                    "title": "Manager",
+                    "phoneNumber": "800-277-2828",
+                    "faxNumber": "800-278-2727",
+                    "cellPhoneNumber": "281-268-7648",
+                    "emailAddress": "charles@petersons-construction.com",
+                    "isMainContact": true,
+                    "note": "Main contact",
+                    "role": "Customer Success",
+                    "lastContacted": "2024-03-27T18:46:50.0281036Z",
+                    "vendorLocationId": "38fb480c-11df-4aa4-a704-7cf4f86f23bf"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/products/{productTypeId}/vendors": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Returns a list of all vendors associated with a product type, scoped to the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetProductVendors",
+        "parameters": [
+          {
+            "name": "productTypeId",
+            "in": "path",
+            "description": "The product type's guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VendorDto"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "de7ed3ef-7510-4b72-a716-8ba9a65504d2",
+                    "businessUnitId": "e68ca14b-fd15-45f8-b3d1-5e1bf0ab7270",
+                    "name": "Petersons Construction INC",
+                    "webAddress": "contact@petersons-construction.com",
+                    "code": "PETERSONS",
+                    "type": {
+                      "id": "227dfcf2-6215-4e73-8ea2-06af69cffebb",
+                      "code": "SUB",
+                      "description": "Subcontractor"
+                    },
+                    "isBonded": false,
+                    "bondRate": 0,
+                    "note": "Specializing in Concrete",
+                    "experienceModificationRating": 1,
+                    "isUnion": false,
+                    "rating": 1
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Vendors": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Returns a list of all vendors, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetAllVendors",
+        "parameters": [
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VendorDto"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "b2352ec2-af57-4507-9383-7702cd600914",
+                    "businessUnitId": "3c188227-003f-412a-9049-076933a3d096",
+                    "name": "Petersons Construction INC",
+                    "webAddress": "contact@petersons-construction.com",
+                    "code": "PETERSONS",
+                    "type": {
+                      "id": "f9d7ecd7-6218-4c21-aa46-dc1d6394a382",
+                      "code": "SUB",
+                      "description": "Subcontractor"
+                    },
+                    "isBonded": false,
+                    "bondRate": 0,
+                    "note": "Specializing in Concrete",
+                    "experienceModificationRating": 1,
+                    "isUnion": false,
+                    "rating": 1
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Creates a new vendor, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "CreateVendor",
+        "parameters": [
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The vendor",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorDto"
+              },
+              "example": {
+                "code": "PETERSONS",
+                "name": "Petersons Construction INC",
+                "typeId": "618a6c7d-6886-454d-9a55-2ec63b114a2d",
+                "regionId": "ac0cc7b9-9798-4358-b09c-b50c859688c2",
+                "communicationMethod": "Email",
+                "webAddress": "contact@petersons-construction.com",
+                "isBonded": false,
+                "bondRate": 0,
+                "note": "Specializing in Concrete",
+                "isUnion": false,
+                "experienceModificationRating": 1,
+                "rating": 1,
+                "accountingCode": "PETERSONS-ACC1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Vendors/{vendorId}/products": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Returns a list of all products of a vendor, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "GetVendorProducts",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "The vendor guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VendorProductDto"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "5e74a82c-27cc-4654-8eb7-c14b805103b2",
+                    "productTypeId": "ce3fd613-f831-42cb-98e6-dd18568c8bc4",
+                    "vendorId": "fdea5d59-df37-47b9-9187-b4b2b524ad75"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Vendors"
+        ],
+        "summary": "Creates a new product for a vendor, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "CreateVendorProduct",
+        "parameters": [
+          {
+            "name": "vendorId",
+            "in": "path",
+            "description": "The vendor guid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The vendor",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorProductDto"
+              },
+              "example": {
+                "vendorId": "655bfdc2-0448-4d4a-9f72-fe3a6bf13a0b",
+                "productTypeId": "1f9a720d-23f5-4e34-a575-5900669183de",
+                "regionId": "4c6bfa35-f447-45b9-9b63-e8690ed51bfc",
+                "date": "2024-03-27T18:46:50.0363121Z"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorProductDto"
+              },
+              "example": {
+                "vendorId": "655bfdc2-0448-4d4a-9f72-fe3a6bf13a0b",
+                "productTypeId": "1f9a720d-23f5-4e34-a575-5900669183de",
+                "regionId": "4c6bfa35-f447-45b9-9b63-e8690ed51bfc",
+                "date": "2024-03-27T18:46:50.0363121Z"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorProductDto"
+              },
+              "example": {
+                "vendorId": "655bfdc2-0448-4d4a-9f72-fe3a6bf13a0b",
+                "productTypeId": "1f9a720d-23f5-4e34-a575-5900669183de",
+                "regionId": "4c6bfa35-f447-45b9-9b63-e8690ed51bfc",
+                "date": "2024-03-27T18:46:50.0363121Z"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVendorProductDto"
+              },
+              "example": {
+                "vendorId": "655bfdc2-0448-4d4a-9f72-fe3a6bf13a0b",
+                "productTypeId": "1f9a720d-23f5-4e34-a575-5900669183de",
+                "regionId": "4c6bfa35-f447-45b9-9b63-e8690ed51bfc",
+                "date": "2024-03-27T18:46:50.0363121Z"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/producttypes": {
+      "post": {
+        "tags": [
+          "ProductTypes"
+        ],
+        "summary": "Creates a new product type, scoped by the company/business unit of the current user",
+        "description": "",
+        "operationId": "CreateProductType",
+        "parameters": [
+          {
+            "name": "BusinessUnitId",
+            "in": "header",
+            "description": "The business unit's guid",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The product type",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductTypeDto"
+              },
+              "example": {
+                "code": "ASPH",
+                "description": "Asphalt"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductTypeDto"
+              },
+              "example": {
+                "code": "ASPH",
+                "description": "Asphalt"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductTypeDto"
+              },
+              "example": {
+                "code": "ASPH",
+                "description": "Asphalt"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductTypeDto"
+              },
+              "example": {
+                "code": "ASPH",
+                "description": "Asphalt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "building": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateProvince": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryRegion": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommunicationMethod": {
+        "enum": [
+          "None",
+          "Email",
+          "Fax",
+          "Print"
+        ],
+        "type": "string"
+      },
+      "CompanyTypeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The type's unique identifier.",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "description": "The type's unique code.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The type's description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A company type data transfer object."
+      },
+      "ContactDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Contact's unique identifier",
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Company's unique identifier",
+            "format": "uuid"
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Company's name",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "description": "Contact's first name",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Contact's last name",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "description": "Contact's title",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Contact's phone number",
+            "nullable": true
+          },
+          "faxNumber": {
+            "type": "string",
+            "description": "Contact's fax number",
+            "nullable": true
+          },
+          "cellPhoneNumber": {
+            "type": "string",
+            "description": "Contact's cell phone number",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "Contact's email address",
+            "nullable": true
+          },
+          "isMainContact": {
+            "type": "boolean",
+            "description": "Whether it is the main contact"
+          },
+          "note": {
+            "type": "string",
+            "description": "Note on the contact",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "description": "A string specifying a contact's role.",
+            "nullable": true
+          },
+          "lastContacted": {
+            "type": "string",
+            "description": "A DateTime when this contact was last contacted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vendorLocationId": {
+            "type": "string",
+            "description": "A LocationId this contact tie to.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContactProductDto": {
+        "type": "object",
+        "properties": {
+          "vendorProductId": {
+            "type": "string",
+            "description": "The product unique identifier.",
+            "format": "uuid"
+          },
+          "productTypeId": {
+            "type": "string",
+            "description": "The contact product's type",
+            "format": "uuid"
+          },
+          "productTypeCode": {
+            "type": "string",
+            "description": "The contact product type's code",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "description": "The contact product's code.",
+            "nullable": true
+          },
+          "regionCode": {
+            "type": "string",
+            "description": "The contact product's region code",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "description": "The contact product's date",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A Contact's Product data transfer object."
+      },
+      "CreateContactProductDto": {
+        "required": [
+          "contactId",
+          "vendorId",
+          "vendorProductId"
+        ],
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "The contacts's unique identifier.",
+            "format": "uuid"
+          },
+          "vendorProductId": {
+            "type": "string",
+            "description": "The vendor product  's unique identifier.",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A create contact product data transfer object."
+      },
+      "CreateProductTypeDto": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string",
+            "description": "A unique product type code."
+          },
+          "description": {
+            "type": "string",
+            "description": "The product type's description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A data transfer object for requesting the creation of a product type."
+      },
+      "CreateVendorContactDto": {
+        "required": [
+          "vendorId"
+        ],
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The contact's first name.",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The contact's last name.",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "description": "The contact's title.",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The contact's phone number.",
+            "nullable": true
+          },
+          "faxNumber": {
+            "type": "string",
+            "description": "The contact's fax number.",
+            "nullable": true
+          },
+          "cellPhoneNumber": {
+            "type": "string",
+            "description": "The contact's cell phone number.",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "The contact's email address.",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "description": "The contact's note.",
+            "nullable": true
+          },
+          "isMainContact": {
+            "type": "boolean",
+            "description": "A boolean indicating whether this contact is the company's main contact."
+          },
+          "role": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "A string specifying a contact's role.",
+            "nullable": true
+          },
+          "lastContacted": {
+            "type": "string",
+            "description": "A DateTime when this contact was last contacted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vendorLocationId": {
+            "type": "string",
+            "description": "A Location tie to this contact.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactProductDto"
+            },
+            "description": "Products tie to this contact.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A data transfer object for requesting the creation of a vendor contact."
+      },
+      "CreateVendorDto": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The vendor's unique code."
+          },
+          "name": {
+            "type": "string",
+            "description": "The vendor's name.",
+            "nullable": true
+          },
+          "typeId": {
+            "type": "string",
+            "description": "The vendor's type unique identifier.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The unique identifier of the region the vendor operates in.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "communicationMethod": {
+            "$ref": "#/components/schemas/CommunicationMethod"
+          },
+          "webAddress": {
+            "type": "string",
+            "description": "The vendor's website address.",
+            "nullable": true
+          },
+          "isBonded": {
+            "type": "boolean",
+            "description": "A flag indicating if this vendor is bonded."
+          },
+          "bondRate": {
+            "type": "number",
+            "description": "The rate at which this vendor is bonded.",
+            "format": "double"
+          },
+          "note": {
+            "type": "string",
+            "description": "Notes about this vendor.",
+            "nullable": true
+          },
+          "isUnion": {
+            "type": "boolean",
+            "description": "A flag indicating if the vendor is in a union."
+          },
+          "experienceModificationRating": {
+            "maximum": 2,
+            "minimum": 0,
+            "type": "number",
+            "description": "The vendor's experience modification rating, which is used for workers' compensation premium.",
+            "format": "double",
+            "nullable": true
+          },
+          "rating": {
+            "maximum": 5,
+            "minimum": 0,
+            "type": "integer",
+            "description": "The rating this vendor has been given.",
+            "format": "int32",
+            "nullable": true
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The vendor's accounting code.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A data transfer object for requesting the creation on a vendor."
+      },
+      "CreateVendorLocationDto": {
+        "required": [
+          "vendorId"
+        ],
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique id.",
+            "format": "uuid"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The vendor location's phonenumber.",
+            "nullable": true
+          },
+          "faxNumber": {
+            "type": "string",
+            "description": "The vendor location's faxnumber.",
+            "nullable": true
+          },
+          "webAddress": {
+            "type": "string",
+            "description": "The vendor location's website address.",
+            "nullable": true
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The unique identifier of the region the vendor location operates in.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "nickname": {
+            "type": "string",
+            "description": "The nickname for a vendor location.",
+            "nullable": true
+          },
+          "isQualified": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is qualified."
+          },
+          "isBlacklisted": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is blacklisted."
+          },
+          "communicationMethod": {
+            "$ref": "#/components/schemas/CommunicationMethod"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateVendorProductDto": {
+        "required": [
+          "productTypeId",
+          "vendorId"
+        ],
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          },
+          "productTypeId": {
+            "type": "string",
+            "description": "The product type's unique identifier.",
+            "format": "uuid"
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The product region's unique identifier.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "description": "The date.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A data transfer object for requesting the creation of vendor products."
+      },
+      "DeleteContactProductDto": {
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "The contact's unique identifier.",
+            "format": "uuid"
+          },
+          "vendorProductId": {
+            "type": "string",
+            "description": "The product unique identifier.",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A Delete Contact's Product data transfer object."
+      },
+      "GetVendorLocationDto": {
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique id.",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string",
+            "description": "The vendor location's unique id.",
+            "format": "uuid"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The vendor location's phonenumber.",
+            "nullable": true
+          },
+          "faxNumber": {
+            "type": "string",
+            "description": "The vendor location's faxnumber.",
+            "nullable": true
+          },
+          "webAddress": {
+            "type": "string",
+            "description": "The vendor location's website address.",
+            "nullable": true
+          },
+          "region": {
+            "$ref": "#/components/schemas/RegionDto"
+          },
+          "nickname": {
+            "type": "string",
+            "description": "The nickname for a vendor location.",
+            "nullable": true
+          },
+          "isQualified": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is qualified."
+          },
+          "isBlacklisted": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is blacklisted."
+          },
+          "communicationMethod": {
+            "$ref": "#/components/schemas/CommunicationMethod"
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is primary."
+          },
+          "isAlternate": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is alternate."
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductTypeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Product type's unique identifier.",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "description": "Product type code.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Product type description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A Product Type data transfer object."
+      },
+      "RegionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Region's unique identifier.",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "description": "Region code.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Region description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A Region data transfer object."
+      },
+      "UpdateProductTypeDto": {
+        "required": [
+          "code",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Existing product type's identifier.",
+            "format": "uuid"
+          },
+          "code": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique product type code."
+          },
+          "description": {
+            "type": "string",
+            "description": "The product type's description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A data transfer object for requesting the update of a product type."
+      },
+      "UpdateVendorContactDto": {
+        "required": [
+          "contactId",
+          "vendorId"
+        ],
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "The contact's unique identifier.",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The contact's first name.",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The contact's last name.",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "description": "The contact's title.",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The contact's phone number.",
+            "nullable": true
+          },
+          "faxNumber": {
+            "type": "string",
+            "description": "The contact's fax number.",
+            "nullable": true
+          },
+          "cellPhoneNumber": {
+            "type": "string",
+            "description": "The contact's cell phone number.",
+            "nullable": true
+          },
+          "emailAddress": {
+            "type": "string",
+            "description": "The contact's email address.",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "description": "The contact's note.",
+            "nullable": true
+          },
+          "isMainContact": {
+            "type": "boolean",
+            "description": "A boolean indicating whether this contact is the company's main contact."
+          },
+          "role": {
+            "maxLength": 30,
+            "type": "string",
+            "description": "A string specifying a contact's role.",
+            "nullable": true
+          },
+          "lastContacted": {
+            "type": "string",
+            "description": "A DateTime when this contact was last contacted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vendorLocationId": {
+            "type": "string",
+            "description": "A Location this contact tie to.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A data transfer object for requesting an update to a contact."
+      },
+      "UpdateVendorDto": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          },
+          "code": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The vendor's unique code."
+          },
+          "name": {
+            "type": "string",
+            "description": "The vendor's name.",
+            "nullable": true
+          },
+          "typeId": {
+            "type": "string",
+            "description": "The vendor type unique identifier.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The unique identifier of the region the vendor operates in.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "communicationMethod": {
+            "$ref": "#/components/schemas/CommunicationMethod"
+          },
+          "webAddress": {
+            "type": "string",
+            "description": "The vendor's website address.",
+            "nullable": true
+          },
+          "isBonded": {
+            "type": "boolean",
+            "description": "A flag indicating if this vendor is bonded."
+          },
+          "bondRate": {
+            "type": "number",
+            "description": "The rate at which this vendor is bonded.",
+            "format": "double"
+          },
+          "note": {
+            "type": "string",
+            "description": "Notes about this vendor.",
+            "nullable": true
+          },
+          "isUnion": {
+            "type": "boolean",
+            "description": "A flag indicating if the vendor is in a union."
+          },
+          "experienceModificationRating": {
+            "maximum": 2,
+            "minimum": 0,
+            "type": "number",
+            "description": "The vendor's experience modification rating, which is used for workers' compensation premium.",
+            "format": "double",
+            "nullable": true
+          },
+          "rating": {
+            "maximum": 5,
+            "minimum": 0,
+            "type": "integer",
+            "description": "The rating this vendor has been given.",
+            "format": "int32",
+            "nullable": true
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The vendor's accounting code.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A data transfer object for requesting the update of a vendor."
+      },
+      "UpdateVendorLocationDto": {
+        "required": [
+          "id",
+          "vendorId"
+        ],
+        "type": "object",
+        "properties": {
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique id.",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string",
+            "description": "The locations's unique id.",
+            "format": "uuid"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The vendor location's phonenumber.",
+            "nullable": true
+          },
+          "faxNumber": {
+            "type": "string",
+            "description": "The vendor location's faxnumber.",
+            "nullable": true
+          },
+          "webAddress": {
+            "type": "string",
+            "description": "The vendor location's website address.",
+            "nullable": true
+          },
+          "regionId": {
+            "type": "string",
+            "description": "The unique identifier of the region the vendor location operates in.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "nickname": {
+            "type": "string",
+            "description": "The nickname for a vendor location.",
+            "nullable": true
+          },
+          "isQualified": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is qualified."
+          },
+          "isBlacklisted": {
+            "type": "boolean",
+            "description": "A flag if a vendor location is blacklisted."
+          },
+          "communicationMethod": {
+            "$ref": "#/components/schemas/CommunicationMethod"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VendorDto": {
+        "required": [
+          "businessUnitId",
+          "code",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          },
+          "businessUnitId": {
+            "type": "string",
+            "description": "The vendor's business unit unique identifier.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "The vendor's name.",
+            "nullable": true
+          },
+          "webAddress": {
+            "type": "string",
+            "description": "The vendor's website address.",
+            "nullable": true
+          },
+          "code": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The vendor's unique code."
+          },
+          "type": {
+            "$ref": "#/components/schemas/CompanyTypeDto"
+          },
+          "isBonded": {
+            "type": "boolean",
+            "description": "A flag indicating if this vendor is bonded."
+          },
+          "bondRate": {
+            "type": "number",
+            "description": "The rate at which this vendor is bonded.",
+            "format": "double"
+          },
+          "note": {
+            "type": "string",
+            "description": "Notes about this vendor.",
+            "nullable": true
+          },
+          "experienceModificationRating": {
+            "type": "number",
+            "description": "The vendor's experience modification rating, which is used for workers' compensation premium.",
+            "format": "double",
+            "nullable": true
+          },
+          "isUnion": {
+            "type": "boolean",
+            "description": "A flag indicating if the vendor is in a union."
+          },
+          "rating": {
+            "type": "integer",
+            "description": "The rating this vendor has been given.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A vendor data transfer object."
+      },
+      "VendorProductDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The product's unique identifier.",
+            "format": "uuid"
+          },
+          "productTypeId": {
+            "type": "string",
+            "description": "The product type's unique identifier.",
+            "format": "uuid"
+          },
+          "vendorId": {
+            "type": "string",
+            "description": "The vendor's unique identifier.",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A Product data transfer object."
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "oauth2",
+        "description": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+            "scopes": {
+              "contacts:write": "contacts:write",
+              "contacts:read": "contacts:read"
+            }
+          },
+          "authorizationCode": {
+            "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+            "authorizationUrl": "https://api.hcssapps.com/identity/connect/authorize",
+            "scopes": {
+              "contacts:write": "contacts:write",
+              "contacts:read": "contacts:read"
+            }
+          }
+        }
+      }
+    }
+  }
+}

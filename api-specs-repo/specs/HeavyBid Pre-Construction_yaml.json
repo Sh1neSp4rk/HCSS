@@ -1,0 +1,1477 @@
+openapi: 3.0.0
+info:
+  title: HeavyBid Pre-Construction API
+  description: Integrate with HeavyBid Pre-Construction. Operations require the 'precon:read' or 'precon:write' scopes.
+  termsOfService: https://support.hcss.com.
+  contact:
+    name: Heavy Construction Systems Specialists, Inc. (HCSS)
+    url: https://support.hcss.com/
+    email: support@hcss.com
+  license:
+    name: EULA
+    url: https://support.hcss.com.
+  version: v1
+servers:
+  - url: https://api.hcssapps.com/precon
+security:
+  - bearer:
+      - precon:read
+      - precon:write
+paths:
+  /api/v1/businessUnits:
+    get:
+      tags:
+        - BusinessUnit
+      summary: Get all business units
+      description: |-
+        This is typically the first API call made to Pre-Con. Most of the other routes require a specific business unit id to be passed in.
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: BusinessUnit_Get
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedResponseOfBusinessUnitReadDTO'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+  /api/v1/businessUnits/{businessUnitId}/Projects:
+    get:
+      tags:
+        - Projects
+      summary: Gets a list of projects
+      description: |-
+        sorting
+
+            GET /businessUnits/{businessUnitId}/projects?orderBy.fieldId=name%26orderBy.ascending=true
+
+        filtering a string field
+
+            GET /businessUnits/{businessUnitId}/projects?filters[0].fieldId=name%26filters[0].contains=project
+
+        filtering a numeric field
+
+            GET /businessUnits/{businessUnitId}/projects?filters[0].fieldId=52fec515-2012-4d2d-b8ae-17c3b274bb84%26filters[0].lowerBound=100
+
+        filtering a date field
+
+            GET /businessUnits/{businessUnitId}/projects?filters[0].fieldId=8230a513-065b-4928-a64b-57cef4de1a31%26filters[0].lowerBound=2021-01-01T00:00:00.00000Z
+
+        paging
+
+            GET /businessUnits/{businessUnitId}/projects?continuationToken=continuationToken%26top=100
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_Get
+      parameters:
+        - name: businessUnitId
+          in: path
+          required: true
+          description: The id of the business unit to operate on
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: Filters
+          in: query
+          style: form
+          explode: true
+          description: Filters to get a subset of data back. Use array syntax `filters[0].fieldId=name` `filters[0].contains=123`
+          schema:
+            type: array
+            nullable: true
+            items:
+              $ref: '#/components/schemas/QueryFilter'
+          x-position: 2
+        - name: OrderBy.FieldId
+          in: query
+          description: The field id to order by
+          schema:
+            type: string
+            nullable: true
+          x-position: 3
+        - name: OrderBy.Ascending
+          in: query
+          description: Whether the data should be sorted in ascending or descending order
+          schema:
+            type: boolean
+          x-position: 4
+        - name: ContinuationToken
+          in: query
+          description: The value from the nextPageToken in a previous response. This should be URL encoded.
+          schema:
+            type: string
+            nullable: true
+          x-position: 5
+        - name: Top
+          in: query
+          description: The number of items to include. Defaults to 100
+          schema:
+            type: integer
+            format: int32
+            example: 100
+          x-position: 6
+        - name: includeDynamicFields
+          in: query
+          description: Flag value to include/exclude runtime dynamic fields like estimates, calculations, etc. By default it is enabled (true). Disabling dynamic fields will improve performance.
+          schema:
+            type: boolean
+            default: true
+          x-position: 7
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectReadPagedResponse'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Projects
+      summary: Creates a new project
+      description: |-
+        The fields property is dependent on the Project schema. Any missing required fields or incorrectly formatted fields will result in a 400.
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_Post
+      parameters:
+        - name: useDefaultValues
+          in: query
+          description: The flag to overwrite empty fields with default values from project schema
+          schema:
+            type: boolean
+            default: false
+          x-position: 2
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-position: 3
+      requestBody:
+        x-name: dto
+        description: The new project to create. Must contain a fields property with any required fields specified in the project schema for the current business unit.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectWriteDto'
+        required: true
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUpdateResultDto'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+  /api/v1/businessUnits/{businessUnitId}/Projects/{id}:
+    get:
+      tags:
+        - Projects
+      summary: Gets a specific project
+      description: |-
+
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_GetById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The project id to get
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: includeDynamicFields
+          in: query
+          description: Flag value to include/exclude runtime dynamic fields like estimates, calculations, etc. By default it is enabled (true). Disabling dynamic fields will improve performance.
+          schema:
+            type: boolean
+            default: true
+          x-position: 2
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectReadDto'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+    put:
+      tags:
+        - Projects
+      summary: Replaces the project
+      description: |-
+        This will replace the existing project with whatever is passed in the request body. Any missing values in the request body will be erased.
+        For partial updates look at the Patch method
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_Put
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The project id to update
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-position: 3
+      requestBody:
+        x-name: dto
+        description: The new project to replace the old one with
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectWriteDto'
+        required: true
+        x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUpdateResultDto'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Projects
+      summary: Applies a partial change to the project
+      description: |-
+        This is a PARTIAL implementation of the JsonPatch protocol - See https://tools.ietf.org/html/rfc6902 for more information.
+                    
+        Setting an object property within an array is NOT supported (e.g. "path": "fields/estimates/2/selectedEstimate")
+                    
+        Instead, use a replace on the full array element (e.g. "path": "fields/estimates/2")
+                    
+        Examples of valid operations:
+                    
+        Replace a string:
+                    
+            PATCH /businessUnits/{businessUnitId}/projects/{id}
+            [
+               {
+                  "path": "fields/name",
+                  "op": "add",
+                  "value": "New Project Name"
+               }
+            ]
+                    
+        Replace an entire array:
+                    
+            PATCH /businessUnits/{businessUnitId}/projects/{id}
+            [
+               {
+                  "path": "fields/bidResults",
+                  "op": "add",
+                  "value": [{"name": "Competitor 1", "amount": 38204, "winner": true}]
+               }
+            ]
+                    
+        Add an element to end of array:
+                    
+            PATCH /businessUnits/{businessUnitId}/projects/{id}
+            [
+               {
+                  "path": "fields/bidResults/-",
+                  "op": "add",
+                  "value": {"name": "Competitor 1", "amount": 38204, "winner": true}
+               }
+            ]
+                    
+        Replace the first element in an array:
+                    
+            PATCH /businessUnits/{businessUnitId}/projects/{id}
+            [
+               {
+                  "path": "fields/bidResults/0",
+                  "op": "replace",
+                  "value": {"name": "Competitor 1", "amount": 38204, "winner": true}
+               }
+            ]
+                    
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_Patch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the project to patch
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-position: 3
+      requestBody:
+        x-name: patch
+        description: The changes to be applied to the project
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Operation'
+        required: true
+        x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectUpdateResultDto'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Projects
+      summary: Delete a project by id
+      description: |-
+
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_Delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The project id to delete
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: businessUnitId
+          in: path
+          required: true
+          description: The id of the business unit to operate on
+          schema:
+            type: string
+            nullable: true
+          x-position: 2
+      responses:
+        '204':
+          description: Empty response indicating that the delete was successful
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+  /api/v1/businessUnits/{businessUnitId}/Projects/range:
+    post:
+      tags:
+        - Projects
+      summary: Creates multiple projects
+      description: |-
+        Similar to the POST and PUT endpoints, but allows for multiple projects to be created or updated in a single request. See POST for more information.
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_PostArray
+      parameters:
+        - name: skipInvalidFields
+          in: query
+          description: Specify if invalid projects should be saved without invalid fields otherwise invalid projects will not be saved
+          schema:
+            type: boolean
+            default: false
+          x-position: 2
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-position: 3
+      requestBody:
+        x-name: dtos
+        description: an array of projects to create
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProjectWriteDto'
+        required: true
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectRangeResultsDto'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Projects
+      summary: Delete multiple projects by id
+      description: |-
+
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Projects_DeleteMultiple
+      parameters:
+        - name: businessUnitId
+          in: path
+          required: true
+          description: The id of the business unit to operate on
+          schema:
+            type: string
+            nullable: true
+          x-position: 2
+      requestBody:
+        x-name: ids
+        description: An array of project ids to delete
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+        x-position: 1
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectIdRangeResultsDto'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+  /api/v1/businessUnits/{businessUnitId}/reports/projects/{projectId}/projectDetails:
+    post:
+      tags:
+        - Reports
+      summary: Generates a report for the given project id
+      description: |-
+
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Reports_GetProjectDetailsReport
+      parameters:
+        - name: businessUnitId
+          in: path
+          required: true
+          description: The id of the requested business unit
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: projectId
+          in: path
+          required: true
+          description: The id of the requested project
+          schema:
+            type: string
+            nullable: true
+          x-position: 2
+      requestBody:
+        x-name: request
+        description: The optional settings for the report
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectDetailsReportRequestDto'
+        required: true
+        x-position: 3
+      responses:
+        '200':
+          description: ''
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+  /api/v1/businessUnits/{businessUnitId}/Schemas:
+    get:
+      tags:
+        - Schemas
+      summary: Get all schemas for a business unit
+      description: |-
+        Schemas can be thought of as a blueprint. They define the fields that can be stored on a project and the sections that those fields belong to.
+        When creating or updating projects, the schema is checked to ensure that all required fields are present, and that all fields have the correct data type.
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Schemas_Get
+      parameters:
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: OrderBy.FieldId
+          in: query
+          description: The field id to order by
+          schema:
+            type: string
+            nullable: true
+          x-position: 2
+        - name: OrderBy.Ascending
+          in: query
+          description: Whether the data should be sorted in ascending or descending order
+          schema:
+            type: boolean
+          x-position: 3
+        - name: ContinuationToken
+          in: query
+          description: The value from the nextPageToken in a previous response. This should be URL encoded.
+          schema:
+            type: string
+            nullable: true
+          x-position: 4
+        - name: Top
+          in: query
+          description: The number of items to include. Defaults to 100
+          schema:
+            type: integer
+            format: int32
+            example: 100
+          x-position: 5
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedResponseOfSchemaReadDTO'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+  /api/v1/businessUnits/{businessUnitId}/Schemas/{id}:
+    get:
+      tags:
+        - Schemas
+      summary: Get a schema for a business unit by id
+      description: |-
+        See GET for more information.
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Schemas_GetById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the schema to return
+          schema:
+            type: string
+            nullable: true
+          x-position: 1
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-position: 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaReadDTO'
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+  /api/v1/businessUnits/{businessUnitId}/Schemas/updateFieldAlias:
+    post:
+      tags:
+        - Schemas
+      summary: Update the alias of a field on the schema
+      description: |-
+        This endpoint will change how a project field is referenced in the Projects API. 
+        <br /><br /><span style="color: white; background-color: orange; font-weight: bold; padding: 3px;">Caution:</span> Updating the alias of an existing field will likely break existing integrations with the projects API.</span>
+
+        For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
+      operationId: Schemas_UpdateFieldAlias
+      parameters:
+        - name: businessUnitId
+          in: path
+          required: true
+          schema:
+            type: string
+          x-position: 2
+      requestBody:
+        x-name: dto
+        description: The existing alias and new alias
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFieldAliasDto'
+        required: true
+        x-position: 1
+      responses:
+        '204':
+          description: Empty response indicating that the field alias was successfully updated
+        '401':
+          description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
+        '403':
+          description: Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information.
+      security:
+        - bearer: []
+components:
+  schemas:
+    PagedResponseOfBusinessUnitReadDTO:
+      type: object
+      additionalProperties: false
+      properties:
+        results:
+          type: array
+          description: An array containing the requested data
+          nullable: true
+          items:
+            $ref: '#/components/schemas/BusinessUnitReadDTO'
+        nextPageToken:
+          type: string
+          description: The token to use for requesting the next page of data
+          nullable: true
+          example: null
+        hasNextPage:
+          type: boolean
+          description: |-
+            A flag representing whether there is another page of data.
+            If this is false, nextPageToken is also null.
+          example: false
+    BusinessUnitReadDTO:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - code
+      properties:
+        id:
+          type: string
+          description: The id of the business unit
+          example: ad695b95-1c2d-4ba5-9db6-f5a2310fa130
+        code:
+          type: string
+          description: The code of the business unit
+          example: Manager
+        description:
+          type: string
+          description: The description of the business unit
+          nullable: true
+          example: Description for Manager BU
+        dateCreated:
+          type: string
+          description: The created date of the business unit
+          format: date-time
+          example: '2022-01-01T12:01:48.000Z'
+    ProjectReadPagedResponse:
+      allOf:
+        - $ref: '#/components/schemas/PagedResponseOfProjectReadDto'
+        - type: object
+          additionalProperties: false
+    PagedResponseOfProjectReadDto:
+      type: object
+      additionalProperties: false
+      properties:
+        results:
+          type: array
+          description: An array containing the requested data
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProjectReadDto'
+        nextPageToken:
+          type: string
+          description: The token to use for requesting the next page of data
+          nullable: true
+          example: null
+        hasNextPage:
+          type: boolean
+          description: |-
+            A flag representing whether there is another page of data.
+            If this is false, nextPageToken is also null.
+          example: false
+    ProjectReadDto:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - lastModified
+        - deleted
+        - fields
+      properties:
+        id:
+          type: string
+          description: The unique Id of the project.
+          example: c33d6196-ecae-4bca-8d90-93f6951ba9b6
+        lastModifiedByUserId:
+          type: string
+          description: The last modified user Id of the project.
+          nullable: true
+          example: 17f96543-9898-4be2-b6c7-e6723bbb1389
+        lastModifiedByClientId:
+          type: string
+          description: The last modified client_id.
+          nullable: true
+        lastModifiedBySystemUser:
+          type: boolean
+          description: 'Indicates if entity was last modified by system user. '
+        dateCreated:
+          type: string
+          description: The created date of the project.
+          format: date-time
+          example: '2022-01-01T12:01:48.000Z'
+        lastModified:
+          type: string
+          description: The last modified date of the project.
+          format: date-time
+          example: '2022-01-01T12:01:48.000Z'
+        deleted:
+          type: boolean
+          description: Whether the project is deleted. (always false)
+          example: false
+        businessUnitId:
+          type: string
+          description: The Business Unit Id the project belongs to.
+          nullable: true
+          example: 308e83a3-59bf-4422-9803-a98120b51770
+        fields:
+          type: object
+          description: An object containing values that correspond to the Projects schema fields. Keyed by schemafield.id.
+          example:
+            name: Project 123
+          additionalProperties: {}
+        fieldsMetadata:
+          type: object
+          description: An object containing metadata of fields. Key by field id.
+          nullable: true
+          example:
+            fieldId:
+              isLocked: true
+          additionalProperties:
+            $ref: '#/components/schemas/FieldMetadata'
+        locationId:
+          type: string
+          description: Optional - The Location Id (HeavyJob) that is linked to the project.
+          nullable: true
+          example: 65f43597-43dd-4380-8930-91e0045f8aa8
+    FieldMetadata:
+      type: object
+      additionalProperties: false
+      properties:
+        isLocked:
+          type: boolean
+        filterValues:
+          type: array
+          nullable: true
+          items:
+            type: string
+    QueryFilter:
+      type: object
+      additionalProperties: false
+      properties:
+        fieldId:
+          type: string
+          description: The field id to filter on
+          nullable: true
+          example: name
+        contains:
+          type: string
+          description: The value to search for. Only applies to text fields.
+          nullable: true
+          example: Project 123
+        lowerBound:
+          type: string
+          description: The minimum value to include in results. Applies to number/currency/date/datetime fields
+          nullable: true
+          example: 100
+        upperBound:
+          type: string
+          description: The maximum value to include in results. Applies to number/currency/date/datetime fields
+          nullable: true
+          example: 500
+    ProjectUpdateResultDto:
+      allOf:
+        - $ref: '#/components/schemas/ProjectReadDto'
+        - type: object
+          additionalProperties: false
+          properties:
+            warnings:
+              type: array
+              nullable: true
+              items:
+                $ref: '#/components/schemas/ProjectFieldWarningDto'
+    ProjectFieldWarningDto:
+      type: object
+      additionalProperties: false
+      properties:
+        fieldId:
+          type: string
+          nullable: true
+        fieldName:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        warningValue:
+          nullable: true
+    ProjectWriteDto:
+      type: object
+      additionalProperties: false
+      required:
+        - fields
+      properties:
+        id:
+          type: string
+          description: Optional - The unique Id of the project.
+          nullable: true
+          example: c33d6196-ecae-4bca-8d90-93f6951ba9b6
+        fields:
+          type: object
+          description: An object containing values that correspond to the Projects schema fields. Keyed by schemafield.id.
+          example:
+            name: Project 123
+          additionalProperties: {}
+        fieldsMetadata:
+          type: object
+          description: An object containing metadata of fields. Key by field id.
+          nullable: true
+          example:
+            fieldId:
+              isLocked: true
+          additionalProperties:
+            $ref: '#/components/schemas/FieldMetadata'
+        locationId:
+          type: string
+          description: Optional - The Location Id (HeavyJob) that is linked to the project.
+          nullable: true
+          example: 65f43597-43dd-4380-8930-91e0045f8aa8
+    Operation:
+      allOf:
+        - $ref: '#/components/schemas/OperationBase'
+        - type: object
+          additionalProperties: false
+          properties:
+            value:
+              nullable: true
+    OperationBase:
+      type: object
+      additionalProperties: false
+      properties:
+        path:
+          type: string
+          nullable: true
+        op:
+          type: string
+          nullable: true
+        from:
+          type: string
+          nullable: true
+    ProjectRangeResultsDto:
+      type: object
+      additionalProperties: false
+      properties:
+        success:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProjectReadDto'
+        failed:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProjectReadDto'
+        invalid:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProjectValidationResultDto'
+    ProjectValidationResultDto:
+      type: object
+      additionalProperties: false
+      properties:
+        entry:
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/ProjectReadDto'
+        errors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProjectValidationErrorDto'
+        warnings:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ProjectValidationWarningDto'
+        index:
+          type: integer
+          format: int32
+          nullable: true
+    ProjectValidationErrorDto:
+      type: object
+      additionalProperties: false
+      properties:
+        fieldId:
+          type: string
+          nullable: true
+        fieldName:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        invalidValue:
+          nullable: true
+    ProjectValidationWarningDto:
+      type: object
+      additionalProperties: false
+      properties:
+        fieldId:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        warningValue:
+          nullable: true
+    ProjectIdRangeResultsDto:
+      type: object
+      additionalProperties: false
+      properties:
+        success:
+          type: array
+          nullable: true
+          items:
+            type: string
+        failed:
+          type: array
+          nullable: true
+          items:
+            type: string
+    ProjectDetailsReportRequestDto:
+      type: object
+      additionalProperties: false
+      properties:
+        hiddenProjectFields:
+          type: array
+          nullable: true
+          items:
+            type: string
+        hiddenEstimateColumns:
+          type: array
+          nullable: true
+          items:
+            type: string
+        settings:
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/ReportSettings'
+    ReportSettings:
+      type: object
+      additionalProperties: false
+      properties:
+        localizationSetting:
+          $ref: '#/components/schemas/ReportLocalization'
+        timeZoneId:
+          type: string
+          description: Timezone iana/windows identifier for report dates (Default is Etc/GMT+0)
+          nullable: true
+          example: 'Canada/Yukon '
+        verticalMargins:
+          type: number
+          description: Report vertical margins in mm (Default is 15)
+          format: float
+          example: 15
+        horizontalMargins:
+          type: number
+          description: Report horizontal margins in mm (Default is 15)
+          format: float
+          example: 15
+    ReportLocalization:
+      type: integer
+      description: ''
+      x-enumNames:
+        - UnitedStates
+        - Australia
+        - UnitedKingdom
+        - Canada
+        - FrenchCanada
+        - France
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+    PagedResponseOfSchemaReadDTO:
+      type: object
+      additionalProperties: false
+      properties:
+        results:
+          type: array
+          description: An array containing the requested data
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SchemaReadDTO'
+        nextPageToken:
+          type: string
+          description: The token to use for requesting the next page of data
+          nullable: true
+          example: null
+        hasNextPage:
+          type: boolean
+          description: |-
+            A flag representing whether there is another page of data.
+            If this is false, nextPageToken is also null.
+          example: false
+    SchemaReadDTO:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - schemaName
+        - lastModified
+        - businessUnitId
+        - fields
+        - sections
+        - orderedSections
+      properties:
+        id:
+          type: string
+          description: The unique Id of the schema
+          example: 0c8b3865-23a8-4b74-8075-4cc95b7cea56
+        schemaName:
+          type: string
+          description: The name of the type of schema (e.g. "projects")
+          example: projects
+        lastModified:
+          type: string
+          description: The last modified date of the Schema.
+          format: date-time
+          example: '2022-01-01T12:01:48.000Z'
+        dateCreated:
+          type: string
+          description: The created date of the schema
+          format: date-time
+          example: '2022-01-01T12:01:48.000Z'
+        businessUnitId:
+          type: string
+          description: The business unit Id that this schema belongs to.
+          example: 308e83a3-59bf-4422-9803-a98120b51770
+        fields:
+          type: object
+          description: An object containing the fields contained in the schema. Keyed by field.Id.
+          example:
+            name:
+              id: name
+              alias: name
+              name: Project Name
+              type: 0
+              config:
+                link: id
+                heavyBid:
+                  mappedFieldIds:
+                    - estimateName
+                    - projectName
+                    - name
+              readOnly: false
+              required: true
+              standard: true
+              protected: true
+              hiddenInTable: false
+              hiddenInForm: false
+              lookup: false
+              adminOnly: false
+            preconId:
+              id: preconId
+              alias: preconId
+              name: Pre-Con ID
+              type: 17
+              config: {}
+              readOnly: false
+              required: false
+              standard: true
+              protected: true
+              hiddenInTable: true
+              hiddenInForm: true
+              lookup: false
+              adminOnly: false
+            lastModified:
+              id: lastModified
+              alias: lastModified
+              name: Last Modified
+              type: 9
+              config: {}
+              readOnly: true
+              required: false
+              standard: true
+              protected: true
+              hiddenInTable: false
+              hiddenInForm: false
+              lookup: true
+              adminOnly: false
+            jobstatus:
+              id: jobstatus
+              alias: jobstatus
+              name: Project Status
+              type: 3
+              config:
+                listValues:
+                  - display: Prospective Work
+                    value: Prospective Work
+                    hbValue: Prospective Work
+                  - display: Change Order
+                    value: Change Order
+                    hbValue: Change Order
+                  - display: Estimating
+                    value: Estimating
+                  - display: Submitted
+                    value: Submitted
+                    hbValue: Submitted
+                  - display: Awarded
+                    value: Awarded
+                    hbValue: Awarded
+                  - display: Will Not Bid
+                    value: Will Not Bid
+                heavyBid:
+                  mappedFieldIds:
+                    - status
+                customSort: true
+              readOnly: false
+              required: false
+              standard: true
+              protected: false
+              hiddenInTable: false
+              hiddenInForm: false
+              lookup: false
+              adminOnly: false
+            state:
+              id: state
+              alias: state
+              name: State
+              type: 4
+              config:
+                heavyBid:
+                  mappedFieldIds:
+                    - state
+              readOnly: false
+              required: false
+              standard: true
+              protected: false
+              hiddenInTable: false
+              hiddenInForm: false
+              lookup: false
+              adminOnly: false
+            7d5347ba-29ae-4d19-868f-cf5d9d3e7748:
+              id: 7d5347ba-29ae-4d19-868f-cf5d9d3e7748
+              alias: customField1
+              name: Custom Field 1
+              type: 15
+              config:
+                latLong: true
+              readOnly: false
+              required: false
+              standard: false
+              protected: false
+              hiddenInTable: false
+              hiddenInForm: false
+              lookup: false
+              adminOnly: false
+          additionalProperties:
+            $ref: '#/components/schemas/SchemaField'
+        sections:
+          type: object
+          description: An object containing the sections contained in the schema. Keyed by section.Id.
+          example:
+            efac79ed-2b22-4381-897d-39bf0ef88d6f:
+              id: efac79ed-2b22-4381-897d-39bf0ef88d6f
+              name: Project Details
+              fields:
+                - name
+                - preconId
+                - lastModified
+                - lastModifiedBy
+                - jobstatus
+                - state
+                - 7d5347ba-29ae-4d19-868f-cf5d9d3e7748
+          additionalProperties:
+            $ref: '#/components/schemas/SchemaSection'
+        orderedSections:
+          type: array
+          description: An array of section Ids that specifies the order in which sections appear in the UI.
+          example:
+            - efac79ed-2b22-4381-897d-39bf0ef88d6f
+          items:
+            type: string
+        dataSyncPreference:
+          type: string
+          description: The data sync preference for this schema.
+          nullable: true
+          example: HeavyBid
+    SchemaField:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - alias
+        - type
+        - config
+        - readOnly
+        - required
+        - standard
+        - protected
+        - hiddenInTable
+        - hiddenInForm
+        - lookup
+        - adminOnly
+        - companyAdminOnly
+        - isLockable
+        - useDefaultValue
+      properties:
+        id:
+          type: string
+          description: The unique Id of the field
+          minLength: 1
+        name:
+          type: string
+          description: The human-readable name of the field
+          minLength: 1
+        alias:
+          type: string
+          description: 'The human-readable JSON property of the field '
+          minLength: 1
+        type:
+          description: The type of field
+          oneOf:
+            - $ref: '#/components/schemas/SchemaFieldType'
+        config:
+          type: object
+          description: The field configuration. This varies depending on the type of field.
+          additionalProperties: {}
+        readOnly:
+          type: boolean
+          description: Whether the field is editable.
+        required:
+          type: boolean
+          description: Whether the field is required.
+        standard:
+          type: boolean
+          description: Whether the field was included when the schema was first created.
+        protected:
+          type: boolean
+          description: Whether the field can be deleted.
+        hiddenInTable:
+          type: boolean
+          description: Whether the field should be hidden in the table view.
+        hiddenInForm:
+          type: boolean
+          description: Whether the field should be hidden in the detail view.
+        lookup:
+          type: boolean
+          description: Whether the field should look up its value from a different schema.
+        adminOnly:
+          type: boolean
+          description: Whether the field is editable by admin only.
+        companyAdminOnly:
+          type: boolean
+          description: Whether the field is managed in Customize Setup page by company admin only.
+        isLockable:
+          type: boolean
+          description: Whether the field is lockable in Project Details page.
+        characterLengthLimited:
+          type: boolean
+          description: Whether the field uses custom field length value limits
+        useDefaultValue:
+          type: boolean
+          description: Whether the field use default value.
+        defaultValue:
+          description: 'Field default value '
+          nullable: true
+    SchemaFieldType:
+      type: integer
+      description: |-
+        0-ShortText,
+        1-LongText,
+        2-Date,
+        3-List,
+        4-States,
+        5-Custom,
+        6-Boolean,
+        7-Number,
+        8-Currency,
+        9-DateTime,
+        10-Estimates,
+        11-BidResults,
+        12-Links,
+        13-PhoneNumber,
+        14-Checklist,
+        15-Location,
+        16-MultiSelectList
+      x-enumNames:
+        - ShortText
+        - LongText
+        - Date
+        - List
+        - States
+        - Custom
+        - Boolean
+        - Number
+        - Currency
+        - DateTime
+        - Estimates
+        - BidResults
+        - Links
+        - PhoneNumber
+        - Checklist
+        - Location
+        - MultiSelectList
+        - PreConId
+        - Company
+        - Contact
+        - HJJob
+        - Table
+        - Calculated
+        - Takeoffs
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+    SchemaSection:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - fields
+      properties:
+        id:
+          type: string
+          description: The section Id
+          minLength: 1
+        name:
+          type: string
+          description: The section name
+          minLength: 1
+        fields:
+          type: array
+          description: An array of field Ids that specifies which fields belong to the section and what order the fields appear in the UI.
+          items:
+            type: string
+    UpdateFieldAliasDto:
+      type: object
+      additionalProperties: false
+      required:
+        - existingFieldAlias
+        - newFieldAlias
+      properties:
+        existingFieldAlias:
+          type: string
+        newFieldAlias:
+          type: string
+  securitySchemes:
+    bearer:
+      type: oauth2
+      description: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.hcssapps.com/identity/connect/token
+          scopes:
+            precon:read: precon:read
+            precon:write: precon:write
+        authorizationCode:
+          tokenUrl: https://api.hcssapps.com/identity/connect/token
+          authorizationUrl: https://api.hcssapps.com/identity/connect/authorize
+          scopes:
+            precon:read: precon:read
+            precon:write: precon:write
+x-generator: NSwag v13.15.10.0 (NJsonSchema v10.6.10.0 (Newtonsoft.Json v13.0.0.0))

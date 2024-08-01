@@ -1,0 +1,4495 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DIS API",
+    "version": "v1",
+    "description": "Integrate with accounting systems. Operations require the 'dis:read' or 'dis:write' scope.",
+    "termsOfService": "https://support.hcss.com.",
+    "contact": {
+      "name": "Heavy Construction Systems Specialists, Inc. (HCSS)",
+      "url": "https://support.hcss.com/",
+      "email": "support@hcss.com"
+    },
+    "license": {
+      "name": "EULA",
+      "url": "https://support.hcss.com."
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.hcssapps.com/setups"
+    }
+  ],
+  "security": [
+    {
+      "bearer": [
+        "dis:read",
+        "dis:write",
+        "heavyjob:read",
+        "heavyjob:write"
+      ]
+    }
+  ],
+  "paths": {
+    "/api/v1/AccountingTemplate": {
+      "get": {
+        "tags": [
+          "AccountingTemplate"
+        ],
+        "summary": "Returns a list of accounting templates.",
+        "description": "Returns a list of accounting templates for the specified business unit code.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeavyJobAccountingTemplate"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "a55f2152-4eb5-4c62-88ea-223e4ab7c2e0",
+                    "name": "HWI-2876",
+                    "isPrimary": false
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/CostCode/bulk": {
+      "post": {
+        "tags": [
+          "BulkCostCode"
+        ],
+        "summary": "Creates multiple cost codes.",
+        "description": "Creates multiple cost codes (up to 100), using its code as a unique identifier on the specified job and business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The list of cost code.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DisCostCode"
+                }
+              },
+              "example": [
+                {
+                  "code": "8530000z",
+                  "businessUnitCode": "manager",
+                  "jobCode": "Z3924",
+                  "id": "af8d7c49-35de-4266-b603-02f238f9fae1",
+                  "quantity": 1.5,
+                  "description": "Purchase Pipe Materials",
+                  "unitOfMeasurement": "LS",
+                  "laborHours": 0.5,
+                  "equipmentHours": 0.5,
+                  "laborDollars": 0.5,
+                  "equipmentDollars": 0.5,
+                  "materialDollars": 60311.92,
+                  "subcontractDollars": 0.5,
+                  "supplyDollars": 0.5,
+                  "tags": [
+                    {
+                      "group": "Cementation",
+                      "tag": "MIXING",
+                      "tagDescription": "Mixing concrete",
+                      "id": "ddd792d9-6bd0-4c5d-bfd0-04feae7376b1"
+                    }
+                  ],
+                  "status": "A",
+                  "accountingCode": "135z",
+                  "category": "Category",
+                  "criticalPathMethod": "CPM Code",
+                  "generalLedgerAccount": "GL Acct",
+                  "subJob": "Sub-Job",
+                  "workBreakdownStructureCode": "WBS Code",
+                  "note": "12P - 413",
+                  "historyCode": "01z",
+                  "isTM": false,
+                  "workType": "G",
+                  "payItemNumber": "PayItem1",
+                  "payItemFactor": 2.1,
+                  "isPayItemDriver": true,
+                  "accountingTemplateName": "default",
+                  "isCapExpected": false,
+                  "isHiddenFromMobile": false
+                }
+              ]
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/BusinessUnit": {
+      "get": {
+        "tags": [
+          "BusinessUnit"
+        ],
+        "summary": "Returns a list of all business units.",
+        "description": "For help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisBusinessUnit"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "22fd9125-4d20-4bb3-9ea9-d3db41fa6293",
+                    "code": "manager",
+                    "description": "optional"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BusinessUnit"
+        ],
+        "summary": "Creates a new business unit.",
+        "description": "Creates a new business unit, using the code as a unique identifier.\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The new business unit data.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupsBusinessUnitWrite"
+              },
+              "example": {
+                "code": "code",
+                "description": "optional description"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisBusinessUnit"
+                },
+                "example": {
+                  "id": "22fd9125-4d20-4bb3-9ea9-d3db41fa6293",
+                  "code": "manager",
+                  "description": "optional"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/BusinessUnit/default": {
+      "get": {
+        "tags": [
+          "BusinessUnit"
+        ],
+        "summary": "Returns the default business unit.",
+        "description": "For help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisBusinessUnit"
+                },
+                "example": {
+                  "id": "22fd9125-4d20-4bb3-9ea9-d3db41fa6293",
+                  "code": "manager",
+                  "description": "optional"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/CostCode": {
+      "post": {
+        "tags": [
+          "CostCode"
+        ],
+        "summary": "Creates a new cost code.",
+        "description": "Creates a new cost code, using its code as a unique identifier on the specified job and business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The cost code.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisCostCode"
+              },
+              "example": {
+                "code": "8530000z",
+                "businessUnitCode": "manager",
+                "jobCode": "Z3924",
+                "id": "af8d7c49-35de-4266-b603-02f238f9fae1",
+                "quantity": 1.5,
+                "description": "Purchase Pipe Materials",
+                "unitOfMeasurement": "LS",
+                "laborHours": 0.5,
+                "equipmentHours": 0.5,
+                "laborDollars": 0.5,
+                "equipmentDollars": 0.5,
+                "materialDollars": 60311.92,
+                "subcontractDollars": 0.5,
+                "supplyDollars": 0.5,
+                "tags": [
+                  {
+                    "group": "Cementation",
+                    "tag": "MIXING",
+                    "tagDescription": "Mixing concrete",
+                    "id": "ddd792d9-6bd0-4c5d-bfd0-04feae7376b1"
+                  }
+                ],
+                "status": "A",
+                "accountingCode": "135z",
+                "category": "Category",
+                "criticalPathMethod": "CPM Code",
+                "generalLedgerAccount": "GL Acct",
+                "subJob": "Sub-Job",
+                "workBreakdownStructureCode": "WBS Code",
+                "note": "12P - 413",
+                "historyCode": "01z",
+                "isTM": false,
+                "workType": "G",
+                "payItemNumber": "PayItem1",
+                "payItemFactor": 2.1,
+                "isPayItemDriver": true,
+                "accountingTemplateName": "default",
+                "isCapExpected": false,
+                "isHiddenFromMobile": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "CostCode"
+        ],
+        "summary": "Returns a list of cost codes.",
+        "description": "Returns a list of cost codes for the specified business unit code, job code, and accounting template.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "jobCode",
+            "in": "query",
+            "description": "The job code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "JOB123"
+          },
+          {
+            "name": "accountingTemplateName",
+            "in": "query",
+            "description": "The accounting template name.  If blank or unspecified, the primary accounting template for the business unit is used.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "MAINTEMPLATE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisCostCode"
+                  }
+                },
+                "example": [
+                  {
+                    "code": "8530000z",
+                    "businessUnitCode": "manager",
+                    "jobCode": "Z3924",
+                    "id": "af8d7c49-35de-4266-b603-02f238f9fae1",
+                    "quantity": 1.5,
+                    "description": "Purchase Pipe Materials",
+                    "unitOfMeasurement": "LS",
+                    "laborHours": 0.5,
+                    "equipmentHours": 0.5,
+                    "laborDollars": 0.5,
+                    "equipmentDollars": 0.5,
+                    "materialDollars": 60311.92,
+                    "subcontractDollars": 0.5,
+                    "supplyDollars": 0.5,
+                    "tags": [
+                      {
+                        "group": "Cementation",
+                        "tag": "MIXING",
+                        "tagDescription": "Mixing concrete",
+                        "id": "ddd792d9-6bd0-4c5d-bfd0-04feae7376b1"
+                      }
+                    ],
+                    "status": "A",
+                    "accountingCode": "135z",
+                    "category": "Category",
+                    "criticalPathMethod": "CPM Code",
+                    "generalLedgerAccount": "GL Acct",
+                    "subJob": "Sub-Job",
+                    "workBreakdownStructureCode": "WBS Code",
+                    "note": "12P - 413",
+                    "historyCode": "01z",
+                    "isTM": false,
+                    "workType": "G",
+                    "payItemNumber": "PayItem1",
+                    "payItemFactor": 2.1,
+                    "isPayItemDriver": true,
+                    "accountingTemplateName": "default",
+                    "isCapExpected": false,
+                    "isHiddenFromMobile": false
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "CostCode"
+        ],
+        "summary": "Creates and updates cost codes.",
+        "description": "This call also requires heavyjob:write scope.\r\nThis endpoint currently only supports the adding or updating of cost codes across \r\na single job. If more than one job ID is specified, the request will be rejected.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The list of cost codes.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DisCostCodeUpsert"
+                }
+              },
+              "example": [
+                {
+                  "businessUnitCode": "MANAGER",
+                  "jobCode": "ROADPAVING",
+                  "code": "COSTCODE1",
+                  "status": "A",
+                  "description": "First cost code.",
+                  "quantity": 1000.5,
+                  "unitOfMeasure": "EA",
+                  "laborHours": 100.65,
+                  "equipmentHours": 45.2,
+                  "laborDollars": 321234.65,
+                  "equipmentDollars": 7656.2,
+                  "materialDollars": 6865.8,
+                  "subcontractDollars": 123.6,
+                  "supplyDollars": 21721.7,
+                  "note": "cost code note.",
+                  "historicalActivityCode": "97HKG1",
+                  "isTm": true,
+                  "isHiddenFromMobile": false,
+                  "isCapExpected": true
+                }
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DisCostCodeUpsert"
+                }
+              },
+              "example": [
+                {
+                  "businessUnitCode": "MANAGER",
+                  "jobCode": "ROADPAVING",
+                  "code": "COSTCODE1",
+                  "status": "A",
+                  "description": "First cost code.",
+                  "quantity": 1000.5,
+                  "unitOfMeasure": "EA",
+                  "laborHours": 100.65,
+                  "equipmentHours": 45.2,
+                  "laborDollars": 321234.65,
+                  "equipmentDollars": 7656.2,
+                  "materialDollars": 6865.8,
+                  "subcontractDollars": 123.6,
+                  "supplyDollars": 21721.7,
+                  "note": "cost code note.",
+                  "historicalActivityCode": "97HKG1",
+                  "isTm": true,
+                  "isHiddenFromMobile": false,
+                  "isCapExpected": true
+                }
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DisCostCodeUpsert"
+                }
+              },
+              "example": [
+                {
+                  "businessUnitCode": "MANAGER",
+                  "jobCode": "ROADPAVING",
+                  "code": "COSTCODE1",
+                  "status": "A",
+                  "description": "First cost code.",
+                  "quantity": 1000.5,
+                  "unitOfMeasure": "EA",
+                  "laborHours": 100.65,
+                  "equipmentHours": 45.2,
+                  "laborDollars": 321234.65,
+                  "equipmentDollars": 7656.2,
+                  "materialDollars": 6865.8,
+                  "subcontractDollars": 123.6,
+                  "supplyDollars": 21721.7,
+                  "note": "cost code note.",
+                  "historicalActivityCode": "97HKG1",
+                  "isTm": true,
+                  "isHiddenFromMobile": false,
+                  "isCapExpected": true
+                }
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DisCostCodeUpsert"
+                }
+              },
+              "example": [
+                {
+                  "businessUnitCode": "MANAGER",
+                  "jobCode": "ROADPAVING",
+                  "code": "COSTCODE1",
+                  "status": "A",
+                  "description": "First cost code.",
+                  "quantity": 1000.5,
+                  "unitOfMeasure": "EA",
+                  "laborHours": 100.65,
+                  "equipmentHours": 45.2,
+                  "laborDollars": 321234.65,
+                  "equipmentDollars": 7656.2,
+                  "materialDollars": 6865.8,
+                  "subcontractDollars": 123.6,
+                  "supplyDollars": 21721.7,
+                  "note": "cost code note.",
+                  "historicalActivityCode": "97HKG1",
+                  "isTm": true,
+                  "isHiddenFromMobile": false,
+                  "isCapExpected": true
+                }
+              ]
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/CostCode/{id}": {
+      "put": {
+        "tags": [
+          "CostCode"
+        ],
+        "summary": "Updates an existing cost code by its id.",
+        "description": "After the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded fields will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The cost code guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The cost code.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisCostCode"
+              },
+              "example": {
+                "code": "8530000z",
+                "businessUnitCode": "manager",
+                "jobCode": "Z3924",
+                "id": "af8d7c49-35de-4266-b603-02f238f9fae1",
+                "quantity": 1.5,
+                "description": "Purchase Pipe Materials",
+                "unitOfMeasurement": "LS",
+                "laborHours": 0.5,
+                "equipmentHours": 0.5,
+                "laborDollars": 0.5,
+                "equipmentDollars": 0.5,
+                "materialDollars": 60311.92,
+                "subcontractDollars": 0.5,
+                "supplyDollars": 0.5,
+                "tags": [
+                  {
+                    "group": "Cementation",
+                    "tag": "MIXING",
+                    "tagDescription": "Mixing concrete",
+                    "id": "ddd792d9-6bd0-4c5d-bfd0-04feae7376b1"
+                  }
+                ],
+                "status": "A",
+                "accountingCode": "135z",
+                "category": "Category",
+                "criticalPathMethod": "CPM Code",
+                "generalLedgerAccount": "GL Acct",
+                "subJob": "Sub-Job",
+                "workBreakdownStructureCode": "WBS Code",
+                "note": "12P - 413",
+                "historyCode": "01z",
+                "isTM": false,
+                "workType": "G",
+                "payItemNumber": "PayItem1",
+                "payItemFactor": 2.1,
+                "isPayItemDriver": true,
+                "accountingTemplateName": "default",
+                "isCapExpected": false,
+                "isHiddenFromMobile": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Employee": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Creates a new employee.",
+        "description": "Create a new employee using its code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The employee.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisEmployee"
+              },
+              "example": {
+                "code": "01-CHARLES, C",
+                "businessUnitCode": "manager",
+                "id": "a16e9d88-2781-4798-a7dd-f418ad3fccf6",
+                "payClass": "MECHV-(HWI-4217)",
+                "phone": "882-838-8366",
+                "accountingCode": "Z193",
+                "address": "99 Ciprianni Blvd",
+                "address2": "#123",
+                "city": "Da Nng",
+                "state": "AR",
+                "zipCode": "444-DDD",
+                "isForeman": true,
+                "isActive": true,
+                "isSalaried": true,
+                "department": "Supers",
+                "costType": "Labor",
+                "earnCode": "Earn",
+                "crew": "rate03",
+                "unionCode": "ACLU",
+                "division": "trade-zz",
+                "salary": 20.5,
+                "generalLedgerAccount": "GL Acct",
+                "taxCode": "Tax Code",
+                "type": "Type",
+                "isDiscontinued": false,
+                "supervisor": "CARP, M",
+                "defaultEquipment": "loader-01",
+                "company": "Bob JV",
+                "mobilePhone": "867-5309",
+                "email": "charles@company.com",
+                "lastName": "Clark",
+                "firstName": "Charles",
+                "middleInitial": "M",
+                "accountingTemplateName": "default",
+                "payRateLevel": "1",
+                "payType": "R",
+                "trade": "CARP"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Returns a list of employees.",
+        "description": "Returns a list of employees for the specified business unit code and accounting template.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "accountingTemplateName",
+            "in": "query",
+            "description": "The accounting template name.  If blank or unspecified, the primary accounting template for the business unit is used.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "MAINTEMPLATE"
+          },
+          {
+            "name": "includeDeleted",
+            "in": "query",
+            "description": "Optional, if set to true result will also include deleted employees.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisEmployee"
+                  }
+                },
+                "example": [
+                  {
+                    "code": "01-CHARLES, C",
+                    "businessUnitCode": "manager",
+                    "id": "a16e9d88-2781-4798-a7dd-f418ad3fccf6",
+                    "payClass": "MECHV-(HWI-4217)",
+                    "phone": "882-838-8366",
+                    "accountingCode": "Z193",
+                    "address": "99 Ciprianni Blvd",
+                    "address2": "#123",
+                    "city": "Da Nng",
+                    "state": "AR",
+                    "zipCode": "444-DDD",
+                    "isForeman": true,
+                    "isActive": true,
+                    "isSalaried": true,
+                    "department": "Supers",
+                    "costType": "Labor",
+                    "earnCode": "Earn",
+                    "crew": "rate03",
+                    "unionCode": "ACLU",
+                    "division": "trade-zz",
+                    "salary": 20.5,
+                    "generalLedgerAccount": "GL Acct",
+                    "taxCode": "Tax Code",
+                    "type": "Type",
+                    "isDiscontinued": false,
+                    "supervisor": "CARP, M",
+                    "defaultEquipment": "loader-01",
+                    "company": "Bob JV",
+                    "mobilePhone": "867-5309",
+                    "email": "charles@company.com",
+                    "lastName": "Clark",
+                    "firstName": "Charles",
+                    "middleInitial": "M",
+                    "accountingTemplateName": "default",
+                    "payRateLevel": "1",
+                    "payType": "R",
+                    "trade": "CARP"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Employee/{id}": {
+      "put": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Updates an employee by its id.",
+        "description": "After the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded fields will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The employee guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The employee.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisEmployee"
+              },
+              "example": {
+                "code": "01-CHARLES, C",
+                "businessUnitCode": "manager",
+                "id": "a16e9d88-2781-4798-a7dd-f418ad3fccf6",
+                "payClass": "MECHV-(HWI-4217)",
+                "phone": "882-838-8366",
+                "accountingCode": "Z193",
+                "address": "99 Ciprianni Blvd",
+                "address2": "#123",
+                "city": "Da Nng",
+                "state": "AR",
+                "zipCode": "444-DDD",
+                "isForeman": true,
+                "isActive": true,
+                "isSalaried": true,
+                "department": "Supers",
+                "costType": "Labor",
+                "earnCode": "Earn",
+                "crew": "rate03",
+                "unionCode": "ACLU",
+                "division": "trade-zz",
+                "salary": 20.5,
+                "generalLedgerAccount": "GL Acct",
+                "taxCode": "Tax Code",
+                "type": "Type",
+                "isDiscontinued": false,
+                "supervisor": "CARP, M",
+                "defaultEquipment": "loader-01",
+                "company": "Bob JV",
+                "mobilePhone": "867-5309",
+                "email": "charles@company.com",
+                "lastName": "Clark",
+                "firstName": "Charles",
+                "middleInitial": "M",
+                "accountingTemplateName": "default",
+                "payRateLevel": "1",
+                "payType": "R",
+                "trade": "CARP"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Equipment": {
+      "post": {
+        "tags": [
+          "Equipment"
+        ],
+        "summary": "Creates a new piece of equipment.",
+        "description": "Creates a new piece of equipment, using its code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The equipment.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisEquipment"
+              },
+              "example": {
+                "code": "00.00DAWN",
+                "businessUnitCode": "manager",
+                "id": "bc226e8c-bbef-4ccd-913f-ecb654995d81",
+                "isActive": true,
+                "defaultPayClass": "01-IRS-(HWI-4217)",
+                "description": "2017 Loader",
+                "gpsDeviceTag": "GPS",
+                "group": "Loaders",
+                "licensePlate": "831-TX01",
+                "state": "LIC",
+                "serialNumber": "TX",
+                "isRental": false,
+                "make": "marque 1",
+                "model": "modele 2a",
+                "year": 2017,
+                "capacity": 103.38,
+                "accountingCode": "10351z",
+                "company": "John Deere",
+                "miscAccount": "Misc Account",
+                "accountingType": "Acct Type",
+                "meterType": "Meter Type",
+                "usageCode": "Usage Code",
+                "costType": "Equipment",
+                "division": "SouthWest",
+                "generalLedgerAccount": "GL Acct",
+                "accountingTemplateName": "default"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Equipment"
+        ],
+        "summary": "Returns a list of equipment.",
+        "description": "Returns a list of equipment for the specified business unit code and accounting template.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "accountingTemplateName",
+            "in": "query",
+            "description": "The accounting template name.  If blank or unspecified, the primary accounting template for the business unit is used.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "MAINTEMPLATE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisEquipment"
+                  }
+                },
+                "example": [
+                  {
+                    "code": "00.00DAWN",
+                    "businessUnitCode": "manager",
+                    "id": "bc226e8c-bbef-4ccd-913f-ecb654995d81",
+                    "isActive": true,
+                    "defaultPayClass": "01-IRS-(HWI-4217)",
+                    "description": "2017 Loader",
+                    "gpsDeviceTag": "GPS",
+                    "group": "Loaders",
+                    "licensePlate": "831-TX01",
+                    "state": "LIC",
+                    "serialNumber": "TX",
+                    "isRental": false,
+                    "make": "marque 1",
+                    "model": "modele 2a",
+                    "year": 2017,
+                    "capacity": 103.38,
+                    "accountingCode": "10351z",
+                    "company": "John Deere",
+                    "miscAccount": "Misc Account",
+                    "accountingType": "Acct Type",
+                    "meterType": "Meter Type",
+                    "usageCode": "Usage Code",
+                    "costType": "Equipment",
+                    "division": "SouthWest",
+                    "generalLedgerAccount": "GL Acct",
+                    "accountingTemplateName": "default"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Equipment/{id}": {
+      "put": {
+        "tags": [
+          "Equipment"
+        ],
+        "summary": "Updates a piece of equipment by its id.",
+        "description": "After the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded fields will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The equipment guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The equipment.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisEquipment"
+              },
+              "example": {
+                "code": "00.00DAWN",
+                "businessUnitCode": "manager",
+                "id": "bc226e8c-bbef-4ccd-913f-ecb654995d81",
+                "isActive": true,
+                "defaultPayClass": "01-IRS-(HWI-4217)",
+                "description": "2017 Loader",
+                "gpsDeviceTag": "GPS",
+                "group": "Loaders",
+                "licensePlate": "831-TX01",
+                "state": "LIC",
+                "serialNumber": "TX",
+                "isRental": false,
+                "make": "marque 1",
+                "model": "modele 2a",
+                "year": 2017,
+                "capacity": 103.38,
+                "accountingCode": "10351z",
+                "company": "John Deere",
+                "miscAccount": "Misc Account",
+                "accountingType": "Acct Type",
+                "meterType": "Meter Type",
+                "usageCode": "Usage Code",
+                "costType": "Equipment",
+                "division": "SouthWest",
+                "generalLedgerAccount": "GL Acct",
+                "accountingTemplateName": "default"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Job": {
+      "post": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Creates a new job.",
+        "description": "Creates a new job, using its code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The job.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisJob"
+              },
+              "example": {
+                "code": "Z3924",
+                "businessUnitCode": "manager",
+                "status": "A",
+                "id": "8ed07dc4-081b-4829-a18c-018b80864fd8",
+                "description": "Demo Job for Testing",
+                "note": "Onsite guard service required",
+                "address": "13151 W Airport Blvd",
+                "address2": "#123",
+                "city": "Sugar Land",
+                "country": "USA",
+                "state": "TX",
+                "zipCode": "77478-6163",
+                "laborRateSetGroup": "000-001-AQ1",
+                "equipmentRateSetGroup": "000-001-AB",
+                "accountingCode": "13807-1234",
+                "accountingState": "TX",
+                "unionClass": "class1",
+                "unionCode": "ACLU",
+                "unionLocal": "ACLU - Houston",
+                "certified": "Certified",
+                "company": "default",
+                "localTaxCode": "Certified",
+                "location": "Local Tax Code",
+                "accountingTemplateName": "Location",
+                "tags": [
+                  {
+                    "group": "AVALON",
+                    "tag": "GAL",
+                    "tagDescription": "Gal Description",
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Returns a list of jobs.",
+        "description": "Returns a list of jobs for the specified business unit code and accounting template.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "accountingTemplateName",
+            "in": "query",
+            "description": "The accounting template name.  If blank or unspecified, the primary accounting template for the business unit is used.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "MAINTEMPLATE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisJob"
+                  }
+                },
+                "example": [
+                  {
+                    "code": "Z3924",
+                    "businessUnitCode": "manager",
+                    "status": "A",
+                    "id": "8ed07dc4-081b-4829-a18c-018b80864fd8",
+                    "description": "Demo Job for Testing",
+                    "note": "Onsite guard service required",
+                    "address": "13151 W Airport Blvd",
+                    "address2": "#123",
+                    "city": "Sugar Land",
+                    "country": "USA",
+                    "state": "TX",
+                    "zipCode": "77478-6163",
+                    "laborRateSetGroup": "000-001-AQ1",
+                    "equipmentRateSetGroup": "000-001-AB",
+                    "accountingCode": "13807-1234",
+                    "accountingState": "TX",
+                    "unionClass": "class1",
+                    "unionCode": "ACLU",
+                    "unionLocal": "ACLU - Houston",
+                    "certified": "Certified",
+                    "company": "default",
+                    "localTaxCode": "Certified",
+                    "location": "Local Tax Code",
+                    "accountingTemplateName": "Location",
+                    "tags": [
+                      {
+                        "group": "AVALON",
+                        "tag": "GAL",
+                        "tagDescription": "Gal Description",
+                        "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Job/{id}": {
+      "put": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "Updates an existing job by its id.",
+        "description": "After the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded fields will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The job guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The job.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisJob"
+              },
+              "example": {
+                "code": "Z3924",
+                "businessUnitCode": "manager",
+                "status": "A",
+                "id": "8ed07dc4-081b-4829-a18c-018b80864fd8",
+                "description": "Demo Job for Testing",
+                "note": "Onsite guard service required",
+                "address": "13151 W Airport Blvd",
+                "address2": "#123",
+                "city": "Sugar Land",
+                "country": "USA",
+                "state": "TX",
+                "zipCode": "77478-6163",
+                "laborRateSetGroup": "000-001-AQ1",
+                "equipmentRateSetGroup": "000-001-AB",
+                "accountingCode": "13807-1234",
+                "accountingState": "TX",
+                "unionClass": "class1",
+                "unionCode": "ACLU",
+                "unionLocal": "ACLU - Houston",
+                "certified": "Certified",
+                "company": "default",
+                "localTaxCode": "Certified",
+                "location": "Local Tax Code",
+                "accountingTemplateName": "Location",
+                "tags": [
+                  {
+                    "group": "AVALON",
+                    "tag": "GAL",
+                    "tagDescription": "Gal Description",
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/PayClass": {
+      "post": {
+        "tags": [
+          "PayClass"
+        ],
+        "summary": "Creates a new pay class.",
+        "description": "Creates a new pay class, using its code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The pay class.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisPayClass"
+              },
+              "example": {
+                "code": "02-MECH-H-(HWI-4217)",
+                "businessUnitCode": "manager",
+                "id": "4ff1c87a-e57f-4ebb-84f1-803784a3bc37",
+                "description": "Mechanic (Heavy Equipment)",
+                "unionCode": "Union Code",
+                "accountingCode": "ACLU",
+                "category": "833205z",
+                "trade": "Trade",
+                "type": "Type",
+                "unionClass": "Union Class",
+                "unionLocal": "Union Local",
+                "craft": "Craft",
+                "heavyBidCode": "HB-OEXC",
+                "isActive": true,
+                "accountingTemplateName": "default"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PayClass"
+        ],
+        "summary": "Returns a list of pay classes.",
+        "description": "Returns a list of pay classes for the specified business unit and accounting template.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "accountingTemplateName",
+            "in": "query",
+            "description": "The accounting template name.  If blank or unspecified, the primary accounting template for the business unit is used.",
+            "schema": {
+              "type": "string",
+              "default": ""
+            },
+            "example": "MAINTEMPLATE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisPayClass"
+                  }
+                },
+                "example": [
+                  {
+                    "code": "02-MECH-H-(HWI-4217)",
+                    "businessUnitCode": "manager",
+                    "id": "4ff1c87a-e57f-4ebb-84f1-803784a3bc37",
+                    "description": "Mechanic (Heavy Equipment)",
+                    "unionCode": "Union Code",
+                    "accountingCode": "ACLU",
+                    "category": "833205z",
+                    "trade": "Trade",
+                    "type": "Type",
+                    "unionClass": "Union Class",
+                    "unionLocal": "Union Local",
+                    "craft": "Craft",
+                    "heavyBidCode": "HB-OEXC",
+                    "isActive": true,
+                    "accountingTemplateName": "default"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/PayClass/{id}": {
+      "put": {
+        "tags": [
+          "PayClass"
+        ],
+        "summary": "Updates an existing pay class by its id.",
+        "description": "After the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded fields will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The pay class guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The pay class.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisPayClass"
+              },
+              "example": {
+                "code": "02-MECH-H-(HWI-4217)",
+                "businessUnitCode": "manager",
+                "id": "4ff1c87a-e57f-4ebb-84f1-803784a3bc37",
+                "description": "Mechanic (Heavy Equipment)",
+                "unionCode": "Union Code",
+                "accountingCode": "ACLU",
+                "category": "833205z",
+                "trade": "Trade",
+                "type": "Type",
+                "unionClass": "Union Class",
+                "unionLocal": "Union Local",
+                "craft": "Craft",
+                "heavyBidCode": "HB-OEXC",
+                "isActive": true,
+                "accountingTemplateName": "default"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/Employee": {
+      "get": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Returns a single employee rate set.",
+        "description": "Returns a single employee rate set or null for the specified business unit and rate set group.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "employeeRateSetGroupCode",
+            "in": "query",
+            "description": "The employee rate set group code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "RSGROUP1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeRateSet"
+                },
+                "example": {
+                  "businessUnitCode": "manager",
+                  "employeeRates": [
+                    {
+                      "employeeCode": "01-CHARLES, C",
+                      "minimumBaseRate": 18.5,
+                      "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                    }
+                  ],
+                  "effectiveDate": "2018-01-01T04:30:00",
+                  "rateSetGroupCode": "000-001-AB",
+                  "rateSetGroupDescription": "Primary rate set",
+                  "id": "71098bb7-99d4-4333-b9a0-77114f7f2317"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Creates a new employee rate set.",
+        "description": "Creates a new employee rate set, using its group code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "Employee rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "employeeRates": [
+                  {
+                    "employeeCode": "01-CHARLES, C",
+                    "minimumBaseRate": 18.5,
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ],
+                "effectiveDate": "2018-01-01T04:30:00",
+                "rateSetGroupCode": "000-001-AB",
+                "rateSetGroupDescription": "Primary rate set",
+                "id": "71098bb7-99d4-4333-b9a0-77114f7f2317"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/Employee/{id}": {
+      "put": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Updates an existing employee rate set by its id.",
+        "description": "If the rate set group code is null, the employee rates to be applied to all rate sets.\r\n            \r\nAfter the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded rates will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The employee rate set guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The employee rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "employeeRates": [
+                  {
+                    "employeeCode": "01-CHARLES, C",
+                    "minimumBaseRate": 18.5,
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ],
+                "effectiveDate": "2018-01-01T04:30:00",
+                "rateSetGroupCode": "000-001-AB",
+                "rateSetGroupDescription": "Primary rate set",
+                "id": "71098bb7-99d4-4333-b9a0-77114f7f2317"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/PayClass": {
+      "get": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Returns a single pay class rate set.",
+        "description": "Returns a single pay class rate set or null for the specified business unit and rate set group.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "payClassRateSetGroupCode",
+            "in": "query",
+            "description": "The pay class rate set group code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "RSGROUP1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayClassRateSet"
+                },
+                "example": {
+                  "businessUnitCode": "manager",
+                  "payClassRates": [
+                    {
+                      "payClassCode": "02-MECH-H-(HWI-4217)",
+                      "shift": 1,
+                      "baseRate": 18.5,
+                      "overtimeFactor": 1.5,
+                      "doubleOvertimeFactor": 2.5,
+                      "fringeRateWithPremium": 36.5,
+                      "fringeRateWithoutPremium": 28.5,
+                      "taxPercent": 23.5,
+                      "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                    }
+                  ],
+                  "effectiveDate": "2018-01-01T12:00:00",
+                  "rateSetGroupCode": "000-001-AB",
+                  "rateSetGroupDescription": "Primary rate set",
+                  "id": "dfbe1430-547a-4c85-91c9-6bbec96a2859"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Creates a new pay class rate set.",
+        "description": "Creates a new pay class rate set, using its group code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The pay class rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayClassRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "payClassRates": [
+                  {
+                    "payClassCode": "02-MECH-H-(HWI-4217)",
+                    "shift": 1,
+                    "baseRate": 18.5,
+                    "overtimeFactor": 1.5,
+                    "doubleOvertimeFactor": 2.5,
+                    "fringeRateWithPremium": 36.5,
+                    "fringeRateWithoutPremium": 28.5,
+                    "taxPercent": 23.5,
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ],
+                "effectiveDate": "2018-01-01T12:00:00",
+                "rateSetGroupCode": "000-001-AB",
+                "rateSetGroupDescription": "Primary rate set",
+                "id": "dfbe1430-547a-4c85-91c9-6bbec96a2859"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/PayClass/{id}": {
+      "put": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Updates an existing pay class rate set by its id.",
+        "description": "The payload has an outer wrapper and a list of pay class rates.  All\r\nfields of the outer wrapper should be specified.\r\n            \r\nIn list of rates, the pay class code is used as the primary key.\r\n(i.e., id has no effect).\r\n            \r\nFor pay classes that are specified in the payload, the server will\r\nmatch exactly what is sent.  In other words, if fields are not\r\nspecified (e.g., taxPercent), they will be saved as 0, replacing\r\nany existing data.\r\n            \r\nIf a rate exists, but is not  provided in the payload, the existing\r\nrate will remain as-is.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The pay class rate set guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Pay class rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayClassRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "payClassRates": [
+                  {
+                    "payClassCode": "02-MECH-H-(HWI-4217)",
+                    "shift": 1,
+                    "baseRate": 18.5,
+                    "overtimeFactor": 1.5,
+                    "doubleOvertimeFactor": 2.5,
+                    "fringeRateWithPremium": 36.5,
+                    "fringeRateWithoutPremium": 28.5,
+                    "taxPercent": 23.5,
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ],
+                "effectiveDate": "2018-01-01T12:00:00",
+                "rateSetGroupCode": "000-001-AB",
+                "rateSetGroupDescription": "Primary rate set",
+                "id": "dfbe1430-547a-4c85-91c9-6bbec96a2859"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/Equipment": {
+      "get": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Returns a single equipment rate set.",
+        "description": "Returns a single equipment rate set or null for the specified business unit and rate set group.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "equipmentRateSetGroupCode",
+            "in": "query",
+            "description": "The equipment rate set group code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "RSGROUP1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipmentRateSet"
+                },
+                "example": {
+                  "businessUnitCode": "manager",
+                  "equipmentRates": [
+                    {
+                      "equipmentCode": "00.00DAWN",
+                      "totalRate": 35.5,
+                      "operatingRate": 20.5,
+                      "ownershipRate": 15.5,
+                      "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                    }
+                  ],
+                  "effectiveDate": "2017-12-01T00:00:00",
+                  "rateSetGroupCode": "000-001-AB",
+                  "rateSetGroupDescription": "Primary rate set",
+                  "id": "98437f72-839f-48f4-a9f9-6c96304d85f0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Creates a new equipment rate set.",
+        "description": "Creates a new equipment rate set, using its group code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The equipment rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EquipmentRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "equipmentRates": [
+                  {
+                    "equipmentCode": "00.00DAWN",
+                    "totalRate": 35.5,
+                    "operatingRate": 20.5,
+                    "ownershipRate": 15.5,
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ],
+                "effectiveDate": "2017-12-01T00:00:00",
+                "rateSetGroupCode": "000-001-AB",
+                "rateSetGroupDescription": "Primary rate set",
+                "id": "98437f72-839f-48f4-a9f9-6c96304d85f0"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/Equipment/{id}": {
+      "put": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Updates an existing equipment rate set by its id.",
+        "description": "After the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded rates will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The equipment rate set guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The equipment rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EquipmentRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "equipmentRates": [
+                  {
+                    "equipmentCode": "00.00DAWN",
+                    "totalRate": 35.5,
+                    "operatingRate": 20.5,
+                    "ownershipRate": 15.5,
+                    "id": "ef4cb06d-9cbd-4fa7-9e33-59e64fcaa092"
+                  }
+                ],
+                "effectiveDate": "2017-12-01T00:00:00",
+                "rateSetGroupCode": "000-001-AB",
+                "rateSetGroupDescription": "Primary rate set",
+                "id": "98437f72-839f-48f4-a9f9-6c96304d85f0"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/CostAdjustment": {
+      "get": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Returns a single cost adjustment rate set.",
+        "description": "Returns a single cost adjustment rate set or null for the specified business unit and rate set group.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "costAdjustmentRateSetGroupCode",
+            "in": "query",
+            "description": "The cost adjustment rate set group code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "RSGROUP1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CostAdjustmentRateSet"
+                },
+                "example": {
+                  "businessUnitCode": "manager",
+                  "costAdjustmentRates": [
+                    {
+                      "costAdjustmentCode": "CAR-01",
+                      "rateType": "dollarPerHour",
+                      "rate": 16,
+                      "taxPercent": 8
+                    }
+                  ],
+                  "effectiveDate": "2018-01-01T05:15:15",
+                  "rateSetGroupCode": "groupCode",
+                  "rateSetGroupDescription": "groupDescription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Creates a new cost adjustment rate set.",
+        "description": "Creates a new cost adjustment rate set, using its group code as a unique identifier on the specified business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "The cost adjustment rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CostAdjustmentRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "costAdjustmentRates": [
+                  {
+                    "costAdjustmentCode": "CAR-01",
+                    "rateType": "dollarPerHour",
+                    "rate": 16,
+                    "taxPercent": 8
+                  }
+                ],
+                "effectiveDate": "2018-01-01T05:15:15",
+                "rateSetGroupCode": "groupCode",
+                "rateSetGroupDescription": "groupDescription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSet/CostAdjustment/{id}": {
+      "put": {
+        "tags": [
+          "RateSet"
+        ],
+        "summary": "Updates an existing cost adjustment rate set by its id.",
+        "description": "After the result of this operation, the server entity will match exactly what is sent here.  (i.e., excluded rates will be interpreted as \"not needed\" and deleted from the server)\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The cost adjustment rate set guid.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The cost adjustment rate set.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CostAdjustmentRateSet"
+              },
+              "example": {
+                "businessUnitCode": "manager",
+                "costAdjustmentRates": [
+                  {
+                    "costAdjustmentCode": "CAR-01",
+                    "rateType": "dollarPerHour",
+                    "rate": 16,
+                    "taxPercent": 8
+                  }
+                ],
+                "effectiveDate": "2018-01-01T05:15:15",
+                "rateSetGroupCode": "groupCode",
+                "rateSetGroupDescription": "groupDescription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSetGroup": {
+      "get": {
+        "tags": [
+          "RateSetGroup"
+        ],
+        "summary": "Returns a list of rate set groups.",
+        "description": "Returns a list of rate set groups for the specified business unit code.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "businessUnitCode",
+            "in": "query",
+            "description": "The business unit code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MANAGER"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The rate set group type.  If not specified, all types will be returned.",
+            "schema": {
+              "$ref": "#/components/schemas/RateSetGroupType"
+            },
+            "example": "labor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeavyJobRateSetGroup"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "4c265042-4001-4c92-a090-950824e30234",
+                    "code": "TC COSTING",
+                    "description": "Labor Rate Set to test TC Costing",
+                    "effectiveDate": "2017-06-12T00:00:00",
+                    "type": "labor"
+                  },
+                  {
+                    "id": "7d6bff6f-ac8f-47e8-9b71-1a222b99d1ec",
+                    "code": "TC COSTING",
+                    "description": "Equipment Rate Set to test TC Costing",
+                    "effectiveDate": "2017-06-05T00:00:00",
+                    "type": "equipment"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RateSetGroup"
+        ],
+        "summary": "Creates a new rate set group.",
+        "description": "Creates a new rate set group for the specified business unit.  Also\r\ncreates an associated rate set based on the type.  (e.g., creating\r\na labor rate set group will create a labor rate set within the group).\r\nCode must be unique for the business unit.\r\n            \r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HeavyJobRateSetGroupWrite"
+              },
+              "example": {
+                "code": "code",
+                "description": "description",
+                "type": "labor",
+                "businessUnitCode": "manager"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HeavyJobRateSetGroupWrite"
+              },
+              "example": {
+                "code": "code",
+                "description": "description",
+                "type": "labor",
+                "businessUnitCode": "manager"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HeavyJobRateSetGroupWrite"
+              },
+              "example": {
+                "code": "code",
+                "description": "description",
+                "type": "labor",
+                "businessUnitCode": "manager"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/HeavyJobRateSetGroupWrite"
+              },
+              "example": {
+                "code": "code",
+                "description": "description",
+                "type": "labor",
+                "businessUnitCode": "manager"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/RateSetGroup/{id}": {
+      "put": {
+        "tags": [
+          "RateSetGroup"
+        ],
+        "summary": "Updates an existing rate set group by its id.",
+        "description": "For help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the rate set group id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HeavyJobRateSetGroupWrite"
+              },
+              "example": {
+                "code": "code",
+                "description": "description",
+                "type": "labor",
+                "businessUnitCode": "manager"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Storage/Config": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "summary": "Retrieves the DIS XML configuration.",
+        "description": "Requires scope dis:config.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "summary": "Updates the DIS XML configuraton.",
+        "description": "Requires scope dis:config.\r\n\r\nThis operation will completely overwrite the existing configuraton with what is sent here.",
+        "requestBody": {
+          "description": "The xml configuration.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Storage/DataCommand": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "summary": "Retrieves the DIS XML data commands.",
+        "description": "Requires scope dis:config.",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "summary": "Updates the DIS XML data commands.",
+        "description": "Requires scope dis:config.\r\n\r\nThis operation will completely overwrite the existing configuraton with what is sent here.",
+        "requestBody": {
+          "description": "The data command xml.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    },
+    "/api/v1/Storage/Log/{name}": {
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "summary": "Updates a DIS log.",
+        "description": "Requires scope dis:config.\r\n\r\nThis operation will completely overwrite the existing log with what is sent here.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the log.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The log content.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CostAdjustmentRateSet": {
+        "required": [
+          "businessUnitCode",
+          "rateSetGroupCode"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit code."
+          },
+          "costAdjustmentRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisCostAdjustmentRate"
+            },
+            "description": "Gets the cost adjustment rates.",
+            "nullable": true
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Gets the effective date.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rateSetGroupCode": {
+            "type": "string",
+            "description": "Gets the rate set group code, used to uniquely identify this rate\r\nset."
+          },
+          "rateSetGroupDescription": {
+            "type": "string",
+            "description": "Gets the rate set group description.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisBusinessUnit": {
+        "required": [
+          "code",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The business unit id.",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "description": "A code, in all caps, that represents this business unit."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description for this business unit.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A business unit is a subdivision within a company that has separate data\r\nfrom other business units.  Business units are particularly useful for\r\nlarge companies that operate in many locations.  (e.g., each location\r\nmay be represented by a separate business unit for reporting and setup\r\npurposes)."
+      },
+      "DisCostAdjustmentRate": {
+        "required": [
+          "costAdjustmentCode",
+          "rate",
+          "rateType",
+          "taxPercent"
+        ],
+        "type": "object",
+        "properties": {
+          "costAdjustmentCode": {
+            "type": "string",
+            "description": "The cost adjustment code for which these rates should apply."
+          },
+          "rateType": {
+            "$ref": "#/components/schemas/RateTimeType"
+          },
+          "rate": {
+            "type": "number",
+            "description": "The rate, usually in dollars per hour.",
+            "format": "double"
+          },
+          "taxPercent": {
+            "type": "number",
+            "description": "Gets the tax percent.",
+            "format": "double"
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisCostCode": {
+        "required": [
+          "businessUnitCode",
+          "code",
+          "jobCode"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Gets the cost code code.  This is a required field."
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit.  This is a required field."
+          },
+          "jobCode": {
+            "type": "string",
+            "description": "Gets job code.  This is a required field."
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the cost code.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity.",
+            "format": "double",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The cost code description.",
+            "nullable": true
+          },
+          "unitOfMeasurement": {
+            "type": "string",
+            "description": "The unit of measure.",
+            "nullable": true
+          },
+          "laborHours": {
+            "type": "number",
+            "description": "The labor hours.",
+            "format": "double",
+            "nullable": true
+          },
+          "equipmentHours": {
+            "type": "number",
+            "description": "The equipment hours.",
+            "format": "double",
+            "nullable": true
+          },
+          "laborDollars": {
+            "type": "number",
+            "description": "The labor cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "equipmentDollars": {
+            "type": "number",
+            "description": "The equipment cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "materialDollars": {
+            "type": "number",
+            "description": "The material cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "subcontractDollars": {
+            "type": "number",
+            "description": "The subcontract cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "supplyDollars": {
+            "type": "number",
+            "description": "The supply cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisTag"
+            },
+            "description": "The cost code tags.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "The cost code status. Items Enum: \"A\" for Active, \"C\" for Completed, \"I\" for Inactive",
+            "nullable": true
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The accounting code.",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "description": "\"Category\" accounting field.",
+            "nullable": true
+          },
+          "criticalPathMethod": {
+            "type": "string",
+            "description": "\"CPM Code\" accounting field.",
+            "nullable": true
+          },
+          "generalLedgerAccount": {
+            "type": "string",
+            "description": "\"GL Acct\" accounting field.",
+            "nullable": true
+          },
+          "subJob": {
+            "type": "string",
+            "description": "\"Sub-Job\" accounting field.",
+            "nullable": true
+          },
+          "workBreakdownStructureCode": {
+            "type": "string",
+            "description": "\"WBS Code\" accounting field.",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "description": "The cost code note.",
+            "nullable": true
+          },
+          "historyCode": {
+            "type": "string",
+            "description": "The history code.",
+            "nullable": true
+          },
+          "isTM": {
+            "type": "boolean",
+            "description": "The flag indicating whether the cost code is a time-and-material item.",
+            "nullable": true
+          },
+          "workType": {
+            "type": "string",
+            "description": "The work type.",
+            "nullable": true
+          },
+          "payItemNumber": {
+            "type": "string",
+            "description": "The pay item number.",
+            "nullable": true
+          },
+          "payItemFactor": {
+            "type": "number",
+            "description": "Any costs contributed by this cost code are multiplied by\r\nthis factor before being applied to its parent pay item.",
+            "format": "double",
+            "nullable": true
+          },
+          "isPayItemDriver": {
+            "type": "boolean",
+            "description": "Whether this cost code contributes to the cost of its parent\r\npay item.",
+            "nullable": true
+          },
+          "accountingTemplateName": {
+            "type": "string",
+            "description": "The accounting template name.",
+            "nullable": true
+          },
+          "isCapExpected": {
+            "type": "boolean",
+            "description": "The flag indicating whether to set the cost code to cap expected.",
+            "nullable": true
+          },
+          "isHiddenFromMobile": {
+            "type": "boolean",
+            "description": "The flag indicating whether cost code is hidden from mobile.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Cost Code object with it's associated accounting fields."
+      },
+      "DisCostCodeUpsert": {
+        "required": [
+          "businessUnitCode",
+          "code",
+          "jobCode",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code. This is a required field."
+          },
+          "jobCode": {
+            "type": "string",
+            "description": "The job code. This is a required field."
+          },
+          "code": {
+            "type": "string",
+            "description": "The cost code code. This is a required field."
+          },
+          "status": {
+            "type": "string",
+            "description": "The cost code status. Items Enum: \"A\" for Active, \"C\" for Completed, \"I\" for Inactive"
+          },
+          "description": {
+            "type": "string",
+            "description": "The cost code description.",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity.",
+            "format": "double",
+            "nullable": true
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "description": "The unit of measure.",
+            "nullable": true
+          },
+          "laborHours": {
+            "type": "number",
+            "description": "The labor hours.",
+            "format": "double",
+            "nullable": true
+          },
+          "equipmentHours": {
+            "type": "number",
+            "description": "The equipment hours.",
+            "format": "double",
+            "nullable": true
+          },
+          "laborDollars": {
+            "type": "number",
+            "description": "The labor cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "equipmentDollars": {
+            "type": "number",
+            "description": "The equipment cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "materialDollars": {
+            "type": "number",
+            "description": "The material cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "subcontractDollars": {
+            "type": "number",
+            "description": "The subcontract cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "supplyDollars": {
+            "type": "number",
+            "description": "The supply cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "description": "The cost code note.",
+            "nullable": true
+          },
+          "historicalActivityCode": {
+            "type": "string",
+            "description": "The historical activity code.",
+            "nullable": true
+          },
+          "isTm": {
+            "type": "boolean",
+            "description": "The flag indicating whether the cost code is a time-and-material item.",
+            "nullable": true
+          },
+          "isHiddenFromMobile": {
+            "type": "boolean",
+            "description": "The flag indicating whether the cost code is hidden from mobile.\r\nDefault is false.",
+            "nullable": true
+          },
+          "isCapExpected": {
+            "type": "boolean",
+            "description": "The flag indicating whether to set the cost code to cap expected.\r\nDefault is true.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisEmployee": {
+        "required": [
+          "businessUnitCode",
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Gets the employee code.  This is a required field."
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit.  This is a required field."
+          },
+          "id": {
+            "type": "string",
+            "description": "Gets the master data id for this entity.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "payClass": {
+            "type": "string",
+            "description": "Gets the pay class. The default HeavyJob pay class will be assigned if the value is null or empty while doing POST/PUT requests.",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "description": "The phone number of the employee.",
+            "nullable": true
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The accounting code.",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the employee.",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "description": "The address2 of the employee.",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "The city.",
+            "nullable": true
+          },
+          "state": {
+            "maxLength": 2,
+            "type": "string",
+            "description": "The state.",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "description": "The zip code.",
+            "nullable": true
+          },
+          "isForeman": {
+            "type": "boolean",
+            "description": "Whether the employee is a foreman.",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "The active status of the employee.",
+            "nullable": true
+          },
+          "isSalaried": {
+            "type": "boolean",
+            "description": "The salaried status of the employee.",
+            "nullable": true
+          },
+          "department": {
+            "type": "string",
+            "description": "The \"Department\" accounting field.",
+            "nullable": true
+          },
+          "costType": {
+            "type": "string",
+            "description": "The \"CostType\" accounting field.",
+            "nullable": true
+          },
+          "earnCode": {
+            "type": "string",
+            "description": "The \"EarnCode\" accounting field.",
+            "nullable": true
+          },
+          "crew": {
+            "type": "string",
+            "description": "The \"Crew\" accounting field.",
+            "nullable": true
+          },
+          "unionCode": {
+            "type": "string",
+            "description": "The \"UnionCode\" accounting field.",
+            "nullable": true
+          },
+          "division": {
+            "type": "string",
+            "description": "The \"Division\" accounting field.",
+            "nullable": true
+          },
+          "salary": {
+            "type": "number",
+            "description": "The \"Salary\" accounting field.",
+            "format": "double",
+            "nullable": true
+          },
+          "generalLedgerAccount": {
+            "type": "string",
+            "description": "The \"GLAcct\" accounting field.",
+            "nullable": true
+          },
+          "taxCode": {
+            "type": "string",
+            "description": "The \"TaxCode\" accounting field.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The \"Type\" accounting field.",
+            "nullable": true
+          },
+          "isDiscontinued": {
+            "type": "boolean",
+            "description": "Whether the employee is discontinued.",
+            "nullable": true
+          },
+          "supervisor": {
+            "type": "string",
+            "description": "The supervisor.",
+            "nullable": true
+          },
+          "defaultEquipment": {
+            "type": "string",
+            "description": "The default equipment.",
+            "nullable": true
+          },
+          "company": {
+            "type": "string",
+            "description": "The company.",
+            "nullable": true
+          },
+          "mobilePhone": {
+            "type": "string",
+            "description": "The mobile phone of the employee.",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the employee.",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name.",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name.",
+            "nullable": true
+          },
+          "middleInitial": {
+            "maxLength": 1,
+            "type": "string",
+            "description": "The middle initial.",
+            "nullable": true
+          },
+          "accountingTemplateName": {
+            "type": "string",
+            "description": "The accounting template name.",
+            "nullable": true
+          },
+          "payRateLevel": {
+            "type": "string",
+            "description": "The \"Pay Rate Level\" accounting field.",
+            "nullable": true
+          },
+          "payType": {
+            "type": "string",
+            "description": "The \"Pay Type\" accounting field.",
+            "nullable": true
+          },
+          "trade": {
+            "type": "string",
+            "description": "The \"Trade\" accounting field.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Employee object with associated accounting fields."
+      },
+      "DisEmployeeRate": {
+        "required": [
+          "employeeCode"
+        ],
+        "type": "object",
+        "properties": {
+          "employeeCode": {
+            "type": "string",
+            "description": "The employee code for whom the minimum base rate should be applied."
+          },
+          "minimumBaseRate": {
+            "type": "number",
+            "description": "Gets the minimum base rate for the employee, which is usually\r\nin dollars per hour.",
+            "format": "double",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A DisEmployeeRate is a container for specifying a minimum base rate\r\nfor a particular employee.  It is included as part of a LaborRateSet,\r\nwhich includes information about the effective date for that particular\r\nrate."
+      },
+      "DisEquipment": {
+        "required": [
+          "businessUnitCode",
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code."
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code."
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the equipment.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "The is Active flag.",
+            "nullable": true
+          },
+          "defaultPayClass": {
+            "type": "string",
+            "description": "The default pay class code.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true
+          },
+          "gpsDeviceTag": {
+            "type": "string",
+            "description": "The GPS device tag.",
+            "nullable": true
+          },
+          "group": {
+            "type": "string",
+            "description": "The group name.",
+            "nullable": true
+          },
+          "licensePlate": {
+            "type": "string",
+            "description": "The license plate.",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "description": "The state.",
+            "nullable": true
+          },
+          "serialNumber": {
+            "type": "string",
+            "description": "The serial number or VIN.",
+            "nullable": true
+          },
+          "isRental": {
+            "type": "boolean",
+            "description": "The is Rental flag.",
+            "nullable": true
+          },
+          "make": {
+            "type": "string",
+            "description": "The make of the equipment.",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "description": "The model of the equipment.",
+            "nullable": true
+          },
+          "year": {
+            "type": "integer",
+            "description": "The year of the equipment.",
+            "format": "int32",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "number",
+            "description": "The capacity of the equipment.",
+            "format": "double",
+            "nullable": true
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The accounting code.",
+            "nullable": true
+          },
+          "company": {
+            "type": "string",
+            "description": "The \"Company\" accounting field.",
+            "nullable": true
+          },
+          "miscAccount": {
+            "type": "string",
+            "description": "The \"MiscAccount\" accounting field.",
+            "nullable": true
+          },
+          "accountingType": {
+            "type": "string",
+            "description": "The \"AccountingType\" accounting field.",
+            "nullable": true
+          },
+          "meterType": {
+            "type": "string",
+            "description": "The \"MeterType\" accounting field.",
+            "nullable": true
+          },
+          "usageCode": {
+            "type": "string",
+            "description": "The \"UsageCode\" accounting field.",
+            "nullable": true
+          },
+          "costType": {
+            "type": "string",
+            "description": "The \"CostType\" accounting field.",
+            "nullable": true
+          },
+          "division": {
+            "type": "string",
+            "description": "The \"Division\" accounting field.",
+            "nullable": true
+          },
+          "generalLedgerAccount": {
+            "type": "string",
+            "description": "The \"GLAcct\" accounting field.",
+            "nullable": true
+          },
+          "accountingTemplateName": {
+            "type": "string",
+            "description": "The accounting template name.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Equipment object with associated accounting fields."
+      },
+      "DisEquipmentRate": {
+        "required": [
+          "equipmentCode"
+        ],
+        "type": "object",
+        "properties": {
+          "equipmentCode": {
+            "type": "string",
+            "description": "The equipment code for which the rates below should apply."
+          },
+          "totalRate": {
+            "type": "number",
+            "description": "The total rate, usually specified in dollars per hour.  This\r\nfield is ignored if the OperatingRate or the OwnershipRate are set.",
+            "format": "double",
+            "nullable": true
+          },
+          "operatingRate": {
+            "type": "number",
+            "description": "The operating rate, usually specified in dollars per hour.  (e.g.,\r\nthe cost of the equipment while it is operating)",
+            "format": "double",
+            "nullable": true
+          },
+          "ownershipRate": {
+            "type": "number",
+            "description": "The ownership rate, usually specified in dollars per hour.  (e.g.,\r\nthe cost of the equipment rental, amortized over time.  The \r\nownership rate is applied even if the equipment is idle.",
+            "format": "double",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A DisEquipmentRate is a container for specifying rates associated with\r\na piece of equipment.  If either the operating rate or the ownership\r\nrate are specified, the server ignores the any specified total rate and\r\noverrides it with the sum of the operating and ownership rate.  \r\nOtherwise, the TotalRate is used."
+      },
+      "DisJob": {
+        "required": [
+          "businessUnitCode",
+          "code",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Gets the job code.  This is a required field."
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit.  This is a required field."
+          },
+          "status": {
+            "type": "string",
+            "description": "Gets the status. Items Enum: \"A\" for Active, \"C\" for Completed, \"I\" for Inactive"
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the job.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "description": "The note.",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "description": "The address.",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "description": "The address2 field.",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "The city.",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "description": "The country.",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "description": "The state.",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "description": "The zip code.",
+            "nullable": true
+          },
+          "laborRateSetGroup": {
+            "type": "string",
+            "description": "The labor rateset group name.",
+            "nullable": true
+          },
+          "equipmentRateSetGroup": {
+            "type": "string",
+            "description": "The equipment rateset group name.",
+            "nullable": true
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The accounting code.",
+            "nullable": true
+          },
+          "accountingState": {
+            "type": "string",
+            "description": "The \"StateCode\" accounting field.",
+            "nullable": true
+          },
+          "unionClass": {
+            "type": "string",
+            "description": "The \"UnionClass\" accounting field.",
+            "nullable": true
+          },
+          "unionCode": {
+            "type": "string",
+            "description": "The \"Union\" accounting field.",
+            "nullable": true
+          },
+          "unionLocal": {
+            "type": "string",
+            "description": "The \"UnionLocal\" accounting field.",
+            "nullable": true
+          },
+          "certified": {
+            "type": "string",
+            "description": "The \"Certified\" accounting field.",
+            "nullable": true
+          },
+          "company": {
+            "type": "string",
+            "description": "The \"Company\" accounting field.",
+            "nullable": true
+          },
+          "localTaxCode": {
+            "type": "string",
+            "description": "The \"LocalTaxCode\" accounting field.",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "description": "The \"Location\" accounting field.",
+            "nullable": true
+          },
+          "accountingTemplateName": {
+            "type": "string",
+            "description": "The accounting template name.",
+            "nullable": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisTag"
+            },
+            "description": "The job tags.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Job object with associated accounting fields."
+      },
+      "DisJobEmployeeRead": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The job-employee relationship id",
+            "format": "uuid"
+          },
+          "businessUnitId": {
+            "type": "string",
+            "description": "The business unit id.",
+            "format": "uuid"
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code.",
+            "nullable": true
+          },
+          "jobId": {
+            "type": "string",
+            "description": "The job id.",
+            "format": "uuid"
+          },
+          "jobCode": {
+            "type": "string",
+            "description": "The job code.",
+            "nullable": true
+          },
+          "employeeId": {
+            "type": "string",
+            "description": "The employee id.",
+            "format": "uuid"
+          },
+          "employeeCode": {
+            "type": "string",
+            "description": "The employee code.",
+            "nullable": true
+          },
+          "defaultPayClassId": {
+            "type": "string",
+            "description": "The pay class id for the employee on the job.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "defaultPayClassCode": {
+            "type": "string",
+            "description": "The pay class code for the employee on the job.",
+            "nullable": true
+          },
+          "assignedEquipmentId": {
+            "type": "string",
+            "description": "The assigned equipment id.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "assignedEquipmentCode": {
+            "type": "string",
+            "description": "The assigned equipment code.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The job-emploee relationship object."
+      },
+      "DisJobEmployeeReadPaginatedResponse": {
+        "required": [
+          "metadata",
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisJobEmployeeRead"
+            },
+            "description": "The paginated results."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/DisJobEmployeeReadResponseMetadata"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a cursor-paginated response from the server."
+      },
+      "DisJobEmployeeReadResponseMetadata": {
+        "type": "object",
+        "properties": {
+          "nextCursor": {
+            "type": "string",
+            "description": "If non-null, specifies the cursor that will return\r\nthe next set of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contains metadata about a paginated response.  (may be later\r\nexpanded to include the limit, count, etc.)"
+      },
+      "DisJobEmployeeWrite": {
+        "required": [
+          "businessUnitCode",
+          "employeeCode",
+          "jobCode"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code."
+          },
+          "jobCode": {
+            "type": "string",
+            "description": "The job code."
+          },
+          "employeeCode": {
+            "type": "string",
+            "description": "The employee code."
+          },
+          "defaultPayClassCode": {
+            "type": "string",
+            "description": "The default pay class code on the job.",
+            "nullable": true
+          },
+          "assignedEquipmentCode": {
+            "type": "string",
+            "description": "The assigned equipment code.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The job-emploee relationship object."
+      },
+      "DisJobEquipmentRead": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The job-equipment id",
+            "format": "uuid",
+            "nullable": true
+          },
+          "businessUnitId": {
+            "type": "string",
+            "description": "The business unit id.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code.",
+            "nullable": true
+          },
+          "jobId": {
+            "type": "string",
+            "description": "The job id.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "jobCode": {
+            "type": "string",
+            "description": "The job code.",
+            "nullable": true
+          },
+          "equipmentId": {
+            "type": "string",
+            "description": "The equipment id.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "equipmentCode": {
+            "type": "string",
+            "description": "The equipment code.",
+            "nullable": true
+          },
+          "equipmentDescription": {
+            "type": "string",
+            "description": "The equipment description.",
+            "nullable": true
+          },
+          "operatorPayClassId": {
+            "type": "string",
+            "description": "The equipment operator pay class id.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "operatorPayClassCode": {
+            "type": "string",
+            "description": "The equipment operator pay class code.",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether or not the relationship is active",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The job-equipment relationship object."
+      },
+      "DisJobEquipmentReadPaginatedResponse": {
+        "required": [
+          "metadata",
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisJobEquipmentRead"
+            },
+            "description": "The paginated results."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/DisJobEquipmentReadResponseMetadata"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a cursor-paginated response from the server."
+      },
+      "DisJobEquipmentReadResponseMetadata": {
+        "type": "object",
+        "properties": {
+          "nextCursor": {
+            "type": "string",
+            "description": "If non-null, specifies the cursor that will return\r\nthe next set of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contains metadata about a paginated response.  (may be later\r\nexpanded to include the limit, count, etc.)"
+      },
+      "DisJobEquipmentWrite": {
+        "required": [
+          "businessUnitCode",
+          "equipmentCode",
+          "jobCode"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code."
+          },
+          "jobCode": {
+            "type": "string",
+            "description": "The job code."
+          },
+          "equipmentCode": {
+            "type": "string",
+            "description": "The equipment code."
+          },
+          "operatorPayClassCode": {
+            "type": "string",
+            "description": "The equipment operator pay class code.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The job-equipment relationship object."
+      },
+      "DisPayClass": {
+        "required": [
+          "businessUnitCode",
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Gets the pay class code.  This is a required field."
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit.  This is a required field."
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the pay class.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the pay class.",
+            "nullable": true
+          },
+          "unionCode": {
+            "type": "string",
+            "description": "The \"UnionCode\" accounting field.",
+            "nullable": true
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The accounting code.",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "description": "The \"Category\" accounting field.",
+            "nullable": true
+          },
+          "trade": {
+            "type": "string",
+            "description": "The \"Trade\" accounting field.",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The \"Type\" accounting field.",
+            "nullable": true
+          },
+          "unionClass": {
+            "type": "string",
+            "description": "The \"UnionClass\" accounting field.",
+            "nullable": true
+          },
+          "unionLocal": {
+            "type": "string",
+            "description": "The \"UnionLocal\" accounting field.",
+            "nullable": true
+          },
+          "craft": {
+            "type": "string",
+            "description": "The \"Craft\" accounting field.",
+            "nullable": true
+          },
+          "heavyBidCode": {
+            "type": "string",
+            "description": "The HeavyBid code.",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "is active flag.",
+            "nullable": true
+          },
+          "accountingTemplateName": {
+            "type": "string",
+            "description": "The accounting template name.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The pay class object with associated accounting fields."
+      },
+      "DisPayClassRate": {
+        "required": [
+          "payClassCode"
+        ],
+        "type": "object",
+        "properties": {
+          "payClassCode": {
+            "type": "string",
+            "description": "The pay class code for which these rates should apply."
+          },
+          "shift": {
+            "type": "integer",
+            "description": "Gets the shift that this PayClassRate should be applied to.",
+            "format": "int32",
+            "nullable": true
+          },
+          "baseRate": {
+            "type": "number",
+            "description": "The base rate, usually in dollars per hour.  The base rate may be\r\naffected by over time factors, fringe rates, etc.",
+            "format": "double",
+            "nullable": true
+          },
+          "overtimeFactor": {
+            "type": "number",
+            "description": "Multiplier for overtime, usually 1.5.",
+            "format": "double",
+            "nullable": true
+          },
+          "doubleOvertimeFactor": {
+            "type": "number",
+            "description": "Multiplier for double-overtime.",
+            "format": "double",
+            "nullable": true
+          },
+          "fringeRateWithPremium": {
+            "type": "number",
+            "description": "Special post-tax rate.  Called \"FringeOT\" on the web.",
+            "format": "double",
+            "nullable": true
+          },
+          "fringeRateWithoutPremium": {
+            "type": "number",
+            "description": "Special post-tax rate.  Called \"Fringe\" on the web.",
+            "format": "double",
+            "nullable": true
+          },
+          "taxPercent": {
+            "type": "number",
+            "description": "Gets the tax percent.",
+            "format": "double",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A DisPayClassRate represents a set of rates and factors that should\r\nbe applied to employees working as a particular pay class."
+      },
+      "DisPayItemUpsert": {
+        "required": [
+          "businessUnitCode",
+          "jobCode",
+          "payItem"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code. This is a required field."
+          },
+          "payItem": {
+            "maxLength": 50,
+            "type": "string",
+            "description": "PayItem code"
+          },
+          "jobCode": {
+            "type": "string",
+            "description": "JobCode"
+          },
+          "stopOverruns": {
+            "type": "boolean",
+            "description": "The stopOverruns",
+            "nullable": true
+          },
+          "unitPrice": {
+            "type": "number",
+            "description": "The unitPrice.",
+            "format": "double",
+            "nullable": true
+          },
+          "contractQuantity": {
+            "type": "number",
+            "description": "The ContractQuantity.",
+            "format": "double",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "A description for this pay item",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/PayItemStatus"
+          },
+          "ownerCode": {
+            "type": "string",
+            "description": "OwnerCode",
+            "nullable": true
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "description": "UnitOfMeasure",
+            "nullable": true
+          },
+          "notes": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "Notes",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "PayItem object"
+      },
+      "DisTag": {
+        "required": [
+          "group",
+          "tag"
+        ],
+        "type": "object",
+        "properties": {
+          "group": {
+            "type": "string",
+            "description": "The group of the tag. This is a required field."
+          },
+          "tag": {
+            "type": "string",
+            "description": "The tag name. This is a required field."
+          },
+          "tagDescription": {
+            "type": "string",
+            "description": "The tag description.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the tag.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Tag to be associated with other entities."
+      },
+      "EmployeeRateSet": {
+        "required": [
+          "businessUnitCode",
+          "rateSetGroupCode"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit code."
+          },
+          "employeeRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisEmployeeRate"
+            },
+            "description": "Gets the employee rates.",
+            "nullable": true
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Gets the effective date.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rateSetGroupCode": {
+            "type": "string",
+            "description": "Gets the rate set group code, used to uniquely identify this rate\r\nset."
+          },
+          "rateSetGroupDescription": {
+            "type": "string",
+            "description": "Gets the rate set group description.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate set.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A LaborRateSet is a collection of EmployeeRates that\r\nshould be applied starting from the EffectiveDate.\r\n\r\nIf the rate set group code is null, these rates will be applied to\r\nall rate sets."
+      },
+      "EquipmentRateSet": {
+        "required": [
+          "businessUnitCode",
+          "rateSetGroupCode"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit code."
+          },
+          "equipmentRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisEquipmentRate"
+            },
+            "description": "The underlying EquipmentRates",
+            "nullable": true
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "The DateTime from which these equipment rates become effective.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rateSetGroupCode": {
+            "type": "string",
+            "description": "Gets the rate set group code, used to identify this particular rate\r\nset."
+          },
+          "rateSetGroupDescription": {
+            "type": "string",
+            "description": "Gets the rate set group description.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate set.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An EquipmentRateSet is a grouping of EquipmentRates that should be\r\napplied starting from the EffectiveDate."
+      },
+      "HeavyJobAccountingTemplate": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Id of the accounting template.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the accounting template."
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "Whether the template is the primary template."
+          }
+        },
+        "additionalProperties": false
+      },
+      "HeavyJobPayItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "ownerCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "contractQuantity": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stopOverruns": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HeavyJobPayItemPaginatedResponse": {
+        "required": [
+          "metadata",
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HeavyJobPayItem"
+            },
+            "description": "The paginated results."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/HeavyJobPayItemResponseMetadata"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a cursor-paginated response from the server."
+      },
+      "HeavyJobPayItemResponseMetadata": {
+        "type": "object",
+        "properties": {
+          "nextCursor": {
+            "type": "string",
+            "description": "If non-null, specifies the cursor that will return\r\nthe next set of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contains metadata about a paginated response.  (may be later\r\nexpanded to include the limit, count, etc.)"
+      },
+      "HeavyJobRateSetGroup": {
+        "required": [
+          "code",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Id if the rate set.",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "description": "The code of the rate set."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "The effective date of the rate set group.",
+            "format": "date-time"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RateSetGroupType"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The rate set group object."
+      },
+      "HeavyJobRateSetGroupWrite": {
+        "required": [
+          "businessUnitCode",
+          "code",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code of the rate set group."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/RateSetGroupType"
+          },
+          "businessUnitCode": {
+            "type": "string",
+            "description": "The business unit code."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The rate set group object."
+      },
+      "PayClassRateSet": {
+        "required": [
+          "businessUnitCode",
+          "rateSetGroupCode"
+        ],
+        "type": "object",
+        "properties": {
+          "businessUnitCode": {
+            "type": "string",
+            "description": "Gets the business unit code."
+          },
+          "payClassRates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisPayClassRate"
+            },
+            "description": "Gets the pay class rates.",
+            "nullable": true
+          },
+          "effectiveDate": {
+            "type": "string",
+            "description": "Gets the effective date.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rateSetGroupCode": {
+            "type": "string",
+            "description": "Gets the rate set group code, used to uniquely identify this rate\r\nset."
+          },
+          "rateSetGroupDescription": {
+            "type": "string",
+            "description": "Gets the rate set group description.",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The Id of the rate set.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A PayClassRateSet is a collection of EmployeeRates that\r\nshould be applied starting from the EffectiveDate."
+      },
+      "PayItemStatus": {
+        "enum": [
+          "active",
+          "completed",
+          "cancelled"
+        ],
+        "type": "string"
+      },
+      "RateSetGroupType": {
+        "enum": [
+          "labor",
+          "workersComp",
+          "tmLabor",
+          "salary",
+          "equipment",
+          "tmEquipment"
+        ],
+        "type": "string"
+      },
+      "RateTimeType": {
+        "enum": [
+          "undefined",
+          "dollarPerHour",
+          "dollarPerDay",
+          "dollarPerWeek",
+          "dollarPerMonth",
+          "percent",
+          "dollarPerUnit"
+        ],
+        "type": "string"
+      },
+      "SetupsBusinessUnitWrite": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "oauth2",
+        "description": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+            "scopes": {
+              "dis:read": "dis:read",
+              "dis:write": "dis:write",
+              "heavyjob:read": "heavyjob:read",
+              "heavyjob:write": "heavyjob:write"
+            }
+          },
+          "authorizationCode": {
+            "tokenUrl": "https://api.hcssapps.com/identity/connect/token",
+            "authorizationUrl": "https://api.hcssapps.com/identity/connect/authorize",
+            "scopes": {
+              "dis:read": "dis:read",
+              "dis:write": "dis:write",
+              "heavyjob:read": "heavyjob:read",
+              "heavyjob:write": "heavyjob:write"
+            }
+          }
+        }
+      }
+    }
+  }
+}

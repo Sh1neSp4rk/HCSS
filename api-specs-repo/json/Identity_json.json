@@ -1,0 +1,158 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Identity",
+    "description": "Authorize your application and get bearer tokens to consume HCSS APIs.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.hcssapps.com/identity"
+    }
+  ],
+  "paths": {
+    "/connect/token": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Get an auth token from identity server.",
+        "description": "Get an auth token from identity server.",
+        "operationId": "post-connect-token",
+        "requestBody": {
+          "description": "The request body is in x-www-form-urlencoded format.<br><br> An example body for authorization_code flow would look like:<br> code=yourauthcode&client_id=client-id&client_secret=alhjad^7hhg&grant_type=authorization_code&redirect_uri=https%3A%2F%2Fwww.hcss.com<br><br>An example body for client_credential flow would look like:<br> client_id=client-id&client_secret=alhjad^7hhg&grant_type=client_credentials&scope=heavyjob%3Aread%20dis%3Aread",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "client_secret": {
+                    "type": "string"
+                  },
+                  "grant_type": {
+                    "type": "string"
+                  },
+                  "scope": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "redirect_uri": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectTokenPost200ApplicationJsonResponse"
+                },
+                "example": {
+                  "access_token": "string",
+                  "expires_in": 0,
+                  "token_type": "string",
+                  "refresh_token": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/connect/authorize": {
+      "get": {
+        "tags": [
+          "Authorize"
+        ],
+        "summary": "Get an authorization code from identity server.",
+        "description": "Get an authorization code from identity server.",
+        "operationId": "get-connect-authorize-client_id-client_id-scope-scope-redirect_uri-redirect_",
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "The client id.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "One or more registered scopes.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "redirect_uri",
+            "in": "query",
+            "description": "One of the allowed redirect URIs for the client.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "response_type",
+            "in": "query",
+            "description": "The response type. Use code to request an authorization code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "A random string. Identity server will echo back the state value on the token response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "If all goes well, you'll receive an HTTP 302 response. The authorization code is included at the end of the URL.<br><br>HTTP/1.1 302 Found<br>Location: https://YOUR_APP/callback?code=AUTHORIZATION_CODE&state=xyzABC123"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConnectTokenPost200ApplicationJsonResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "The access token."
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "Duration in seconds for which the token is valid for."
+          },
+          "token_type": {
+            "type": "string",
+            "description": "The token type."
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "The refresh token."
+          }
+        }
+      }
+    }
+  }
+}
