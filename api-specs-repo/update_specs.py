@@ -8,7 +8,7 @@ from utils.extract_endpoints import extract_endpoints_from_file
 from utils.utils import ensure_directories_exist, load_etags, save_etags, save_endpoints
 
 # Load API URLs from YAML file
-with open("api_urls.yaml", "r") as file:
+with open("api-specs-repo/api_urls.yaml", "r") as file:
     api_specs = yaml.safe_load(file)
 
 # Directory to save the fetched specs
