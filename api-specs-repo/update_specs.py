@@ -80,7 +80,7 @@ for name, url in api_specs.items():
             json.dump(openapi_yaml, file, indent=4)
 
         # Extract the endpoints
-        for path, methods in openapi_yaml["paths"].items():
+        for path, methods in openapi_yaml.get("paths", {}).items():
             for method, _ in methods.items():
                 endpoint = f"{method.upper()} {path}"
                 if name not in endpoints:
@@ -88,16 +88,15 @@ for name, url in api_specs.items():
                 if method.upper() not in endpoints[name]:
                     endpoints[name][method.upper()] = []
                 
-                                # Construct the full URL
+                # Construct the full URL
+                server_url = ''
                 if 'openapi' in openapi_yaml:
                     # OpenAPI 3.0
-                    if 'servers' in openapi_yaml:
+                    if 'servers' in openapi_yaml and openapi_yaml['servers']:
                         server_url = openapi_yaml['servers'][0]['url']
-                    else:
-                        server_url = ''
-                else:
+                if not server_url:
                     # OpenAPI 2.0
-                    server_url = openapi_yaml['host'] + openapi_yaml['basePath']
+                    server_url = openapi_yaml.get('host', '') + openapi_yaml.get('basePath', '')
 
                 full_url = server_url + path.replace('{', '{{').replace('}', '}}')
                 endpoints[name][method.upper()].append(full_url)
