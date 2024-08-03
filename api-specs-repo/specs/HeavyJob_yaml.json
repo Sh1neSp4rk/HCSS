@@ -18545,16 +18545,16 @@ components:
     ApiPurchaseOrderUpdate:
       type: object
       properties:
+        purchaseOrder:
+          type: string
+          description: The purchase order name.
+          nullable: true
         orderStatus:
           $ref: '#/components/schemas/OrderStatus'
         dateIssued:
           type: string
           description: "The date purchase order was issued. If not specified, the default\r\nvalue is the server time."
           format: date-time
-          nullable: true
-        purchaseOrder:
-          type: string
-          description: The purchase order name.
           nullable: true
         description:
           type: string
