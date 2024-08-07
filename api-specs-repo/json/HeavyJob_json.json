@@ -2380,7 +2380,7 @@
         ],
         "summary": "Returns cost codes",
         "description": "This call returns a list of cost codes with accounting values, if available, given business unit, job, cost code or accounting template.",
-        "operationId": "CostCodeController_GetCostCodesAsync",
+        "operationId": "CostCodeController_GetCostCodesV1Async",
         "parameters": [
           {
             "name": "accountingTemplateName",
@@ -2448,7 +2448,6 @@
                   "results": [
                     {
                       "accountingCode": "Account Code 1",
-                      "id": "85f16824-83a3-4c49-a402-0b48c607e1cb",
                       "code": "COSTCODE",
                       "description": "This is a cost code.",
                       "businessUnitId": "03b9b2d2-9af6-4bc5-9517-fd0d8e448d0c",
@@ -2486,7 +2485,9 @@
                           "costCategoryDescription": "Debris removal.",
                           "budgetedCost": 2322.1
                         }
-                      ]
+                      ],
+                      "isDeleted": false,
+                      "id": "85f16824-83a3-4c49-a402-0b48c607e1cb"
                     }
                   ],
                   "metadata": {
@@ -2560,7 +2561,6 @@
                 },
                 "example": {
                   "accountingCode": "Account Code 1",
-                  "id": "85f16824-83a3-4c49-a402-0b48c607e1cb",
                   "code": "COSTCODE",
                   "description": "This is a cost code.",
                   "businessUnitId": "03b9b2d2-9af6-4bc5-9517-fd0d8e448d0c",
@@ -2598,7 +2598,9 @@
                       "costCategoryDescription": "Debris removal.",
                       "budgetedCost": 2322.1
                     }
-                  ]
+                  ],
+                  "isDeleted": false,
+                  "id": "85f16824-83a3-4c49-a402-0b48c607e1cb"
                 }
               }
             }
@@ -2765,6 +2767,115 @@
         ]
       }
     },
+    "/api/v2/costCodes": {
+      "get": {
+        "tags": [
+          "CostCode"
+        ],
+        "summary": "Returns cost codes",
+        "description": "This call returns a list of cost codes with accounting values, if available, given business unit, job, cost code, accounting template or modified since date.",
+        "operationId": "CostCodeController_GetCostCodesV2Async",
+        "parameters": [
+          {
+            "name": "accountingTemplateName",
+            "in": "query",
+            "description": "If specified, returns accounting values for this template instead of the default template.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "query",
+            "description": "Filters the list of cost codes by job",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "businessUnitId",
+            "in": "query",
+            "description": "Filters the list of cost codes by business unit",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "costCodeId",
+            "in": "query",
+            "description": "Return a single cost code",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isDeleted",
+            "in": "query",
+            "description": "If true, only include deleted cost codes. If false, only include non-deleted cost codes. If null, include all.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results that should be returned.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1000
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "<param name=\"modifiedSince \">The timestamp you want to see the changes from. (optional)</param>\r\n            When there are additional results, the metadata nextCursor \r\n            field should be passed to retrieve the next page of results.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modifiedSince",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiCostCodeWithAccountingValuesReadV2PaginatedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:read"
+            ]
+          }
+        ]
+      }
+    },
     "/api/v2/costCodes/advancedRequest": {
       "post": {
         "tags": [
@@ -2772,7 +2883,7 @@
         ],
         "summary": "Returns cost codes",
         "description": "This call returns a list of cost codes for the specified business unit, jobs, cost codes, or accounting template",
-        "operationId": "CostCodeController_GetCostCodesAdvancedRequestAsyncV2",
+        "operationId": "CostCodeController_GetCostCodesAdvancedRequestV2Async",
         "requestBody": {
           "description": "The request object for getting cost codes.",
           "content": {
@@ -2848,7 +2959,6 @@
                   "results": [
                     {
                       "accountingCode": "Account Code 1",
-                      "id": "85f16824-83a3-4c49-a402-0b48c607e1cb",
                       "code": "COSTCODE",
                       "description": "This is a cost code.",
                       "businessUnitId": "03b9b2d2-9af6-4bc5-9517-fd0d8e448d0c",
@@ -2886,7 +2996,9 @@
                           "costCategoryDescription": "Debris removal.",
                           "budgetedCost": 2322.1
                         }
-                      ]
+                      ],
+                      "isDeleted": false,
+                      "id": "85f16824-83a3-4c49-a402-0b48c607e1cb"
                     }
                   ],
                   "metadata": {
@@ -8870,7 +8982,8 @@
                           "costCodeCode": "CC1",
                           "costCodeDescription": "Cost Code 1"
                         }
-                      ]
+                      ],
+                      "isDeleted": false
                     }
                   ],
                   "metadata": {
@@ -8990,7 +9103,8 @@
                       "costCodeCode": "CC1",
                       "costCodeDescription": "Cost Code 1"
                     }
-                  ]
+                  ],
+                  "isDeleted": false
                 }
               }
             }
@@ -15849,6 +15963,43 @@
         "additionalProperties": false,
         "description": "A model for updating an existing cost code."
       },
+      "ApiCostCodePayItemRead": {
+        "required": [
+          "isPayItemDriver",
+          "payItemDescription",
+          "payItemFactor",
+          "payItemId"
+        ],
+        "type": "object",
+        "properties": {
+          "payItemId": {
+            "type": "string",
+            "description": "The pay item id the cost code is associated with.",
+            "format": "uuid"
+          },
+          "payItemCode": {
+            "type": "string",
+            "description": "The pay item number",
+            "nullable": true
+          },
+          "payItemDescription": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The pay item's description"
+          },
+          "payItemFactor": {
+            "type": "number",
+            "description": "Any costs contributed by this cost code are multiplied by\r\nthis factor before being applied to its parent pay item.",
+            "format": "double"
+          },
+          "isPayItemDriver": {
+            "type": "boolean",
+            "description": "Whether this cost code contributes to the cost of its parent\r\npay item."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a pay item - cost code relationship"
+      },
       "ApiCostCodeProgressRead": {
         "type": "object",
         "properties": {
@@ -15929,7 +16080,6 @@
           "businessUnitCode",
           "businessUnitId",
           "code",
-          "id",
           "isPayItemDriver",
           "jobCode",
           "jobId",
@@ -16130,6 +16280,10 @@
             },
             "description": "The custom-cost-type cost.",
             "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Whether or not the cost code is deleted."
           }
         },
         "additionalProperties": false,
@@ -16763,7 +16917,6 @@
           "businessUnitCode",
           "businessUnitId",
           "code",
-          "id",
           "isPayItemDriver",
           "jobCode",
           "jobId",
@@ -16965,6 +17118,10 @@
             "description": "The custom-cost-type cost.",
             "nullable": true
           },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Whether or not the cost code is deleted."
+          },
           "accountingCode": {
             "type": "string",
             "description": "The accounting code.",
@@ -17027,6 +17184,275 @@
         "description": "A POCO that represents a cursor-paginated response from the server."
       },
       "ApiCostCodeWithAccountingValuesReadResponseMetadata": {
+        "type": "object",
+        "properties": {
+          "nextCursor": {
+            "type": "string",
+            "description": "If non-null, specifies the cursor that will return\r\nthe next set of results.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contains metadata about a paginated response.  (may be later\r\nexpanded to include the limit, count, etc.)"
+      },
+      "ApiCostCodeWithAccountingValuesReadV2": {
+        "required": [
+          "businessUnitCode",
+          "businessUnitId",
+          "code",
+          "jobCode",
+          "jobId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The cost code id",
+            "format": "uuid"
+          },
+          "code": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The cost code's code"
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description.",
+            "nullable": true
+          },
+          "businessUnitId": {
+            "type": "string",
+            "description": "The business unit id.",
+            "format": "uuid"
+          },
+          "businessUnitCode": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The business unit code."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "The job id.",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "The start date.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "description": "The end date.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "duration": {
+            "type": "number",
+            "description": "The duration (days).",
+            "format": "double",
+            "nullable": true
+          },
+          "jobCode": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The job code."
+          },
+          "isHiddenFromMobile": {
+            "type": "boolean",
+            "description": "The flag indicating whether the cost code is hidden from mobile.\r\nDefault is false.",
+            "nullable": true
+          },
+          "quantityDrivingEntityType": {
+            "$ref": "#/components/schemas/QuantityDrivingEntityType"
+          },
+          "quantityDrivingEntityId": {
+            "type": "string",
+            "description": "The entity id that drives the quantity of the cost code.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "payItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiCostCodePayItemRead"
+            },
+            "description": "The payitems of this cost code.",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity.",
+            "format": "double",
+            "nullable": true
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "description": "The unit of measure.",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/CostCodeStatus"
+          },
+          "historicalActivityCode": {
+            "type": "string",
+            "description": "The historical activity code from HeavyBid.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "historicalBiditem": {
+            "type": "string",
+            "description": "The historical biditem from HeavyBid.",
+            "nullable": true
+          },
+          "heavyBidEstimateCode": {
+            "type": "string",
+            "description": "The estimate code from HeavyBid.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "isCapExpected": {
+            "type": "boolean",
+            "description": "The flag indicating whether the cost code is capped at expected",
+            "nullable": true
+          },
+          "isTm": {
+            "type": "boolean",
+            "description": "The flag indicating whether the cost code is setup as T and M.\r\nDefault is false.",
+            "nullable": true
+          },
+          "workersCompId": {
+            "type": "string",
+            "description": "The workers comp id this cost code is associated with.  Optional.",
+            "format": "uuid",
+            "nullable": true
+          },
+          "workersCompCode": {
+            "type": "string",
+            "description": "The workers comp code that this cost code is associated\r\nwith.  Optional.",
+            "nullable": true
+          },
+          "workersCompDescription": {
+            "type": "string",
+            "description": "The workers comp code that this cost code is associated\r\nwith.  Optional.",
+            "nullable": true
+          },
+          "laborHours": {
+            "type": "number",
+            "description": "The labor hours.",
+            "format": "double",
+            "nullable": true
+          },
+          "equipmentHours": {
+            "type": "number",
+            "description": "The equipment hours.",
+            "format": "double",
+            "nullable": true
+          },
+          "laborDollars": {
+            "type": "number",
+            "description": "The labor cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "equipmentDollars": {
+            "type": "number",
+            "description": "The equipment cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "materialDollars": {
+            "type": "number",
+            "description": "The material cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "subcontractDollars": {
+            "type": "number",
+            "description": "The subcontract cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "supplyDollars": {
+            "type": "number",
+            "description": "The supply cost.",
+            "format": "double",
+            "nullable": true
+          },
+          "customCostTypeDollars": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiCustomCostTypeBudgetRead"
+            },
+            "description": "The custom-cost-type cost.",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Whether or not the cost code is deleted."
+          },
+          "accountingCode": {
+            "type": "string",
+            "description": "The accounting code.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "category": {
+            "type": "string",
+            "description": "\"Category\" accounting field",
+            "nullable": true,
+            "readOnly": true
+          },
+          "cpm": {
+            "type": "string",
+            "description": "\"CPM Code\" accounting field",
+            "nullable": true,
+            "readOnly": true
+          },
+          "glAcct": {
+            "type": "string",
+            "description": "\"GL Acct\" accounting field",
+            "nullable": true,
+            "readOnly": true
+          },
+          "subJob": {
+            "type": "string",
+            "description": "\"Sub-Job\" accounting field",
+            "nullable": true,
+            "readOnly": true
+          },
+          "wbsCode": {
+            "type": "string",
+            "description": "\"WBS Code\" accounting field",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "HeavyJob cost code object with it's associated accounting fields"
+      },
+      "ApiCostCodeWithAccountingValuesReadV2PaginatedResponse": {
+        "required": [
+          "metadata",
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiCostCodeWithAccountingValuesReadV2"
+            },
+            "description": "The paginated results."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/ApiCostCodeWithAccountingValuesReadV2ResponseMetadata"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a cursor-paginated response from the server."
+      },
+      "ApiCostCodeWithAccountingValuesReadV2ResponseMetadata": {
         "type": "object",
         "properties": {
           "nextCursor": {
@@ -24178,7 +24604,17 @@
             "items": {
               "$ref": "#/components/schemas/ApiCostCodeCompactWithPayItemRead"
             },
-            "description": "Cost Codes linked to the Pay Item",
+            "description": "Cost Codes linked to the Pay Item.",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Whether the Pay Item is soft deleted."
+          },
+          "deletedDate": {
+            "type": "string",
+            "description": "When the Pay Item was soft deleted.",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -24351,6 +24787,16 @@
               "$ref": "#/components/schemas/ApiCostCodeCompactWithPayItemRead"
             },
             "description": "Cost Codes linked to the Pay Item",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "Whether the Pay Item is soft deleted."
+          },
+          "deletedDate": {
+            "type": "string",
+            "description": "When the Pay Item was soft deleted.",
+            "format": "date-time",
             "nullable": true
           }
         },
@@ -25576,11 +26022,6 @@
       "ApiPurchaseOrderUpdate": {
         "type": "object",
         "properties": {
-          "purchaseOrder": {
-            "type": "string",
-            "description": "The purchase order name.",
-            "nullable": true
-          },
           "orderStatus": {
             "$ref": "#/components/schemas/OrderStatus"
           },
@@ -25588,6 +26029,11 @@
             "type": "string",
             "description": "The date purchase order was issued. If not specified, the default\r\nvalue is the server time.",
             "format": "date-time",
+            "nullable": true
+          },
+          "purchaseOrder": {
+            "type": "string",
+            "description": "The purchase order name.",
             "nullable": true
           },
           "description": {
