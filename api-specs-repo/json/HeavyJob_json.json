@@ -5970,13 +5970,91 @@
         ]
       }
     },
-    "/api/v1/businessUnits/{businessUnitId}/equipment/types": {
-      "get": {
+    "/api/v1/businessUnits/{businessUnitId}/equipment/{equipmentId}": {
+      "put": {
         "tags": [
           "Equipment"
         ],
+        "summary": "Updates an existing equipment",
+        "operationId": "EquipmentController_UpdateEquipmentAsync",
+        "parameters": [
+          {
+            "name": "businessUnitId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "equipmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "accountingTemplateName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:write"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/businessUnits/{businessUnitId}/equipment/types": {
+      "get": {
+        "tags": [
+          "EquipmentType"
+        ],
         "summary": "Returns a list of equipment types.",
-        "operationId": "EquipmentController_GetEquipmentTypesAsync",
+        "description": "<span style='color: white; background-color: orange; font-weight: bold; padding: 5px;'>DEPRECATED</span> Please use the endpoint \"/api/v1/equipmentTypes\"<br /><br />",
+        "operationId": "EquipmentTypeController_GetEquipmentTypesAsync",
         "parameters": [
           {
             "name": "businessUnitId",
@@ -6020,6 +6098,7 @@
             "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
           }
         },
+        "deprecated": true,
         "security": [
           {
             "bearer": [
@@ -6030,10 +6109,11 @@
       },
       "post": {
         "tags": [
-          "Equipment"
+          "EquipmentType"
         ],
         "summary": "Creates a new equipment type.",
-        "operationId": "EquipmentController_CreateEquipmentTypeAsync",
+        "description": "<span style='color: white; background-color: orange; font-weight: bold; padding: 5px;'>DEPRECATED</span> Please use the endpoint \"/api/v1/equipmentTypes\"<br /><br />",
+        "operationId": "EquipmentTypeController_CreateBusinessUnitEquipmentTypeAsync",
         "parameters": [
           {
             "name": "businessUnitId",
@@ -6106,6 +6186,7 @@
             "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
           }
         },
+        "deprecated": true,
         "security": [
           {
             "bearer": [
@@ -6115,55 +6196,86 @@
         ]
       }
     },
-    "/api/v1/businessUnits/{businessUnitId}/equipment/{equipmentId}": {
-      "put": {
+    "/api/v1/equipmentTypes": {
+      "get": {
         "tags": [
-          "Equipment"
+          "EquipmentType"
         ],
-        "summary": "Updates an existing equipment",
-        "operationId": "EquipmentController_UpdateEquipmentAsync",
-        "parameters": [
-          {
-            "name": "businessUnitId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
+        "summary": "Returns a list of equipment types.",
+        "operationId": "EquipmentTypeController_GetEquipmentTypesV2Async",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiEquipmentTypeReadV2"
+                  }
+                },
+                "example": [
+                  {
+                    "id": "309dcd94-2c42-43b8-9d71-ed61560a6d2e",
+                    "code": "DOZER",
+                    "description": "New dozer"
+                  }
+                ]
+              }
             }
           },
-          {
-            "name": "equipmentId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
           },
-          {
-            "name": "accountingTemplateName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
           }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:read"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "EquipmentType"
         ],
+        "summary": "Creates a new equipment type.",
+        "operationId": "EquipmentTypeController_CreateEquipmentTypeAsync",
         "requestBody": {
+          "description": "The equipment type to be created.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+                "$ref": "#/components/schemas/ApiEquipmentTypeWrite"
+              },
+              "example": {
+                "code": "DIGGER",
+                "description": "Earth digger"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+                "$ref": "#/components/schemas/ApiEquipmentTypeWrite"
+              },
+              "example": {
+                "code": "DIGGER",
+                "description": "Earth digger"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+                "$ref": "#/components/schemas/ApiEquipmentTypeWrite"
+              },
+              "example": {
+                "code": "DIGGER",
+                "description": "Earth digger"
               }
             }
           },
@@ -6171,7 +6283,19 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiEquipmentTypeReadV2"
+                },
+                "example": {
+                  "id": "10b98b7e-5015-4b7e-a1a6-56166dbcbd37",
+                  "code": "EXCAVATOR",
+                  "description": "Sand excavator"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
@@ -20674,6 +20798,28 @@
         },
         "additionalProperties": false,
         "description": "A POCO that represents a slice of equipment type state returned by the API."
+      },
+      "ApiEquipmentTypeReadV2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id.",
+            "format": "uuid"
+          },
+          "code": {
+            "type": "string",
+            "description": "The code.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents an equipment type."
       },
       "ApiEquipmentTypeWrite": {
         "required": [

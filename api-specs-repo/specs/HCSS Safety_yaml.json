@@ -57,11 +57,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-04-22T22:08:22.326809Z'
+                  DateOfHire: '2024-08-12T19:29:55.5324395Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-04-22T08:00:00Z'
+                  TimeStartedWork: '2024-08-12T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -87,13 +87,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-04-23T00:00:00Z'
-                    LastDay: '2024-04-25T00:00:00Z'
+                    FirstDay: '2024-08-13T00:00:00Z'
+                    LastDay: '2024-08-15T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-04-23T00:00:00Z'
-                    LastDay: '2024-04-25T00:00:00Z'
+                    FirstDay: '2024-08-13T00:00:00Z'
+                    LastDay: '2024-08-15T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -123,11 +123,35 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-04-29T00:00:00Z'
-                    CompletionDate: '2024-04-29T00:00:00Z'
+                    TargetCompletionDate: '2024-08-19T00:00:00Z'
+                    CompletionDate: '2024-08-19T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
-              CreatedDateUtc: '2024-04-22T22:08:20.8892776Z'
-              LastModifiedUtc: '2024-04-22T22:08:20.8892776Z'
+              Attachments:
+                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
+                  Name: injury photo
+                  MimeType: image/png
+              FieldAttachments:
+                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
+                  Name: injury photo
+                  MimeType: image/png
+              MinersInvolved:
+                - MinerCode: minor-code-01
+                  JobTitle: Contractor
+                  ExperienceJobTitle: '5'
+                  ExperienceJobTitleMeasure: years
+                  ExperienceMine: '2'
+                  ExperienceMineMeasure: months
+                  ExperienceTotalMining: '7'
+                  ExperienceTotalMiningMeasure: years
+              Address:
+                Address1: 123 New Streat
+                Address2: null
+                City: Houston
+                State: TX
+                ZipCode: '77042'
+                Country: US
+              CreatedDateUtc: '2024-08-12T19:29:55.4074409Z'
+              LastModifiedUtc: '2024-08-12T19:29:55.4074409Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -138,25 +162,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-04-23T22:08:20.8892776Z'
-              Attachments:
-                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                  Name: injury photo
-                  MimeType: image/png
-              FieldAttachments:
-                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                  Name: injury photo
-                  MimeType: image/png
-              MinersInvolved:
-                - JobTitle: Contractor
-                  MinerCode: minor-code-01
-                  ExperienceJobTitle: '5'
-                  ExperienceJobTitleMeasure: years
-                  ExperienceMine: '2'
-                  ExperienceMineMeasure: months
-                  ExperienceTotalMining: '7'
-                  ExperienceTotalMiningMeasure: years
-              ID: d29ecec5-a4d6-4f2e-bac1-8fd0b57da337
+              DateInvestigationBegan: '2024-08-13T19:29:55.4074409Z'
+              ID: ad91e09b-d5b5-45b5-a2a1-85ba4d4637d4
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -164,18 +171,11 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-04-22T22:08:20.8892776Z'
+              ReportedDateUtc: '2024-08-12T19:29:55.4074409Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-04-22T21:08:20.8892776Z'
+              IncidentDateUtc: '2024-08-12T18:29:55.4074409Z'
               Status: Reported
-              Address:
-                Address1: 123 New Streat
-                Address2: null
-                City: Houston
-                State: TX
-                ZipCode: '77042'
-                Country: US
               Latitude: 29.76
               Longitude: 95.37
               Weather: Overcast
@@ -223,7 +223,7 @@ paths:
           description: The incident you want to modify
           required: true
           schema:
-            $ref: '#/definitions/BaseApiIncident'
+            $ref: '#/definitions/ApiIncidentUpdate'
       responses:
         '200':
           description: Incident saved successfully
@@ -243,11 +243,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-04-22T22:08:23.3424624Z'
+                  DateOfHire: '2024-08-12T19:29:55.8449429Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-04-22T08:00:00Z'
+                  TimeStartedWork: '2024-08-12T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -273,13 +273,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-04-23T00:00:00Z'
-                    LastDay: '2024-04-25T00:00:00Z'
+                    FirstDay: '2024-08-13T00:00:00Z'
+                    LastDay: '2024-08-15T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-04-23T00:00:00Z'
-                    LastDay: '2024-04-25T00:00:00Z'
+                    FirstDay: '2024-08-13T00:00:00Z'
+                    LastDay: '2024-08-15T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -309,11 +309,35 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-04-29T00:00:00Z'
-                    CompletionDate: '2024-04-29T00:00:00Z'
+                    TargetCompletionDate: '2024-08-19T00:00:00Z'
+                    CompletionDate: '2024-08-19T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
-              CreatedDateUtc: '2024-04-22T22:08:23.201832Z'
-              LastModifiedUtc: '2024-04-22T22:08:23.201832Z'
+              Attachments:
+                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
+                  Name: injury photo
+                  MimeType: image/png
+              FieldAttachments:
+                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
+                  Name: injury photo
+                  MimeType: image/png
+              MinersInvolved:
+                - MinerCode: minor-code-01
+                  JobTitle: Contractor
+                  ExperienceJobTitle: '5'
+                  ExperienceJobTitleMeasure: years
+                  ExperienceMine: '2'
+                  ExperienceMineMeasure: months
+                  ExperienceTotalMining: '7'
+                  ExperienceTotalMiningMeasure: years
+              Address:
+                Address1: 123 New Streat
+                Address2: null
+                City: Houston
+                State: TX
+                ZipCode: '77042'
+                Country: US
+              CreatedDateUtc: '2024-08-12T19:29:55.7511905Z'
+              LastModifiedUtc: '2024-08-12T19:29:55.7511905Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -324,25 +348,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-04-23T22:08:23.201832Z'
-              Attachments:
-                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                  Name: injury photo
-                  MimeType: image/png
-              FieldAttachments:
-                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                  Name: injury photo
-                  MimeType: image/png
-              MinersInvolved:
-                - JobTitle: Contractor
-                  MinerCode: minor-code-01
-                  ExperienceJobTitle: '5'
-                  ExperienceJobTitleMeasure: years
-                  ExperienceMine: '2'
-                  ExperienceMineMeasure: months
-                  ExperienceTotalMining: '7'
-                  ExperienceTotalMiningMeasure: years
-              ID: 04b9c942-814a-4558-9bde-f65daeac3f2b
+              DateInvestigationBegan: '2024-08-13T19:29:55.7511905Z'
+              ID: 2b55ba2b-f58a-45a0-9e7a-eac3cebbfcb2
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -350,18 +357,11 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-04-22T22:08:23.201832Z'
+              ReportedDateUtc: '2024-08-12T19:29:55.7511905Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-04-22T21:08:23.201832Z'
+              IncidentDateUtc: '2024-08-12T18:29:55.7511905Z'
               Status: Reported
-              Address:
-                Address1: 123 New Streat
-                Address2: null
-                City: Houston
-                State: TX
-                ZipCode: '77042'
-                Country: US
               Latitude: 29.76
               Longitude: 95.37
               Weather: Overcast
@@ -438,92 +438,11 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ApiIncidentDetailsV1'
+              $ref: '#/definitions/ApiIncident'
           examples:
             application/json:
-              - EmployeeInjuries:
-                  - EmployeeCode: employee-code-04
-                    Address:
-                      Address1: 456 Old Street
-                      Address2: null
-                      City: Houston
-                      State: TX
-                      ZipCode: '77042'
-                      Country: US
-                    Phone: 555-111-4444
-                    Email: employee04@company.com
-                    JobTitle: Contractor
-                    DateOfHire: '2024-04-22T22:08:23.4987156Z'
-                    YearsWithCompanyString: '1'
-                    YearsInConstructionString: '3'
-                    DescriptionOfInjury: Minor cut on left arm
-                    TimeStartedWork: '2024-04-22T08:00:00Z'
-                    ActivityAtTime: Working on XYZ
-                    InjuryClassificationString: illness/injury classification
-                    NatureOfInjuryCategoryString: nature of injury category
-                    NatureOfInjuryTypeString: nature of injury type
-                    IncidentCauseCategoryString: incident cause category
-                    IncidentCauseTypeString: incident cause type
-                    InjuredBodyPartCategoryString: Limb
-                    InjuredBodyPartTypeString: Arm
-                    InjuredSideString: Left
-                    DrugAlcoholTest: true
-                    DrugAlcoholTestFacility: Test Facility, MD
-                    FirstAidMedOnly: true
-                    FirstAidMedOnlyProvidedBy: employee-code-05
-                    TreatedAwayFromWorkSite: false
-                    TreatedAwayFromWorkSiteProvidedBy: provider
-                    TreatedInAnEmergencyRoom: false
-                    HospitalizedOvernightInpatient: false
-                    MedicalFacility: medical facility (if treated at one)
-                    PhysicianHealthCareProvider: provider
-                    IsRecordable: true
-                    ExcludeNameFromOSHAReport: false
-                    SummarizedDescriptionForOSHA: summarized description
-                    ClassificationString: injury classification
-                    DateOfDeath: '0001-01-01T00:00:00'
-                    DaysAwayFromWork:
-                      FirstDay: '2024-04-23T00:00:00Z'
-                      LastDay: '2024-04-25T00:00:00Z'
-                      IncludeWeekends: true
-                      DaysAway: 3
-                    DaysOnJobTransfer:
-                      FirstDay: '2024-04-23T00:00:00Z'
-                      LastDay: '2024-04-25T00:00:00Z'
-                      IncludeWeekends: true
-                      DaysAway: 3
-                    Notes: Additional injury notes
-                    Attachments:
-                      - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                        Name: injury photo
-                        MimeType: image/png
-                    RootCause:
-                      isRootCause: true
-                      ProbableRecurrenceString: Low/Medium/High
-                      PotentialExposureString: Low/Medium/High
-                      LossSeverityPotentialString: Low/Medium/High
-                      LossPotentialNotes: additional notes
-                      EmployeeReceivedSafetyTrainingString: 'True'
-                      EmployeeNeedsSafetyTrainingString: 'True'
-                      OtherEmployeeNeedSafetyTrainingString: 'True'
-                      PersonResponsibleCode: employee-code-06
-                      TrainingNotes: training notes
-                      UnsafeActsDirectCause: direct cause
-                      UnsafeActsIndirectCause: indirect cause
-                      UnsafeActsManagementControl: management control
-                      UnsafeActsNotes: additional notes
-                      UnsafeConditionsDirectCause: direct cause
-                      UnsafeConditionsIndirectCause: indirect cause
-                      UnsafeConditionsManagementControl: management control
-                      UnsafeConditionsNotes: additional notes
-                      FuturePreventionString: future prevention measures
-                      PreventiveMeasuresNotes: additional notes
-                      AssigneeCode: employee-code-07
-                      TargetCompletionDate: '2024-04-29T00:00:00Z'
-                      CompletionDate: '2024-04-29T00:00:00Z'
-                      PreventiveAccountabilityNotes: additional notes
-                CreatedDateUtc: '2024-04-22T22:08:23.3580865Z'
-                LastModifiedUtc: '2024-04-22T22:08:23.3580865Z'
+              - CreatedDateUtc: '2024-08-12T19:29:55.8605641Z'
+                LastModifiedUtc: '2024-08-12T19:29:55.8605641Z'
                 BusinessUnitDescription: BU-123 description
                 ReportingStatus: ReportedToThirdPartyCarrier
                 InsuranceCompanyName: Allstate
@@ -534,25 +453,8 @@ paths:
                 AdjusterEmail: adjuster@company.com
                 AdjusterPhone: 555-111-9999
                 AdjusterNotes: adjuster notes
-                DateInvestigationBegan: '2024-04-23T22:08:23.3580865Z'
-                Attachments:
-                  - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                    Name: injury photo
-                    MimeType: image/png
-                FieldAttachments:
-                  - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                    Name: injury photo
-                    MimeType: image/png
-                MinersInvolved:
-                  - JobTitle: Contractor
-                    MinerCode: minor-code-01
-                    ExperienceJobTitle: '5'
-                    ExperienceJobTitleMeasure: years
-                    ExperienceMine: '2'
-                    ExperienceMineMeasure: months
-                    ExperienceTotalMining: '7'
-                    ExperienceTotalMiningMeasure: years
-                ID: 08fd3203-a972-42ad-809a-e63c28cbefb4
+                DateInvestigationBegan: '2024-08-13T19:29:55.8605641Z'
+                ID: 4ba9ed56-2e28-4be3-add2-88e3ba00131f
                 CaseNumber: injury-1234
                 Description: Employee injured on-site
                 Notes: Additional notes
@@ -560,18 +462,11 @@ paths:
                 JobCode: construction-job-123
                 BusinessUnitCode: BU-123
                 LocationDescription: job site
-                ReportedDateUtc: '2024-04-22T22:08:23.3580865Z'
+                ReportedDateUtc: '2024-08-12T19:29:55.8605641Z'
                 RecorderCode: employee-code-01
                 PersonInChargeCode: employee-code-02
-                IncidentDateUtc: '2024-04-22T21:08:23.3580865Z'
+                IncidentDateUtc: '2024-08-12T18:29:55.8605641Z'
                 Status: Reported
-                Address:
-                  Address1: 123 New Streat
-                  Address2: null
-                  City: Houston
-                  State: TX
-                  ZipCode: '77042'
-                  Country: US
                 Latitude: 29.76
                 Longitude: 95.37
                 Weather: Overcast
@@ -739,8 +634,32 @@ paths:
                             LastDay: 1/24/24
                             DaysAway: 14
                             IncludeWeekends: true
-              CreatedDateUtc: '2024-04-22T22:08:23.5455912Z'
-              LastModifiedUtc: '2024-04-22T22:08:23.5455912Z'
+              Attachments:
+                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
+                  Name: injury photo
+                  MimeType: image/png
+              FieldAttachments:
+                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
+                  Name: injury photo
+                  MimeType: image/png
+              MinersInvolved:
+                - MinerCode: minor-code-01
+                  JobTitle: Contractor
+                  ExperienceJobTitle: '5'
+                  ExperienceJobTitleMeasure: years
+                  ExperienceMine: '2'
+                  ExperienceMineMeasure: months
+                  ExperienceTotalMining: '7'
+                  ExperienceTotalMiningMeasure: years
+              Address:
+                Address1: 123 New Streat
+                Address2: null
+                City: Houston
+                State: TX
+                ZipCode: '77042'
+                Country: US
+              CreatedDateUtc: '2024-08-12T19:29:55.9230669Z'
+              LastModifiedUtc: '2024-08-12T19:29:55.9230669Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -751,25 +670,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-04-23T22:08:23.5455912Z'
-              Attachments:
-                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                  Name: injury photo
-                  MimeType: image/png
-              FieldAttachments:
-                - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
-                  Name: injury photo
-                  MimeType: image/png
-              MinersInvolved:
-                - JobTitle: Contractor
-                  MinerCode: minor-code-01
-                  ExperienceJobTitle: '5'
-                  ExperienceJobTitleMeasure: years
-                  ExperienceMine: '2'
-                  ExperienceMineMeasure: months
-                  ExperienceTotalMining: '7'
-                  ExperienceTotalMiningMeasure: years
-              ID: 5189ab73-38e1-48ef-bc2b-2a64c0da8ae4
+              DateInvestigationBegan: '2024-08-13T19:29:55.9230669Z'
+              ID: 3ed9a85d-c800-427b-912d-7272045185df
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -777,18 +679,11 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-04-22T22:08:23.5455912Z'
+              ReportedDateUtc: '2024-08-12T19:29:55.9230669Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-04-22T21:08:23.5455912Z'
+              IncidentDateUtc: '2024-08-12T18:29:55.9230669Z'
               Status: Reported
-              Address:
-                Address1: 123 New Streat
-                Address2: null
-                City: Houston
-                State: TX
-                ZipCode: '77042'
-                Country: US
               Latitude: 29.76
               Longitude: 95.37
               Weather: Overcast
@@ -879,11 +774,11 @@ paths:
           examples:
             application/json:
               Meetings:
-                - Id: 7225bb03-ad2c-4f59-aa90-ddfcbcef69f2
-                  MeetingDate: '2024-04-22T22:08:23.9049744Z'
-                  JobId: 80438f20-59de-47fc-a0a3-25b7b8fe357a
+                - Id: be6ec966-433a-43d2-8285-f640732a165a
+                  MeetingDate: '2024-08-12T19:29:56.0324407Z'
+                  JobId: 9c8713ce-ecaf-43d8-888c-483af578107d
                   JobCode: road-construction-123
-                  RecorderId: e89b83fa-325f-4c60-8c57-45e4a893cf5c
+                  RecorderId: ae9d83bd-64a3-455f-8927-e9dab27209cd
                   RecorderCode: EMP-123
                   DurationMinutes: 60
                   Type: Weekly check-in
@@ -933,6 +828,24 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/ApiEmployeeInjury'
+      Attachments:
+        description: List of Incident attachments
+        type: array
+        items:
+          $ref: '#/definitions/ApiAttachment'
+      FieldAttachments:
+        description: List of Incident Field attachments
+        type: array
+        items:
+          $ref: '#/definitions/ApiAttachment'
+      MinersInvolved:
+        description: Miners involved during the investigation
+        type: array
+        items:
+          $ref: '#/definitions/ApiMiners'
+      Address:
+        $ref: '#/definitions/ApiAddress'
+        description: The incident location address
       CreatedDateUtc:
         format: date-time
         description: The UTC date and time the incident record was created. This value cannot be changed, any edits to this field will be ignored.
@@ -979,21 +892,6 @@ definitions:
         format: date-time
         description: Date the MSHA Investigation Began
         type: string
-      Attachments:
-        description: List of Incident attachments
-        type: array
-        items:
-          $ref: '#/definitions/ApiAttachment'
-      FieldAttachments:
-        description: List of Incident Field attachments
-        type: array
-        items:
-          $ref: '#/definitions/ApiAttachment'
-      MinersInvolved:
-        description: Miners involved during the investigation
-        type: array
-        items:
-          $ref: '#/definitions/ApiMiners'
       ID:
         format: uuid
         description: The HCSS unique identifier for the incident.
@@ -1043,9 +941,6 @@ definitions:
       Status:
         description: "Incident Status for this incident. \r\nOptions: 'Open', 'Received', or 'Completed'."
         type: string
-      Address:
-        $ref: '#/definitions/ApiAddress'
-        description: The incident location address
       Latitude:
         format: double
         description: The incident location latitude
@@ -1251,12 +1146,14 @@ definitions:
         description: 'MimeType examples: application/pdf image/png image/jpeg'
         type: string
   ApiMiners:
+    description: Incident miner
     type: object
     properties:
-      JobTitle:
-        type: string
       MinerCode:
         description: Employee Code for the miner
+        type: string
+      JobTitle:
+        description: Miner's Job Title
         type: string
       ExperienceJobTitle:
         description: Number of years/months with this job title
@@ -1383,8 +1280,8 @@ definitions:
       PreventiveAccountabilityNotes:
         description: Preventive Accountability Notes
         type: string
-  BaseApiIncident:
-    description: A POCO representing an incident from the incidents API for updating an incident.
+  ApiIncidentUpdate:
+    description: Incident details
     required:
       - ID
       - Description
@@ -1398,6 +1295,9 @@ definitions:
       - IncidentDateUtc
     type: object
     properties:
+      Address:
+        $ref: '#/definitions/ApiAddress'
+        description: The incident location address
       ID:
         format: uuid
         description: The HCSS unique identifier for the incident.
@@ -1447,9 +1347,177 @@ definitions:
       Status:
         description: "Incident Status for this incident. \r\nOptions: 'Open', 'Received', or 'Completed'."
         type: string
-      Address:
-        $ref: '#/definitions/ApiAddress'
-        description: The incident location address
+      Latitude:
+        format: double
+        description: The incident location latitude
+        maximum: 90
+        minimum: -90
+        type: number
+      Longitude:
+        format: double
+        description: The incident location longitude
+        maximum: 180
+        minimum: -180
+        type: number
+      Weather:
+        description: Weather conditions at the time of the incident
+        maxLength: 500
+        minLength: 0
+        type: string
+      PersonMostFamiliarCode:
+        description: The employee code for the person most familiar with the incident
+        type: string
+      RecordedEmail:
+        description: Email of the person who recorded the incident
+        type: string
+      RecordedPhoneNumber:
+        description: Phone Number of the person who recorded the incident
+        type: string
+      PersonInChargeEmail:
+        description: Email of the person in charge when the incident occurred
+        type: string
+      PersonInChargePhoneNumber:
+        description: Phone Number of the person in charge when the incident occurred
+        type: string
+      PersonMostFamiliarEmail:
+        description: Email of the person most familiar with the incident
+        type: string
+      PersonMostFamiliarPhoneNumber:
+        description: Phone Number of the person most familiar with the incident
+        type: string
+      EstimatedCost:
+        format: double
+        description: Estimated cost of this incident
+        type: number
+      ActualCost:
+        format: double
+        description: Actual cost of this incident
+        type: number
+      IsMSHAInvestigation:
+        description: Did the incident required a MSHA Investigation
+        type: boolean
+      Individuals:
+        description: Individuals list for MSHA Investigation. Separated by semi-colon (;)
+        type: string
+      SiteDescription:
+        description: Site description
+        type: string
+      AccidentInjuryExplanation:
+        description: Accident/Injury Explanation
+        type: string
+      StepsToPreventFutureOccurrences:
+        description: Steps to Prevent Future Occurrences
+        type: string
+  ApiIncident:
+    description: Incident details
+    required:
+      - ID
+      - Description
+      - Notes
+      - FieldNotes
+      - JobCode
+      - LocationDescription
+      - ReportedDateUtc
+      - RecorderCode
+      - PersonInChargeCode
+      - IncidentDateUtc
+    type: object
+    properties:
+      CreatedDateUtc:
+        format: date-time
+        description: The UTC date and time the incident record was created. This value cannot be changed, any edits to this field will be ignored.
+        type: string
+      LastModifiedUtc:
+        format: date-time
+        description: The UTC date and time of the last modification to the incident. This value is generated automatically, any edits to this field will be ignored.
+        type: string
+      BusinessUnitDescription:
+        description: The description for the business unit associated with this incident. This value cannot be changed, edits to this value will trigger a 400 Bad Request response.
+        type: string
+      ReportingStatus:
+        description: Insurance claim reporting status for this incident
+        enum:
+          - None
+          - InHouse
+          - ReportedToCarrier
+          - ReportedToThirdPartyCarrier
+        type: string
+      InsuranceCompanyName:
+        description: Insurance claim company name for this incident
+        type: string
+      InsuranceClaimTypes:
+        description: Insurance claims for this incident
+        type: array
+        items:
+          type: string
+      ClaimNumber:
+        description: Insurance claim number for this incident
+        type: string
+      Adjuster:
+        description: Adjuster for this incident
+        type: string
+      AdjusterEmail:
+        description: Adjuster email for this incident
+        type: string
+      AdjusterPhone:
+        description: Adjuster phone for this incident
+        type: string
+      AdjusterNotes:
+        description: Adjuster notes for this incident
+        type: string
+      DateInvestigationBegan:
+        format: date-time
+        description: Date the MSHA Investigation Began
+        type: string
+      ID:
+        format: uuid
+        description: The HCSS unique identifier for the incident.
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      CaseNumber:
+        description: The user-entered unique identifier for the incident. Must be unique within each company.
+        maxLength: 100
+        minLength: 0
+        type: string
+      Description:
+        description: Description of the incident
+        maxLength: 2000
+        minLength: 0
+        type: string
+      Notes:
+        description: Notes about this incident
+        type: string
+      FieldNotes:
+        description: Field Notes about this incident
+        type: string
+      JobCode:
+        description: The code for the job where the incident occurred
+        type: string
+      BusinessUnitCode:
+        description: The code for the business unit associated with this incident. This value cannot be changed, edits to this value will trigger a 400 Bad Request response.
+        type: string
+      LocationDescription:
+        description: A description of the location where the incident occurred
+        maxLength: 2000
+        minLength: 0
+        type: string
+      ReportedDateUtc:
+        format: date-time
+        description: The UTC date and time when the incident was reported
+        type: string
+      RecorderCode:
+        description: The employee code of the person who recorded the incident
+        type: string
+      PersonInChargeCode:
+        description: The employee code of the employee in charge when the incident occurred
+        type: string
+      IncidentDateUtc:
+        format: date-time
+        description: The UTC date and time when the incident occurred
+        type: string
+      Status:
+        description: "Incident Status for this incident. \r\nOptions: 'Open', 'Received', or 'Completed'."
+        type: string
       Latitude:
         format: double
         description: The incident location latitude
@@ -1531,6 +1599,24 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/ApiIncidentForm'
+      Attachments:
+        description: List of Incident attachments
+        type: array
+        items:
+          $ref: '#/definitions/ApiAttachment'
+      FieldAttachments:
+        description: List of Incident Field attachments
+        type: array
+        items:
+          $ref: '#/definitions/ApiAttachment'
+      MinersInvolved:
+        description: Miners involved during the investigation
+        type: array
+        items:
+          $ref: '#/definitions/ApiMiners'
+      Address:
+        $ref: '#/definitions/ApiAddress'
+        description: The incident location address
       CreatedDateUtc:
         format: date-time
         description: The UTC date and time the incident record was created. This value cannot be changed, any edits to this field will be ignored.
@@ -1577,21 +1663,6 @@ definitions:
         format: date-time
         description: Date the MSHA Investigation Began
         type: string
-      Attachments:
-        description: List of Incident attachments
-        type: array
-        items:
-          $ref: '#/definitions/ApiAttachment'
-      FieldAttachments:
-        description: List of Incident Field attachments
-        type: array
-        items:
-          $ref: '#/definitions/ApiAttachment'
-      MinersInvolved:
-        description: Miners involved during the investigation
-        type: array
-        items:
-          $ref: '#/definitions/ApiMiners'
       ID:
         format: uuid
         description: The HCSS unique identifier for the incident.
@@ -1641,9 +1712,6 @@ definitions:
       Status:
         description: "Incident Status for this incident. \r\nOptions: 'Open', 'Received', or 'Completed'."
         type: string
-      Address:
-        $ref: '#/definitions/ApiAddress'
-        description: The incident location address
       Latitude:
         format: double
         description: The incident location latitude
