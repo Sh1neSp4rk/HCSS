@@ -229,8 +229,7 @@
             "in": "query",
             "description": "If true, returns discontinued material advanced budgets.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           },
           {
@@ -238,8 +237,7 @@
             "in": "query",
             "description": "If true, returns deleted material advanced budgets.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -593,16 +591,14 @@
             "name": "isDiscontinued",
             "in": "query",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           },
           {
             "name": "isDeleted",
             "in": "query",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -4562,8 +4558,7 @@
             "in": "query",
             "description": "If true, only include deleted items. If false, only include non-deleted items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -4848,21 +4843,19 @@
             }
           },
           {
-            "name": "isDiscontinued",
-            "in": "query",
-            "description": "If true, only include discontinued items. If false, only include non-discontinued items. If null, include all.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
-          },
-          {
             "name": "isDeleted",
             "in": "query",
             "description": "If true, only include deleted items. If false, only include non-deleted items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "isDiscontinued",
+            "in": "query",
+            "description": "If true, only include discontinued items. If false, only include non-discontinued items. If null, include all.",
+            "schema": {
+              "type": "boolean"
             }
           }
         ],
@@ -5479,8 +5472,7 @@
             "in": "query",
             "description": "If true, only include active employees. If false, only include inactive employees. If null, include all.",
             "schema": {
-              "type": "boolean",
-              "default": true
+              "type": "boolean"
             }
           },
           {
@@ -5488,8 +5480,7 @@
             "in": "query",
             "description": "If true, only include deleted employees. If false, only include non-deleted employees. If null, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           },
           {
@@ -5867,8 +5858,7 @@
             "in": "query",
             "description": "If true, only include active equipment. If false, only include inactive equipment. If null, include all.",
             "schema": {
-              "type": "boolean",
-              "default": true
+              "type": "boolean"
             }
           },
           {
@@ -5876,8 +5866,7 @@
             "in": "query",
             "description": "If true, only include deleted equipment. If false, only include non-deleted equipment. If null, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -7930,8 +7919,7 @@
             "in": "query",
             "description": "If true, only include deleted items. If false, only include non-deleted items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -8222,8 +8210,7 @@
             "in": "query",
             "description": "If true, only include discontinued items. If false or not specified, only include non-discontinued items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           },
           {
@@ -8231,8 +8218,7 @@
             "in": "query",
             "description": "If true, only include deleted items. If false, only include non-deleted items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -8313,8 +8299,8 @@
                 "$ref": "#/components/schemas/ApiJobMaterialWrite"
               },
               "example": {
-                "description": "Job material",
                 "materialId": "caa95ace-7aa3-4a0c-af85-f33e18a9773e",
+                "description": "Job material",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -8328,8 +8314,8 @@
                 "$ref": "#/components/schemas/ApiJobMaterialWrite"
               },
               "example": {
-                "description": "Job material",
                 "materialId": "caa95ace-7aa3-4a0c-af85-f33e18a9773e",
+                "description": "Job material",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -8343,8 +8329,8 @@
                 "$ref": "#/components/schemas/ApiJobMaterialWrite"
               },
               "example": {
-                "description": "Job material",
                 "materialId": "caa95ace-7aa3-4a0c-af85-f33e18a9773e",
+                "description": "Job material",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -8513,8 +8499,8 @@
                 "$ref": "#/components/schemas/ApiJobMaterialWrite"
               },
               "example": {
-                "description": "Job material",
                 "materialId": "caa95ace-7aa3-4a0c-af85-f33e18a9773e",
+                "description": "Job material",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -8528,8 +8514,8 @@
                 "$ref": "#/components/schemas/ApiJobMaterialWrite"
               },
               "example": {
-                "description": "Job material",
                 "materialId": "caa95ace-7aa3-4a0c-af85-f33e18a9773e",
+                "description": "Job material",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -8543,8 +8529,8 @@
                 "$ref": "#/components/schemas/ApiJobMaterialWrite"
               },
               "example": {
-                "description": "Job material",
                 "materialId": "caa95ace-7aa3-4a0c-af85-f33e18a9773e",
+                "description": "Job material",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -9422,8 +9408,7 @@
             "name": "isDeleted",
             "in": "query",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           },
           {
@@ -10393,8 +10378,7 @@
             "in": "query",
             "description": "If true, only include deleted items. If false, only include non-deleted items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -10669,8 +10653,7 @@
             "in": "query",
             "description": "If true, only include deleted items. If false, only include non-deleted items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           },
           {
@@ -10678,8 +10661,7 @@
             "in": "query",
             "description": "If true, only include discontinued items. If false, only include non-discontinued items. If blank, include all.",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           }
         ],
@@ -10758,8 +10740,8 @@
                 "$ref": "#/components/schemas/ApiJobSubcontractWrite"
               },
               "example": {
-                "description": "Job subcontract",
                 "subcontractId": "a7e4fdbe-8485-4bbd-b9bd-122bbad73ebc",
+                "description": "Job subcontract",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -10772,8 +10754,8 @@
                 "$ref": "#/components/schemas/ApiJobSubcontractWrite"
               },
               "example": {
-                "description": "Job subcontract",
                 "subcontractId": "a7e4fdbe-8485-4bbd-b9bd-122bbad73ebc",
+                "description": "Job subcontract",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -10786,8 +10768,8 @@
                 "$ref": "#/components/schemas/ApiJobSubcontractWrite"
               },
               "example": {
-                "description": "Job subcontract",
                 "subcontractId": "a7e4fdbe-8485-4bbd-b9bd-122bbad73ebc",
+                "description": "Job subcontract",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -10951,8 +10933,8 @@
                 "$ref": "#/components/schemas/ApiJobSubcontractWrite"
               },
               "example": {
-                "description": "Job subcontract",
                 "subcontractId": "a7e4fdbe-8485-4bbd-b9bd-122bbad73ebc",
+                "description": "Job subcontract",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -10965,8 +10947,8 @@
                 "$ref": "#/components/schemas/ApiJobSubcontractWrite"
               },
               "example": {
-                "description": "Job subcontract",
                 "subcontractId": "a7e4fdbe-8485-4bbd-b9bd-122bbad73ebc",
+                "description": "Job subcontract",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -10979,8 +10961,8 @@
                 "$ref": "#/components/schemas/ApiJobSubcontractWrite"
               },
               "example": {
-                "description": "Job subcontract",
                 "subcontractId": "a7e4fdbe-8485-4bbd-b9bd-122bbad73ebc",
+                "description": "Job subcontract",
                 "salesTaxPercent": 10.1,
                 "tmRate": 7.5,
                 "unitCost": 20.5,
@@ -11451,8 +11433,7 @@
             "in": "query",
             "description": "If true, returns only time cards with costs codes marked as T&M",
             "schema": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             }
           },
           {
@@ -12905,8 +12886,8 @@
               "example": {
                 "orderStatus": "inProgress",
                 "dateIssued": "2019-01-01",
-                "vendorContract": "VCConcrete",
                 "description": "Subcontract for concrete pour",
+                "vendorContract": "VCConcrete",
                 "vendorId": "563a5017-2405-4c07-85d3-518caae7d374"
               }
             },
@@ -12917,8 +12898,8 @@
               "example": {
                 "orderStatus": "inProgress",
                 "dateIssued": "2019-01-01",
-                "vendorContract": "VCConcrete",
                 "description": "Subcontract for concrete pour",
+                "vendorContract": "VCConcrete",
                 "vendorId": "563a5017-2405-4c07-85d3-518caae7d374"
               }
             },
@@ -12929,8 +12910,8 @@
               "example": {
                 "orderStatus": "inProgress",
                 "dateIssued": "2019-01-01",
-                "vendorContract": "VCConcrete",
                 "description": "Subcontract for concrete pour",
+                "vendorContract": "VCConcrete",
                 "vendorId": "563a5017-2405-4c07-85d3-518caae7d374"
               }
             }
@@ -22409,15 +22390,15 @@
         ],
         "type": "object",
         "properties": {
-          "description": {
-            "type": "string",
-            "description": "The description.",
-            "nullable": true
-          },
           "materialId": {
             "type": "string",
             "description": "The material guid.",
             "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true
           },
           "salesTaxPercent": {
             "type": "number",
@@ -22648,15 +22629,15 @@
         ],
         "type": "object",
         "properties": {
-          "description": {
-            "type": "string",
-            "description": "The description.",
-            "nullable": true
-          },
           "subcontractId": {
             "type": "string",
             "description": "The subcontract guid.",
             "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true
           },
           "salesTaxPercent": {
             "type": "number",
@@ -26177,14 +26158,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "purchaseOrder": {
-            "type": "string",
-            "description": "The purchase order name.",
-            "nullable": true
-          },
           "description": {
             "type": "string",
             "description": "The purchase order description.",
+            "nullable": true
+          },
+          "purchaseOrder": {
+            "type": "string",
+            "description": "The purchase order name.",
             "nullable": true
           },
           "vendorId": {
@@ -30824,14 +30805,14 @@
             "format": "date-time",
             "nullable": true
           },
-          "vendorContract": {
-            "type": "string",
-            "description": "The vendor contract name.",
-            "nullable": true
-          },
           "description": {
             "type": "string",
             "description": "The vendor contract description.",
+            "nullable": true
+          },
+          "vendorContract": {
+            "type": "string",
+            "description": "The vendor contract name.",
             "nullable": true
           },
           "vendorId": {
