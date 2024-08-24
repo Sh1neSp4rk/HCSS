@@ -24847,6 +24847,7 @@
           "revisedQuantity",
           "status",
           "stopOverruns",
+          "toDateQuantity",
           "unitPrice"
         ],
         "type": "object",
@@ -24887,6 +24888,11 @@
           "revisedQuantity": {
             "type": "number",
             "description": "The actual expected or budgeted quantity.\r\nFor companies that do not have desktop Manager systems, this is always the same as the contract quantity.",
+            "format": "double"
+          },
+          "toDateQuantity": {
+            "type": "number",
+            "description": "The sum of all active and non-deleted revenue quantity transactions for the pay item.",
             "format": "double"
           },
           "unitOfMeasure": {
