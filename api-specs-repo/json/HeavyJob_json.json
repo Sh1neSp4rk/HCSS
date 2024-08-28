@@ -13801,7 +13801,8 @@
           "userId": {
             "type": "string",
             "description": "The user id that initiated the bulk job creation request.",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "status": {
             "$ref": "#/components/schemas/JMBatchJobRequestStatus"

@@ -564,21 +564,21 @@
                 },
                 "example": [
                   {
-                    "id": "1a9cc951-0c3d-4ff1-b23f-2597d57de945",
+                    "id": "a03d2948-bfbc-4718-88b3-648fdeb2b280",
                     "customFieldType": "Equipment",
                     "customFieldName": "Division",
                     "customFieldCategoryId": 6,
                     "entityId": 105,
-                    "entityGuid": "b18a6f24-a91f-4a3e-8493-fa21f22548d2",
+                    "entityGuid": "323613fa-e0ca-4dbc-83a4-7d57dea33b84",
                     "value": "Joy Division"
                   },
                   {
-                    "id": "68693667-be5e-485e-826b-23b7bde253ec",
+                    "id": "4ae7c70f-2479-40e7-8d48-f2b7a89068cf",
                     "customFieldType": "WorkOrder",
                     "customFieldName": "Time You Left the Job?",
                     "customFieldCategoryId": 10,
                     "entityId": 561,
-                    "entityGuid": "d6ac1684-9aae-4a3f-a149-2d8def8835f0",
+                    "entityGuid": "8b394587-4e4f-4ea4-bd6f-989e5baf0b01",
                     "value": "2023-08-21 17:00:00"
                   }
                 ]
@@ -611,7 +611,7 @@
               },
               "example": {
                 "customFieldCategoryId": 6,
-                "entityGUID": "5ff8b7ae-be4a-406f-9e4a-96d972533cae",
+                "entityGUID": "858bbfc7-8dcd-4664-8925-ad073e0da933",
                 "value": "My Division"
               }
             },
@@ -621,7 +621,7 @@
               },
               "example": {
                 "customFieldCategoryId": 6,
-                "entityGUID": "5ff8b7ae-be4a-406f-9e4a-96d972533cae",
+                "entityGUID": "858bbfc7-8dcd-4664-8925-ad073e0da933",
                 "value": "My Division"
               }
             },
@@ -631,7 +631,7 @@
               },
               "example": {
                 "customFieldCategoryId": 6,
-                "entityGUID": "5ff8b7ae-be4a-406f-9e4a-96d972533cae",
+                "entityGUID": "858bbfc7-8dcd-4664-8925-ad073e0da933",
                 "value": "My Division"
               }
             }
@@ -3289,25 +3289,25 @@
         "tags": [
           "PartInventory"
         ],
-        "summary": "Gets work order purchases.",
+        "summary": "Gets inventory for a specific part.",
         "parameters": [
           {
             "name": "businessUnitId",
             "in": "query",
-            "description": "The busuiness unit guid.",
+            "description": "The business unit guid. Required",
             "schema": {
               "type": "string",
-              "description": "The busuiness unit guid.",
+              "description": "The business unit guid. Required",
               "format": "uuid"
             }
           },
           {
             "name": "partNum",
             "in": "query",
-            "description": "The part number.",
+            "description": "The part number. Required",
             "schema": {
               "type": "string",
-              "description": "The part number.",
+              "description": "The part number. Required",
               "nullable": true
             }
           },
