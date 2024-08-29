@@ -134,7 +134,10 @@
                   "subJob": "Sub-Job",
                   "workBreakdownStructureCode": "WBS Code",
                   "note": "12P - 413",
-                  "historyCode": "01z",
+                  "estimateResources": "01z",
+                  "historyCode": "HistCode",
+                  "historicalBidItem": "HistBidItem",
+                  "heavyBidEstimateCode": "HBEstiMateCode",
                   "isTM": false,
                   "workType": "G",
                   "payItemNumber": "PayItem1",
@@ -333,7 +336,10 @@
                 "subJob": "Sub-Job",
                 "workBreakdownStructureCode": "WBS Code",
                 "note": "12P - 413",
-                "historyCode": "01z",
+                "estimateResources": "01z",
+                "historyCode": "HistCode",
+                "historicalBidItem": "HistBidItem",
+                "heavyBidEstimateCode": "HBEstiMateCode",
                 "isTM": false,
                 "workType": "G",
                 "payItemNumber": "PayItem1",
@@ -442,7 +448,10 @@
                     "subJob": "Sub-Job",
                     "workBreakdownStructureCode": "WBS Code",
                     "note": "12P - 413",
-                    "historyCode": "01z",
+                    "estimateResources": "01z",
+                    "historyCode": "HistCode",
+                    "historicalBidItem": "HistBidItem",
+                    "heavyBidEstimateCode": "HBEstiMateCode",
                     "isTM": false,
                     "workType": "G",
                     "payItemNumber": "PayItem1",
@@ -684,7 +693,10 @@
                 "subJob": "Sub-Job",
                 "workBreakdownStructureCode": "WBS Code",
                 "note": "12P - 413",
-                "historyCode": "01z",
+                "estimateResources": "01z",
+                "historyCode": "HistCode",
+                "historicalBidItem": "HistBidItem",
+                "heavyBidEstimateCode": "HBEstiMateCode",
                 "isTM": false,
                 "workType": "G",
                 "payItemNumber": "PayItem1",
@@ -760,11 +772,15 @@
                 "email": "charles@company.com",
                 "lastName": "Clark",
                 "firstName": "Charles",
-                "middleInitial": "M",
-                "accountingTemplateName": "default",
-                "payRateLevel": "1",
-                "payType": "R",
-                "trade": "CARP"
+                "suffix": "M",
+                "middleInitial": "default",
+                "accountingTemplateName": "1",
+                "payRateLevel": "R",
+                "payType": "CARP",
+                "trade": null,
+                "viewExclusions": [
+                  "timeCard"
+                ]
               }
             }
           },
@@ -868,11 +884,15 @@
                     "email": "charles@company.com",
                     "lastName": "Clark",
                     "firstName": "Charles",
-                    "middleInitial": "M",
-                    "accountingTemplateName": "default",
-                    "payRateLevel": "1",
-                    "payType": "R",
-                    "trade": "CARP"
+                    "suffix": "M",
+                    "middleInitial": "default",
+                    "accountingTemplateName": "1",
+                    "payRateLevel": "R",
+                    "payType": "CARP",
+                    "trade": null,
+                    "viewExclusions": [
+                      "timeCard"
+                    ]
                   }
                 ]
               }
@@ -949,11 +969,15 @@
                 "email": "charles@company.com",
                 "lastName": "Clark",
                 "firstName": "Charles",
-                "middleInitial": "M",
-                "accountingTemplateName": "default",
-                "payRateLevel": "1",
-                "payType": "R",
-                "trade": "CARP"
+                "suffix": "M",
+                "middleInitial": "default",
+                "accountingTemplateName": "1",
+                "payRateLevel": "R",
+                "payType": "CARP",
+                "trade": null,
+                "viewExclusions": [
+                  "timeCard"
+                ]
               }
             }
           },
@@ -2191,12 +2215,14 @@
                       "costAdjustmentCode": "CAR-01",
                       "rateType": "dollarPerHour",
                       "rate": 16,
-                      "taxPercent": 8
+                      "taxPercent": 8,
+                      "id": "b866e0e9-87a3-4583-a87e-c5790d833454"
                     }
                   ],
                   "effectiveDate": "2018-01-01T05:15:15",
                   "rateSetGroupCode": "groupCode",
-                  "rateSetGroupDescription": "groupDescription"
+                  "rateSetGroupDescription": "groupDescription",
+                  "id": "0c87057e-d3c2-4d79-83e7-fb6af2bfac7e"
                 }
               }
             }
@@ -2232,12 +2258,14 @@
                     "costAdjustmentCode": "CAR-01",
                     "rateType": "dollarPerHour",
                     "rate": 16,
-                    "taxPercent": 8
+                    "taxPercent": 8,
+                    "id": "b866e0e9-87a3-4583-a87e-c5790d833454"
                   }
                 ],
                 "effectiveDate": "2018-01-01T05:15:15",
                 "rateSetGroupCode": "groupCode",
-                "rateSetGroupDescription": "groupDescription"
+                "rateSetGroupDescription": "groupDescription",
+                "id": "0c87057e-d3c2-4d79-83e7-fb6af2bfac7e"
               }
             }
           }
@@ -2291,12 +2319,14 @@
                     "costAdjustmentCode": "CAR-01",
                     "rateType": "dollarPerHour",
                     "rate": 16,
-                    "taxPercent": 8
+                    "taxPercent": 8,
+                    "id": "b866e0e9-87a3-4583-a87e-c5790d833454"
                   }
                 ],
                 "effectiveDate": "2018-01-01T05:15:15",
                 "rateSetGroupCode": "groupCode",
-                "rateSetGroupDescription": "groupDescription"
+                "rateSetGroupDescription": "groupDescription",
+                "id": "0c87057e-d3c2-4d79-83e7-fb6af2bfac7e"
               }
             }
           }
@@ -2908,9 +2938,24 @@
             "description": "The cost code note.",
             "nullable": true
           },
+          "estimateResources": {
+            "type": "string",
+            "description": "The estimate resources.",
+            "nullable": true
+          },
           "historyCode": {
             "type": "string",
-            "description": "The history code.",
+            "description": "The historical activity code.",
+            "nullable": true
+          },
+          "historicalBidItem": {
+            "type": "string",
+            "description": "The historical bid item.",
+            "nullable": true
+          },
+          "heavyBidEstimateCode": {
+            "type": "string",
+            "description": "The HeavyBid estimate code.",
             "nullable": true
           },
           "isTM": {
@@ -3237,6 +3282,11 @@
             "description": "The first name.",
             "nullable": true
           },
+          "suffix": {
+            "type": "string",
+            "description": "The suffix.",
+            "nullable": true
+          },
           "middleInitial": {
             "maxLength": 1,
             "type": "string",
@@ -3261,6 +3311,14 @@
           "trade": {
             "type": "string",
             "description": "The \"Trade\" accounting field.",
+            "nullable": true
+          },
+          "viewExclusions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmployeeViewType"
+            },
+            "description": "Gets the view exclusions.",
             "nullable": true
           }
         },
@@ -4158,6 +4216,13 @@
         },
         "additionalProperties": false,
         "description": "A LaborRateSet is a collection of EmployeeRates that\r\nshould be applied starting from the EffectiveDate.\r\n\r\nIf the rate set group code is null, these rates will be applied to\r\nall rate sets."
+      },
+      "EmployeeViewType": {
+        "enum": [
+          "timeCard"
+        ],
+        "type": "string",
+        "description": "Employee view type"
       },
       "EquipmentRateSet": {
         "required": [
