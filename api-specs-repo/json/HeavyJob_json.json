@@ -1183,6 +1183,415 @@
         ]
       }
     },
+    "/api/v1/changeOrder": {
+      "get": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Finds a change order by id.",
+        "operationId": "ChangeOrderController_GetChangeOrderAsync",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The change order id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiChangeOrderRead"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:read"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Deletes a change order by id.",
+        "operationId": "ChangeOrderController_DeleteChangeOrderAsync",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The change order id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:write"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Creates a change order.",
+        "operationId": "ChangeOrderController_CreateChangeOrderAsync",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiChangeOrderWrite"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiChangeOrderWrite"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiChangeOrderWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiChangeOrderRead"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:write"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Updates a change order.",
+        "operationId": "ChangeOrderController_UpdateChangeOrderAsync",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiChangeOrderPatch"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiChangeOrderPatch"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiChangeOrderPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:write"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/changeOrdersByJob": {
+      "get": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Finds all change orders by job id.",
+        "operationId": "ChangeOrderController_GetChangeOrdersByJobAsync",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The job id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiChangeOrderRead"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:read"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/changeOrdersByBU": {
+      "get": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Finds all change orders by business unit id.",
+        "operationId": "ChangeOrderController_GetChangeOrdersByBUAsync",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The business unit id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiChangeOrderRead"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:read"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/changeOrderChangesByBU": {
+      "get": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Finds all change orders by business unit id that have been updated since a given timestamp.",
+        "operationId": "ChangeOrderController_GetMobileChangeOrdersByBUAsync",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The business unit id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lastSyncTime",
+            "in": "query",
+            "description": "The last timestamp used when this data was requested",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiChangeOrderMobileRead"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:read"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/changeOrderIncrementor": {
+      "get": {
+        "tags": [
+          "ChangeOrder"
+        ],
+        "summary": "Finds the change order incrementor data by business unit id.",
+        "operationId": "ChangeOrderController_GetChangeOrdersIncrementorAsync",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The business unit id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiChangeOrderIncrementorRead"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. See https://developer.hcssapps.com/getting-started/troubleshoot-bad-request for more information."
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "heavyjob:read"
+            ]
+          }
+        ]
+      }
+    },
     "/api/v1/jobs/{jobId}/costs": {
       "get": {
         "tags": [
@@ -7155,7 +7564,7 @@
           "Job"
         ],
         "summary": "Upserts multiple jobs",
-        "description": "This call will add a list of jobs to update/insert to a queue to be ultimately processed.",
+        "description": "<span style='color: white; background-color: red; font-weight: bold; padding: 5px;'>VOLATILE</span>\n\t\t<span>The query parameters and responses are likely to change. Do not use this operation for mission-critical applications yet.</span>\n\t\t<br /><br />This call will add a list of jobs to update/insert to a queue to be ultimately processed.",
         "operationId": "JobController_BulkProcessJobsAsync",
         "requestBody": {
           "description": "Set of parameters for the jobs request.",
@@ -7170,8 +7579,8 @@
                   {
                     "code": "Code A",
                     "description": "Code A Description",
-                    "laborRateSetGroupId": "d1d840d7-6d89-4c65-b074-32de79cdc77f",
-                    "equipmentRateSetGroupId": "2e8ce564-7bae-4635-8d20-4bd8d4ba8c5a",
+                    "laborRateSetGroupCode": "LABOR RATE SET CODE",
+                    "equipmentRateSetGroupCode": "EQUIPMENT RATE SET CODE",
                     "jobStatus": "A",
                     "latitude": "44.1",
                     "longitude": "100.11",
@@ -7197,8 +7606,8 @@
                   {
                     "code": "Code A",
                     "description": "Code A Description",
-                    "laborRateSetGroupId": "d1d840d7-6d89-4c65-b074-32de79cdc77f",
-                    "equipmentRateSetGroupId": "2e8ce564-7bae-4635-8d20-4bd8d4ba8c5a",
+                    "laborRateSetGroupCode": "LABOR RATE SET CODE",
+                    "equipmentRateSetGroupCode": "EQUIPMENT RATE SET CODE",
                     "jobStatus": "A",
                     "latitude": "44.1",
                     "longitude": "100.11",
@@ -7224,8 +7633,8 @@
                   {
                     "code": "Code A",
                     "description": "Code A Description",
-                    "laborRateSetGroupId": "d1d840d7-6d89-4c65-b074-32de79cdc77f",
-                    "equipmentRateSetGroupId": "2e8ce564-7bae-4635-8d20-4bd8d4ba8c5a",
+                    "laborRateSetGroupCode": "LABOR RATE SET CODE",
+                    "equipmentRateSetGroupCode": "EQUIPMENT RATE SET CODE",
                     "jobStatus": "A",
                     "latitude": "44.1",
                     "longitude": "100.11",
@@ -14073,6 +14482,28 @@
         "additionalProperties": false,
         "description": "Change Order Attachments Details"
       },
+      "ApiChangeOrderIncrementorRead": {
+        "type": "object",
+        "properties": {
+          "changeOrderNumbers": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "The list of PCO numbers",
+            "nullable": true
+          },
+          "jobId": {
+            "type": "string",
+            "description": "The job id of the change order.",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents the existing change order PCO#s for incrementing purposes."
+      },
       "ApiChangeOrderLinkedItemRead": {
         "type": "object",
         "properties": {
@@ -14206,6 +14637,112 @@
         "additionalProperties": false,
         "description": "A POCO that represents a change order returned by the API."
       },
+      "ApiChangeOrderPatch": {
+        "required": [
+          "changeOrderNumber",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "changeOrderNumber": {
+            "type": "integer",
+            "description": "The change order number",
+            "format": "int32",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The change order description",
+            "nullable": true
+          },
+          "ownerNumber": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The owner Number",
+            "nullable": true
+          },
+          "subSupplierNumber": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The sub/supplier number",
+            "nullable": true
+          },
+          "showInMobile": {
+            "type": "boolean",
+            "description": "Is the change order shown on mobile devices?"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "The StatusId",
+            "format": "uuid",
+            "nullable": true
+          },
+          "roughOrderOfMagnitude": {
+            "type": "number",
+            "description": "The estimated ROM of how impactful this change will be",
+            "format": "double",
+            "nullable": true
+          },
+          "costImpactEvaluation": {
+            "$ref": "#/components/schemas/ChangeOrderImpactEvaluation"
+          },
+          "costImpactDescription": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The description of this change's impact on cost",
+            "nullable": true
+          },
+          "scheduleImpactEvaluation": {
+            "$ref": "#/components/schemas/ChangeOrderImpactEvaluation"
+          },
+          "scheduleImpactDescription": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The description of this change's impact on schedule",
+            "nullable": true
+          },
+          "actualCost": {
+            "type": "number",
+            "description": "The change order actual cost",
+            "format": "double",
+            "nullable": true
+          },
+          "productionQuantityChange": {
+            "type": "number",
+            "description": "The change order Production Quantity Change",
+            "format": "double",
+            "nullable": true
+          },
+          "otherDrawings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Other Drawings associated with the change order",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID",
+            "format": "uuid"
+          },
+          "subject": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "The subject",
+            "nullable": true
+          },
+          "managedByUserId": {
+            "type": "string",
+            "description": "The ID of the user managing change order",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a change order to be updated by the API."
+      },
       "ApiChangeOrderPlansSheetRead": {
         "type": "object",
         "properties": {
@@ -14242,6 +14779,145 @@
         "additionalProperties": false,
         "description": "A POCO that represents a change order plans sheet returned by the API."
       },
+      "ApiChangeOrderRead": {
+        "required": [
+          "changeOrderNumber",
+          "subject"
+        ],
+        "type": "object",
+        "properties": {
+          "changeOrderNumber": {
+            "type": "integer",
+            "description": "The change order number",
+            "format": "int32"
+          },
+          "subject": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "The subject"
+          },
+          "description": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The change order description",
+            "nullable": true
+          },
+          "ownerNumber": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The owner Number",
+            "nullable": true
+          },
+          "subSupplierNumber": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The sub/supplier number",
+            "nullable": true
+          },
+          "showInMobile": {
+            "type": "boolean",
+            "description": "Is the change order shown on mobile devices?"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "The StatusId",
+            "format": "uuid",
+            "nullable": true
+          },
+          "roughOrderOfMagnitude": {
+            "type": "number",
+            "description": "The estimated ROM of how impactful this change will be",
+            "format": "double",
+            "nullable": true
+          },
+          "costImpactEvaluation": {
+            "$ref": "#/components/schemas/ChangeOrderImpactEvaluation"
+          },
+          "costImpactDescription": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The description of this change's impact on cost",
+            "nullable": true
+          },
+          "scheduleImpactEvaluation": {
+            "$ref": "#/components/schemas/ChangeOrderImpactEvaluation"
+          },
+          "scheduleImpactDescription": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The description of this change's impact on schedule",
+            "nullable": true
+          },
+          "actualCost": {
+            "type": "number",
+            "description": "The change order actual cost",
+            "format": "double",
+            "nullable": true
+          },
+          "productionQuantityChange": {
+            "type": "number",
+            "description": "The change order Production Quantity Change",
+            "format": "double",
+            "nullable": true
+          },
+          "otherDrawings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Other Drawings associated with the change order",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The change order ID",
+            "format": "uuid"
+          },
+          "lastUpdatedDate": {
+            "type": "string",
+            "description": "The datetime when this change order was last modified.",
+            "format": "date-time"
+          },
+          "createdByUser": {
+            "$ref": "#/components/schemas/ApiUserSlimRead"
+          },
+          "managedByUser": {
+            "$ref": "#/components/schemas/ApiUserSlimRead"
+          },
+          "lastUpdatedByUser": {
+            "$ref": "#/components/schemas/ApiUserSlimRead"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ApiChangeOrderStatusCompactRead"
+          },
+          "linkedCostCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiCostCodeCompactReadV2"
+            },
+            "description": "The cost codes linked to the PCO",
+            "nullable": true
+          },
+          "job": {
+            "$ref": "#/components/schemas/ApiJobCompactReadV2"
+          },
+          "createdOnDate": {
+            "type": "string",
+            "description": "The datetime when this change order was created.",
+            "format": "date-time"
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "if the change order is deleted"
+          },
+          "auditEventType": {
+            "$ref": "#/components/schemas/AuditEventType"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a change order returned by the API."
+      },
       "ApiChangeOrderStatusCompactRead": {
         "required": [
           "id",
@@ -14266,6 +14942,112 @@
         },
         "additionalProperties": false,
         "description": "A POCO that represents a change order status's basic information."
+      },
+      "ApiChangeOrderWrite": {
+        "required": [
+          "changeOrderNumber",
+          "jobId",
+          "subject"
+        ],
+        "type": "object",
+        "properties": {
+          "changeOrderNumber": {
+            "type": "integer",
+            "description": "The change order number",
+            "format": "int32"
+          },
+          "subject": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "The subject"
+          },
+          "description": {
+            "maxLength": 4000,
+            "type": "string",
+            "description": "The change order description",
+            "nullable": true
+          },
+          "ownerNumber": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The owner Number",
+            "nullable": true
+          },
+          "subSupplierNumber": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The sub/supplier number",
+            "nullable": true
+          },
+          "showInMobile": {
+            "type": "boolean",
+            "description": "Is the change order shown on mobile devices?"
+          },
+          "statusId": {
+            "type": "string",
+            "description": "The StatusId",
+            "format": "uuid",
+            "nullable": true
+          },
+          "roughOrderOfMagnitude": {
+            "type": "number",
+            "description": "The estimated ROM of how impactful this change will be",
+            "format": "double",
+            "nullable": true
+          },
+          "costImpactEvaluation": {
+            "$ref": "#/components/schemas/ChangeOrderImpactEvaluation"
+          },
+          "costImpactDescription": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The description of this change's impact on cost",
+            "nullable": true
+          },
+          "scheduleImpactEvaluation": {
+            "$ref": "#/components/schemas/ChangeOrderImpactEvaluation"
+          },
+          "scheduleImpactDescription": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "The description of this change's impact on schedule",
+            "nullable": true
+          },
+          "actualCost": {
+            "type": "number",
+            "description": "The change order actual cost",
+            "format": "double",
+            "nullable": true
+          },
+          "productionQuantityChange": {
+            "type": "number",
+            "description": "The change order Production Quantity Change",
+            "format": "double",
+            "nullable": true
+          },
+          "otherDrawings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Other Drawings associated with the change order",
+            "nullable": true
+          },
+          "jobId": {
+            "type": "string",
+            "description": "The change order job ID",
+            "format": "uuid"
+          },
+          "managedByUserId": {
+            "type": "string",
+            "description": "The ID of the user managing change order",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a change order to be created or updated by the API."
       },
       "ApiConnexOrderItemRead": {
         "required": [
@@ -15116,6 +15898,36 @@
             "minLength": 1,
             "type": "string",
             "description": "The cost code's description."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A POCO that represents a cost code's basic information."
+      },
+      "ApiCostCodeCompactReadV2": {
+        "required": [
+          "code",
+          "description",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The cost code guid.",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "code": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The cost code's code.",
+            "readOnly": true
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The cost code's description.",
+            "readOnly": true
           }
         },
         "additionalProperties": false,
@@ -22855,15 +23667,19 @@
             "description": "The job description.",
             "nullable": true
           },
-          "laborRateSetGroupId": {
+          "laborRateSetGroupCode": {
+            "maxLength": 100,
+            "minLength": 0,
             "type": "string",
-            "description": "The id for the labor rate set to be used in this job.",
-            "format": "uuid"
+            "description": "The Code for the labor rate set to be used in this job. Required if labor rate set is not imported from a source job.",
+            "nullable": true
           },
-          "equipmentRateSetGroupId": {
+          "equipmentRateSetGroupCode": {
+            "maxLength": 100,
+            "minLength": 0,
             "type": "string",
-            "description": "The id for the equipment rate set to be used in this job.",
-            "format": "uuid"
+            "description": "The Code for the equipment rate set to be used in this job. Required if equipment rate set is not imported from a source job.",
+            "nullable": true
           },
           "jobStatus": {
             "maxLength": 1,
@@ -31076,6 +31892,16 @@
           "operatingCost"
         ],
         "type": "string"
+      },
+      "AuditEventType": {
+        "enum": [
+          "created",
+          "edited",
+          "deleted",
+          "restored"
+        ],
+        "type": "string",
+        "description": "Enumerations for temporal table audit event types"
       },
       "BillingStatus": {
         "enum": [
