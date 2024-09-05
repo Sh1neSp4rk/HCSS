@@ -43,7 +43,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedResponseOfBusinessUnitReadDTO"
+                  "$ref": "#/components/schemas/PagedResponseOfBusinessUnitReadDto"
                 }
               }
             }
@@ -759,7 +759,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedResponseOfSchemaReadDTO"
+                  "$ref": "#/components/schemas/PagedResponseOfSchemaReadDto"
                 }
               }
             }
@@ -814,7 +814,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SchemaReadDTO"
+                  "$ref": "#/components/schemas/SchemaReadDto"
                 }
               }
             }
@@ -886,7 +886,7 @@
   },
   "components": {
     "schemas": {
-      "PagedResponseOfBusinessUnitReadDTO": {
+      "PagedResponseOfBusinessUnitReadDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -895,7 +895,7 @@
             "description": "An array containing the requested data",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/BusinessUnitReadDTO"
+              "$ref": "#/components/schemas/BusinessUnitReadDto"
             }
           },
           "nextPageToken": {
@@ -911,7 +911,7 @@
           }
         }
       },
-      "BusinessUnitReadDTO": {
+      "BusinessUnitReadDto": {
         "type": "object",
         "additionalProperties": false,
         "required": [
@@ -1423,7 +1423,7 @@
           5
         ]
       },
-      "PagedResponseOfSchemaReadDTO": {
+      "PagedResponseOfSchemaReadDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -1432,7 +1432,7 @@
             "description": "An array containing the requested data",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/SchemaReadDTO"
+              "$ref": "#/components/schemas/SchemaReadDto"
             }
           },
           "nextPageToken": {
@@ -1448,7 +1448,7 @@
           }
         }
       },
-      "SchemaReadDTO": {
+      "SchemaReadDto": {
         "type": "object",
         "additionalProperties": false,
         "required": [

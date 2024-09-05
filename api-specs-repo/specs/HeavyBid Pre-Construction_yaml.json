@@ -34,7 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagedResponseOfBusinessUnitReadDTO'
+                $ref: '#/components/schemas/PagedResponseOfBusinessUnitReadDto'
         '401':
           description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
         '403':
@@ -586,7 +586,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagedResponseOfSchemaReadDTO'
+                $ref: '#/components/schemas/PagedResponseOfSchemaReadDto'
         '401':
           description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
         '403':
@@ -624,7 +624,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SchemaReadDTO'
+                $ref: '#/components/schemas/SchemaReadDto'
         '401':
           description: Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information.
         '403':
@@ -669,7 +669,7 @@ paths:
         - bearer: []
 components:
   schemas:
-    PagedResponseOfBusinessUnitReadDTO:
+    PagedResponseOfBusinessUnitReadDto:
       type: object
       additionalProperties: false
       properties:
@@ -678,7 +678,7 @@ components:
           description: An array containing the requested data
           nullable: true
           items:
-            $ref: '#/components/schemas/BusinessUnitReadDTO'
+            $ref: '#/components/schemas/BusinessUnitReadDto'
         nextPageToken:
           type: string
           description: The token to use for requesting the next page of data
@@ -690,7 +690,7 @@ components:
             A flag representing whether there is another page of data.
             If this is false, nextPageToken is also null.
           example: false
-    BusinessUnitReadDTO:
+    BusinessUnitReadDto:
       type: object
       additionalProperties: false
       required:
@@ -1061,7 +1061,7 @@ components:
         - 3
         - 4
         - 5
-    PagedResponseOfSchemaReadDTO:
+    PagedResponseOfSchemaReadDto:
       type: object
       additionalProperties: false
       properties:
@@ -1070,7 +1070,7 @@ components:
           description: An array containing the requested data
           nullable: true
           items:
-            $ref: '#/components/schemas/SchemaReadDTO'
+            $ref: '#/components/schemas/SchemaReadDto'
         nextPageToken:
           type: string
           description: The token to use for requesting the next page of data
@@ -1082,7 +1082,7 @@ components:
             A flag representing whether there is another page of data.
             If this is false, nextPageToken is also null.
           example: false
-    SchemaReadDTO:
+    SchemaReadDto:
       type: object
       additionalProperties: false
       required:

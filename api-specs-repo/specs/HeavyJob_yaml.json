@@ -9343,6 +9343,34 @@ components:
           nullable: true
       additionalProperties: false
       description: "Contains metadata about a paginated response.  (may be later\r\nexpanded to include the limit, count, etc.)"
+    ApiAccountingValuesWrite:
+      type: object
+      properties:
+        accountingTemplateId:
+          type: string
+          description: The accounting template id.
+          format: uuid
+          nullable: true
+        businessUnitId:
+          type: string
+          description: The business unit id.
+          format: uuid
+        accountingEntity:
+          $ref: '#/components/schemas/AccountingEntity'
+        value:
+          type: string
+          description: The value.
+          nullable: true
+        code:
+          type: string
+          description: The code.
+          nullable: true
+        parentId:
+          type: string
+          description: The Id of the parent entity.
+          format: uuid
+      additionalProperties: false
+      description: Accounting values object
     ApiAdjustmentWrite:
       required:
         - adjustment
@@ -17018,6 +17046,12 @@ components:
           minLength: 0
           type: string
           description: The country.
+          nullable: true
+        accountingValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiAccountingValuesWrite'
+          description: The Accounting Values.
           nullable: true
       additionalProperties: false
       description: A POCO that represents a slice of a job to be created by the API.
