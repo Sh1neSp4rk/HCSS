@@ -59,6 +59,8 @@ paths:
                   - id: f3a895ca-a1fe-45d7-96ae-35b74095fa2e
                     code: CRANE
                     description: Site crane
+                    fuelUom: Liters
+                    lastBearing: 20
                     lastLatitude: 29.74
                     lastLongitude: -95.35
                     lastLocationDateTime: '2021-01-01T11:44:00Z'
@@ -67,11 +69,19 @@ paths:
                     lastHourMeterReadingDateTime: '2021-01-01T10:00:00+00:00'
                     lastHourMeterReadingSource: Manual Entry
                     hourMeterOffsetInSeconds: 25
+                    lastEngineStatus: Active
+                    lastEngineStatusDateTime: '2021-01-01T11:23:00+00:00'
                     lastOdometerReadingInMeters: 3218.69
                     lastOdometerReadingInMiles: 2.0000012427
                     lastOdometerReadingDateTime: '2021-01-01T11:23:00+00:00'
                     lastOdometerReadingSource: HCSS Telematics Calculation
+                    lastSpeed: 60
+                    lastTotalFuelUsedInLiters: 5050
+                    lastTotalFuelUsedReport: '2021-01-01T11:23:00+00:00'
+                    make: Ford
+                    model: F350
                     odometerOffset: 100
+                    speedUom: MPH
                     isRegistered: false
                 metadata:
                   nextCursor: QyJT0vDd1gjwBqpo5FE3TZw/yom5BGly
@@ -101,6 +111,17 @@ components:
         description:
           type: string
           description: The equipment's description.
+          nullable: true
+          readOnly: true
+        fuelUom:
+          type: string
+          description: The unit of measure used by the equipment's fuel reading.
+          nullable: true
+          readOnly: true
+        lastBearing:
+          type: number
+          description: The equipment's last bearing in degrees. 0 degrees is North.
+          format: float
           nullable: true
           readOnly: true
         lastLatitude:
@@ -150,6 +171,17 @@ components:
           format: double
           nullable: true
           readOnly: true
+        lastEngineStatus:
+          type: string
+          description: The last engine status for the equipment. Options are (No Data, Old Data, Off, Active, Idle).
+          nullable: true
+          readOnly: true
+        lastEngineStatusDateTime:
+          type: string
+          description: The datetime (in UTC) of the equipment's last engine status.
+          format: date-time
+          nullable: true
+          readOnly: true
         lastOdometerReadingInMeters:
           type: number
           description: The equipment's last meter reading in meters.
@@ -173,10 +205,43 @@ components:
           description: The source of the equipment's last odometer reading.
           nullable: true
           readOnly: true
+        lastSpeed:
+          type: number
+          description: The equipment's last speed in miles per hour.
+          format: float
+          nullable: true
+          readOnly: true
+        lastTotalFuelUsedInLiters:
+          type: number
+          description: The equipment's last total fuel used in liters.
+          format: double
+          nullable: true
+          readOnly: true
+        lastTotalFuelUsedReport:
+          type: string
+          description: The datetime (in UTC) of the equipment's last total fuel used report.
+          format: date-time
+          nullable: true
+          readOnly: true
+        make:
+          type: string
+          description: The make of the equipment.
+          nullable: true
+          readOnly: true
+        model:
+          type: string
+          description: The model of the equipment.
+          nullable: true
+          readOnly: true
         odometerOffset:
           type: number
           description: The odometer offset.
           format: double
+          nullable: true
+          readOnly: true
+        speedUom:
+          type: string
+          description: The unit of measure used by the equipment's speed reading.
           nullable: true
           readOnly: true
         isRegistered:
