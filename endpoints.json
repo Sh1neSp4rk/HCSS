@@ -1,15 +1,1 @@
-{
-    "HCSS Telematics": {
-        "base": "https://api.hcssapps.com/",
-        "v1": {
-            "base": "v1/",
-            "GET": [
-                "equipment"
-            ],
-            "PUT": [],
-            "POST": [],
-            "DELETE": [],
-            "PATCH": []
-        }
-    }
-}
+{}
