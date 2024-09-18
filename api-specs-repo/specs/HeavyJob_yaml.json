@@ -17053,6 +17053,12 @@ components:
             $ref: '#/components/schemas/ApiAccountingValuesWrite'
           description: The Accounting Values.
           nullable: true
+        jobTags:
+          type: array
+          items:
+            type: string
+          description: The Job Tags.
+          nullable: true
       additionalProperties: false
       description: A POCO that represents a slice of a job to be created by the API.
     ApiMSELibraryEntry:
