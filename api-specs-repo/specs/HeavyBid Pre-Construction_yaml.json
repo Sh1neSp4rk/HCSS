@@ -1366,6 +1366,14 @@ components:
         14-Checklist,
         15-Location,
         16-MultiSelectList
+        17-PreConId
+        18-Company
+        19-Contact
+        20-HJJob
+        21-Table
+        22-Calculated
+        23-Takeoffs
+        24-QuickPriceSheet    
       x-enumNames:
         - ShortText
         - LongText

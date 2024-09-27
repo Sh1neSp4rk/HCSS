@@ -1787,7 +1787,7 @@
       },
       "SchemaFieldType": {
         "type": "integer",
-        "description": "0-ShortText,\n1-LongText,\n2-Date,\n3-List,\n4-States,\n5-Custom,\n6-Boolean,\n7-Number,\n8-Currency,\n9-DateTime,\n10-Estimates,\n11-BidResults,\n12-Links,\n13-PhoneNumber,\n14-Checklist,\n15-Location,\n16-MultiSelectList",
+        "description": "0-ShortText,\n1-LongText,\n2-Date,\n3-List,\n4-States,\n5-Custom,\n6-Boolean,\n7-Number,\n8-Currency,\n9-DateTime,\n10-Estimates,\n11-BidResults,\n12-Links,\n13-PhoneNumber,\n14-Checklist,\n15-Location,\n16-MultiSelectList\n17-PreConId\n18-Company\n19-Contact\n20-HJJob\n21-Table\n22-Calculated\n23-Takeoffs\n24-QuickPriceSheet    ",
         "x-enumNames": [
           "ShortText",
           "LongText",
