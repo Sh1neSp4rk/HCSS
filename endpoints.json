@@ -1,31 +1,18 @@
 {
-    "HeavyBid Pre-Construction": {
+    "HCSS Safety": {
         "base": "https://api.hcssapps.com/",
-        "v1": {
-            "base": "v1/",
+        "incidents": {
+            "base": "incidents/",
             "GET": [
-                "businessUnits",
-                "businessUnits/{businessUnitId}/Projects",
-                "businessUnits/{businessUnitId}/Projects/{id}",
-                "businessUnits/{businessUnitId}/Schemas",
-                "businessUnits/{businessUnitId}/Schemas/{id}"
+                "{id}",
+                "{id}"
             ],
             "PUT": [
-                "businessUnits/{businessUnitId}/Projects/{id}"
+                "{id}"
             ],
-            "POST": [
-                "businessUnits/{businessUnitId}/Projects",
-                "businessUnits/{businessUnitId}/Projects/range",
-                "businessUnits/{businessUnitId}/reports/projects/{projectId}/projectDetails",
-                "businessUnits/{businessUnitId}/Schemas/updateFieldAlias"
-            ],
-            "DELETE": [
-                "businessUnits/{businessUnitId}/Projects/{id}",
-                "businessUnits/{businessUnitId}/Projects/range"
-            ],
-            "PATCH": [
-                "businessUnits/{businessUnitId}/Projects/{id}"
-            ]
+            "POST": [],
+            "DELETE": [],
+            "PATCH": []
         }
     }
 }
