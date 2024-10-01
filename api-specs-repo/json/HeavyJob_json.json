@@ -16419,6 +16419,11 @@
             "description": "The note.",
             "nullable": true
           },
+          "sourceName": {
+            "type": "string",
+            "description": "The entity name from whom the transaction originates",
+            "nullable": true
+          },
           "syncTimestamp": {
             "type": "string",
             "description": "The sync timestamp.",
@@ -17591,6 +17596,11 @@
           "note": {
             "type": "string",
             "description": "The note.",
+            "nullable": true
+          },
+          "sourceName": {
+            "type": "string",
+            "description": "The entity name from whom the transaction originates",
             "nullable": true
           },
           "syncTimestamp": {
