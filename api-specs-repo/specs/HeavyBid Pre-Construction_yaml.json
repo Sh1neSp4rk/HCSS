@@ -45,8 +45,27 @@ paths:
     get:
       tags:
         - Projects
+      summary: Gets a list of projects
       description: |-
+        sorting
 
+            GET /businessUnits/{businessUnitId}/projects?orderBy.fieldId=name%26orderBy.ascending=true
+
+        filtering a string field
+
+            GET /businessUnits/{businessUnitId}/projects?filters[0].fieldId=name%26filters[0].contains=project
+
+        filtering a numeric field
+
+            GET /businessUnits/{businessUnitId}/projects?filters[0].fieldId=52fec515-2012-4d2d-b8ae-17c3b274bb84%26filters[0].lowerBound=100
+
+        filtering a date field
+
+            GET /businessUnits/{businessUnitId}/projects?filters[0].fieldId=8230a513-065b-4928-a64b-57cef4de1a31%26filters[0].lowerBound=2021-01-01T00:00:00.00000Z
+
+        paging
+
+            GET /businessUnits/{businessUnitId}/projects?continuationToken=continuationToken%26top=100
 
         For help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens
       operationId: Projects_Get
@@ -54,6 +73,7 @@ paths:
         - name: businessUnitId
           in: path
           required: true
+          description: The id of the business unit to operate on
           schema:
             type: string
             nullable: true
@@ -99,12 +119,14 @@ paths:
           x-position: 6
         - name: includeDynamicFields
           in: query
+          description: Flag value to include/exclude runtime dynamic fields like estimates, calculations, etc. By default, it is enabled (true). Disabling dynamic fields will improve performance.
           schema:
             type: boolean
             default: true
           x-position: 7
         - name: includeArchived
           in: query
+          description: Flag value to include/exclude archived projects. By default, it is disabled (false).
           schema:
             type: boolean
             default: false

@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: v1
   title: Safety.CustomerApi
-  description: A safety management system. Operations require the "safety:read" or "safety:write" scope.
+  description: A safety management system. Operations require the "safetyapi:read", "safetyapi:write", "safetyapi:permissions:read", "safetyapi:permissions:write", "incidents:read", "incidents:write", or "meetings:read" scope.
   termsOfService: https://support.hcss.com.
   contact:
     name: Heavy Construction Systems Specialists, Inc. (HCSS)
@@ -17,6 +17,10 @@ schemes:
   - https
 security:
   - bearer:
+      - safetyapi:read
+      - safetyapi:write
+      - safetyapi:permissions:read
+      - safetyapi:permissions:write
       - incidents:read
       - incidents:write
       - meetings:read
@@ -57,10 +61,10 @@ paths:
           examples:
             application/json:
               results:
-                - id: 06ddaade-66cb-42a0-a352-c6fd361fe4b4
+                - id: 65bdd6f4-fe6a-448f-865f-b7c7a4e1c4b9
                   name: Name
                   description: Description
-                  lastChangedById: bb7deb64-bd5b-4ca1-961c-e4e492958cfd
+                  lastChangedById: bc8ae8ef-aa0a-4358-baed-ef7e7f8fb3cf
                   isDeleted: false
               metadata:
                 nextCursor: KySw1rGEukCz8ne2PqxXxg
@@ -105,11 +109,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-09-27T19:44:17.5151899Z'
+                  DateOfHire: '2024-10-02T16:33:22.0190823Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-09-27T08:00:00Z'
+                  TimeStartedWork: '2024-10-02T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -135,13 +139,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-09-28T00:00:00Z'
-                    LastDay: '2024-09-30T00:00:00Z'
+                    FirstDay: '2024-10-03T00:00:00Z'
+                    LastDay: '2024-10-05T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-09-28T00:00:00Z'
-                    LastDay: '2024-09-30T00:00:00Z'
+                    FirstDay: '2024-10-03T00:00:00Z'
+                    LastDay: '2024-10-05T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -171,8 +175,8 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-10-04T00:00:00Z'
-                    CompletionDate: '2024-10-04T00:00:00Z'
+                    TargetCompletionDate: '2024-10-09T00:00:00Z'
+                    CompletionDate: '2024-10-09T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
               Attachments:
                 - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
@@ -198,8 +202,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-09-27T19:44:17.437064Z'
-              LastModifiedUtc: '2024-09-27T19:44:17.437064Z'
+              CreatedDateUtc: '2024-10-02T16:33:21.9253272Z'
+              LastModifiedUtc: '2024-10-02T16:33:21.9253272Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -210,8 +214,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-09-28T19:44:17.437064Z'
-              ID: 45f8e4b7-7cc1-4ac5-a831-e2f306f2c4f5
+              DateInvestigationBegan: '2024-10-03T16:33:21.9253272Z'
+              ID: 22e0a142-9d36-48b9-b5d7-c9aa335568cb
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -219,10 +223,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-09-27T19:44:17.437064Z'
+              ReportedDateUtc: '2024-10-02T16:33:21.9253272Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-09-27T18:44:17.437064Z'
+              IncidentDateUtc: '2024-10-02T15:33:21.9253272Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -291,11 +295,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-09-27T19:44:17.6714404Z'
+                  DateOfHire: '2024-10-02T16:33:22.2222127Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-09-27T08:00:00Z'
+                  TimeStartedWork: '2024-10-02T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -321,13 +325,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-09-28T00:00:00Z'
-                    LastDay: '2024-09-30T00:00:00Z'
+                    FirstDay: '2024-10-03T00:00:00Z'
+                    LastDay: '2024-10-05T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-09-28T00:00:00Z'
-                    LastDay: '2024-09-30T00:00:00Z'
+                    FirstDay: '2024-10-03T00:00:00Z'
+                    LastDay: '2024-10-05T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -357,8 +361,8 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-10-04T00:00:00Z'
-                    CompletionDate: '2024-10-04T00:00:00Z'
+                    TargetCompletionDate: '2024-10-09T00:00:00Z'
+                    CompletionDate: '2024-10-09T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
               Attachments:
                 - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
@@ -384,8 +388,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-09-27T19:44:17.577689Z'
-              LastModifiedUtc: '2024-09-27T19:44:17.577689Z'
+              CreatedDateUtc: '2024-10-02T16:33:22.1128336Z'
+              LastModifiedUtc: '2024-10-02T16:33:22.1128336Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -396,8 +400,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-09-28T19:44:17.577689Z'
-              ID: f773c40e-38f2-4d31-bf31-ef403cbe471b
+              DateInvestigationBegan: '2024-10-03T16:33:22.1128336Z'
+              ID: 0c863ba7-8977-416b-89a6-8e7dbbcae2ca
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -405,10 +409,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-09-27T19:44:17.577689Z'
+              ReportedDateUtc: '2024-10-02T16:33:22.1128336Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-09-27T18:44:17.577689Z'
+              IncidentDateUtc: '2024-10-02T15:33:22.1128336Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -489,8 +493,8 @@ paths:
               $ref: '#/definitions/ApiIncident'
           examples:
             application/json:
-              - CreatedDateUtc: '2024-09-27T19:44:17.6714404Z'
-                LastModifiedUtc: '2024-09-27T19:44:17.6714404Z'
+              - CreatedDateUtc: '2024-10-02T16:33:22.2222127Z'
+                LastModifiedUtc: '2024-10-02T16:33:22.2222127Z'
                 BusinessUnitDescription: BU-123 description
                 ReportingStatus: ReportedToThirdPartyCarrier
                 InsuranceCompanyName: Allstate
@@ -501,8 +505,8 @@ paths:
                 AdjusterEmail: adjuster@company.com
                 AdjusterPhone: 555-111-9999
                 AdjusterNotes: adjuster notes
-                DateInvestigationBegan: '2024-09-28T19:44:17.6714404Z'
-                ID: 868fb656-4681-449b-86e1-a31f04d6c177
+                DateInvestigationBegan: '2024-10-03T16:33:22.2222127Z'
+                ID: 2eddd9f1-5856-4b9a-980e-6eed5ccc1714
                 CaseNumber: injury-1234
                 Description: Employee injured on-site
                 Notes: Additional notes
@@ -510,10 +514,10 @@ paths:
                 JobCode: construction-job-123
                 BusinessUnitCode: BU-123
                 LocationDescription: job site
-                ReportedDateUtc: '2024-09-27T19:44:17.6714404Z'
+                ReportedDateUtc: '2024-10-02T16:33:22.2222127Z'
                 RecorderCode: employee-code-01
                 PersonInChargeCode: employee-code-02
-                IncidentDateUtc: '2024-09-27T18:44:17.6714404Z'
+                IncidentDateUtc: '2024-10-02T15:33:22.2222127Z'
                 Status: Reported
                 Latitude: 29.76
                 Longitude: 95.37
@@ -706,8 +710,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-09-27T19:44:17.7339389Z'
-              LastModifiedUtc: '2024-09-27T19:44:17.7339389Z'
+              CreatedDateUtc: '2024-10-02T16:33:22.3003393Z'
+              LastModifiedUtc: '2024-10-02T16:33:22.3003393Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -718,8 +722,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-09-28T19:44:17.7339389Z'
-              ID: c8a5bae3-ff5a-4ac5-b6ff-62cbdaf90873
+              DateInvestigationBegan: '2024-10-03T16:33:22.3003393Z'
+              ID: 88be2d5c-a006-401b-ad56-0fc5d68512a8
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -727,10 +731,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-09-27T19:44:17.7339389Z'
+              ReportedDateUtc: '2024-10-02T16:33:22.3003393Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-09-27T18:44:17.7339389Z'
+              IncidentDateUtc: '2024-10-02T15:33:22.3003393Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -822,11 +826,11 @@ paths:
           examples:
             application/json:
               Meetings:
-                - Id: 329bcb31-3ddd-4e82-9c94-9460683e41b4
-                  MeetingDate: '2024-09-27T19:44:17.8745676Z'
-                  JobId: df60ee87-2876-4e15-8776-c6a9d06c9e86
+                - Id: d5de1693-1041-4bee-9f53-cb972b7542da
+                  MeetingDate: '2024-10-02T16:33:22.4097176Z'
+                  JobId: fadaed49-3d13-4668-85ab-08f66a0a7cf1
                   JobCode: road-construction-123
-                  RecorderId: 6a3dd3c8-4f78-498b-a570-c52e049e28c4
+                  RecorderId: 901b231a-f50a-477e-bc2c-e37a43acc92b
                   RecorderCode: EMP-123
                   DurationMinutes: 60
                   Type: Weekly check-in
@@ -850,6 +854,53 @@ paths:
                       Note: Client manager
                       OnSite: true
                       Attended: true
+        '400':
+          description: |-
+            Bad Request. This typically means one or more request validation errors occurred.
+            Check the response body for details.
+            For more help troubleshooting, please see https://dev-developer.hcssapps.com/getting-started/troubleshoot-bad-request
+  /v1/users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Gets a single user by ID.
+      description: "---\r\n\r\n**Note:** This API is not yet available but is coming soon. If you want early access, you can request it by calling Support at [855-231-7878](tel:855-231-7878)\r\n\r\n---\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens"
+      operationId: Users_Get
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+      parameters:
+        - name: id
+          in: path
+          description: The unique identifier of the user.
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: User found
+          schema:
+            $ref: '#/definitions/ApiUser'
+          examples:
+            application/json:
+              id: a9983748-b73e-4b7f-b63d-00a2de3c08ba
+              userName: name66.LastName66@Dev
+              firstName: name66
+              lastName: LastName66
+              email: nancy.oneida@hcss.com
+              isDeleted: false
+              deletedBy: null
+              deletedDate: null
+              allowSync: false
+              syncTimestamp: '2022-08-12T19:13:47.0938417'
+              employee:
+                id: 07c29992-c51d-4de6-817b-831f27bd34e7
+                code: 0812C
+                firstName: nancy
+                lastName: nancy31
+        '204':
+          description: NoContent
         '400':
           description: |-
             Bad Request. This typically means one or more request validation errors occurred.
@@ -2162,6 +2213,67 @@ definitions:
       Attended:
         description: Did this person attend?
         type: boolean
+  ApiUser:
+    description: DTO for Customer API User data (same as HJ API)
+    type: object
+    properties:
+      ID:
+        format: uuid
+        description: User ID
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      UserName:
+        description: User Name
+        type: string
+      FirstName:
+        description: User First Name
+        type: string
+      LastName:
+        description: User Last Name
+        type: string
+      Email:
+        description: User Email
+        type: string
+      IsDeleted:
+        description: User IsDeleted
+        type: boolean
+      DeletedBy:
+        format: uuid
+        description: User Deleted By
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      DeletedDate:
+        format: date-time
+        description: User Deleted Date
+        type: string
+      AllowSync:
+        description: User Allow Sync
+        type: boolean
+      SyncTimestamp:
+        format: date-time
+        description: User SyncTimestamp
+        type: string
+      Employee:
+        $ref: '#/definitions/ApiUserEmployee'
+        description: Employee joined from EmployeeID (if present)
+  ApiUserEmployee:
+    description: DTO for Customer API Employee data
+    type: object
+    properties:
+      ID:
+        format: uuid
+        description: Employee ID
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      Code:
+        description: Employee Code
+        type: string
+      FirstName:
+        description: Employee First Name
+        type: string
+      LastName:
+        description: Employee Last Name
+        type: string
 securityDefinitions:
   bearer:
     type: oauth2
@@ -2169,6 +2281,10 @@ securityDefinitions:
     flow: application
     tokenUrl: https://api.hcssapps.com/identity/connect/token
     scopes:
+      safetyapi:read: safetyapi:read
+      safetyapi:write: safetyapi:write
+      safetyapi:permissions:read: safetyapi:permissions:read
+      safetyapi:permissions:write: safetyapi:permissions:write
       incidents:read: incidents:read
       incidents:write: incidents:write
       meetings:read: meetings:read
@@ -2179,6 +2295,10 @@ securityDefinitions:
     tokenUrl: https://api.hcssapps.com/identity/connect/token
     authorizationUrl: https://api.hcssapps.com/identity/connect/authorize
     scopes:
+      safetyapi:read: safetyapi:read
+      safetyapi:write: safetyapi:write
+      safetyapi:permissions:read: safetyapi:permissions:read
+      safetyapi:permissions:write: safetyapi:permissions:write
       incidents:read: incidents:read
       incidents:write: incidents:write
       meetings:read: meetings:read
