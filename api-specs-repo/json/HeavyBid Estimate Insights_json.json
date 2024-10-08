@@ -1363,6 +1363,110 @@
         ]
       }
     },
+    "/api/v2/integration/businessunits/{businessUnitId}/estimates/{estimateId}/materials/{materialType}": {
+      "get": {
+        "tags": [
+          "Materials"
+        ],
+        "summary": "Get all Materials for an Estimate of a specific Material Type",
+        "description": "Get all Materials for an Estimate of a specific Material Type\n\n\n\nFor help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens",
+        "operationId": "IntegrationsV2Controller_GetEstimateMaterialsAsync",
+        "parameters": [
+          {
+            "name": "businessUnitId",
+            "in": "path",
+            "required": true,
+            "description": "The required business unit id",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "estimateId",
+            "in": "path",
+            "required": true,
+            "description": "The required estimate id",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 3
+          },
+          {
+            "name": "materialType",
+            "in": "path",
+            "required": true,
+            "description": "The required material type \"permanent\" or \"construction\"",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The max number of records. (e.g. $top=10)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of records to skip. (e.g. $skip=5)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "A function that must evaluate to true for a record to be returned. (e.g. $filter=estimateId eq c9804e19-acbf-4db2-adaa-04d344dbcc1b)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Determines what values are used to order a collection of records. (e.g. $orderby=filters/typeOfWork desc)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationResponseOfMaterialAnalysisReportIntegrationDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/api/v2/integration/businessunits/{businessUnitId}/partitions": {
       "get": {
         "tags": [
@@ -1448,6 +1552,156 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/IntegrationResponseSingleOfApiDatabasePartitionRead"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/integration/businessunits/{businessUnitId}/estimates/{estimateId}/quoteFolders": {
+      "get": {
+        "tags": [
+          "Quote Folders"
+        ],
+        "summary": "Get all quote folders in an estimate with details.",
+        "description": "Get all quote folders in an estimate with details.\n\n\n\nFor help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens",
+        "operationId": "IntegrationsV2Controller_GetQuoteFoldersWithDetails",
+        "parameters": [
+          {
+            "name": "businessUnitId",
+            "in": "path",
+            "required": true,
+            "description": "The required business unit id.",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "estimateId",
+            "in": "path",
+            "required": true,
+            "description": "The required estimate id.",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 3
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The max number of records. (e.g. $top=10)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of records to skip. (e.g. $skip=5)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "A function that must evaluate to true for a record to be returned. (e.g. $filter=estimateId eq c9804e19-acbf-4db2-adaa-04d344dbcc1b)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Determines what values are used to order a collection of records. (e.g. $orderby=filters/typeOfWork desc)",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationResponseOfQuoteFolderIntegrationDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. See https://developer.hcssapps.com/getting-started/troubleshoot-unauthorized for more information."
+          },
+          "403": {
+            "description": "Forbidden. See https://developer.hcssapps.com/getting-started/troubleshoot-forbidden for more information."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v2/integration/businessunits/{businessUnitId}/quoteFolders/{id}": {
+      "get": {
+        "tags": [
+          "Quote Folders"
+        ],
+        "summary": "Get detailed quote folder by id",
+        "description": "Get detailed quote folder by id\n\n\n\nFor help with authorization, see https://developer.hcssapps.com/getting-started/request-tokens",
+        "operationId": "IntegrationsV2Controller_GetQuoteFolderWithDetailsById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The required quote id.",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "businessUnitId",
+            "in": "path",
+            "required": true,
+            "description": "The required business unit id.",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationResponseSingleOfQuoteFolderIntegrationDto"
                 }
               }
             }
@@ -7911,6 +8165,240 @@
           }
         }
       },
+      "IntegrationResponseOfMaterialAnalysisReportIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "Response data",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/MaterialAnalysisReportIntegrationDto"
+            }
+          },
+          "currentTopValue": {
+            "type": "integer",
+            "description": "The current top value",
+            "format": "int32",
+            "nullable": true,
+            "example": 100
+          },
+          "currentSkipValue": {
+            "type": "integer",
+            "description": "The current skip value",
+            "format": "int32",
+            "nullable": true,
+            "example": 0
+          },
+          "nextSkipValue": {
+            "type": "integer",
+            "description": "Current top value + current skip value",
+            "format": "int32",
+            "nullable": true,
+            "example": 100
+          }
+        }
+      },
+      "MaterialAnalysisReportIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "estimateCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialType": {
+            "type": "string",
+            "nullable": true
+          },
+          "materials": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/MaterialIntegrationDto"
+            }
+          },
+          "rowCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentSkipValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentTopValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextSkipValue": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MaterialIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "resourceId": {
+            "type": "string",
+            "description": "The resource id.",
+            "format": "guid",
+            "example": "25dbb66d-bf4d-421f-a2df-f15765287dc3"
+          },
+          "resourceCode": {
+            "type": "string",
+            "description": "The resource code.",
+            "nullable": true,
+            "example": "2BAG"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description.",
+            "nullable": true,
+            "example": "Silt Fence"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The currency the unit cost was entered in.",
+            "nullable": true,
+            "example": "US$"
+          },
+          "units": {
+            "type": "string",
+            "description": "The unit of measure.",
+            "nullable": true,
+            "example": "LF"
+          },
+          "unitCost": {
+            "type": "number",
+            "description": "Unit cost for all biditems combined.",
+            "format": "decimal",
+            "example": 1.15
+          },
+          "total": {
+            "type": "number",
+            "description": "The total for all biditems combined.",
+            "format": "decimal",
+            "example": 51750
+          },
+          "biditems": {
+            "type": "array",
+            "description": "The list of all biditems which this material is used in.",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/MaterialBiditemIntegrationDto"
+            }
+          }
+        }
+      },
+      "MaterialBiditemIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "biditemId": {
+            "type": "string",
+            "description": "The biditem id.",
+            "format": "guid",
+            "example": "25dbb66d-bf4d-421f-a2df-f15765287dc3"
+          },
+          "biditemCode": {
+            "type": "string",
+            "description": "Biditem code, padded with spaces on the left for sorting.",
+            "nullable": true,
+            "example": 140
+          },
+          "activityId": {
+            "type": "string",
+            "description": "The activity id.",
+            "format": "guid",
+            "example": "2cf04cfb-7f3d-4456-9bd7-7513c725f5fc"
+          },
+          "activityCode": {
+            "type": "string",
+            "description": "The activity code.",
+            "nullable": true,
+            "example": 290001
+          },
+          "quantity": {
+            "type": "number",
+            "description": "The quantity.",
+            "format": "decimal",
+            "example": 45000
+          },
+          "units": {
+            "type": "string",
+            "description": "The unit of measure.",
+            "nullable": true,
+            "example": "LF"
+          },
+          "unitCost": {
+            "type": "number",
+            "description": "Unit cost for everything except labor. Labor will only have the base rate here.",
+            "format": "decimal",
+            "example": 1.15
+          },
+          "percent": {
+            "type": "number",
+            "description": "Used depending on the record cost type: Labor - This is the overtime premium percent\nOther costs - This is the tax percent",
+            "format": "decimal",
+            "example": 100
+          },
+          "total": {
+            "type": "number",
+            "description": "The total.",
+            "format": "decimal",
+            "example": 51750
+          },
+          "escalationPercent": {
+            "type": "number",
+            "description": "Average escalation percent to be used on this resource.",
+            "format": "decimal",
+            "example": 100
+          }
+        }
+      },
+      "ODataQueryOptionsOfMaterialIntegrationDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ODataQueryOptions"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ifMatch": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ETagOfMaterialIntegrationDto"
+                  }
+                ]
+              },
+              "ifNoneMatch": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ETagOfMaterialIntegrationDto"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "ETagOfMaterialIntegrationDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ETag"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
       "IntegrationResponseOfApiDatabasePartitionRead": {
         "type": "object",
         "additionalProperties": false,
@@ -8002,6 +8490,328 @@
             "oneOf": [
               {
                 "$ref": "#/components/schemas/ApiDatabasePartitionRead"
+              }
+            ]
+          }
+        }
+      },
+      "IntegrationResponseOfQuoteFolderIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "Response data",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/QuoteFolderIntegrationDto"
+            }
+          },
+          "currentTopValue": {
+            "type": "integer",
+            "description": "The current top value",
+            "format": "int32",
+            "nullable": true,
+            "example": 100
+          },
+          "currentSkipValue": {
+            "type": "integer",
+            "description": "The current skip value",
+            "format": "int32",
+            "nullable": true,
+            "example": 0
+          },
+          "nextSkipValue": {
+            "type": "integer",
+            "description": "Current top value + current skip value",
+            "format": "int32",
+            "nullable": true,
+            "example": 100
+          }
+        }
+      },
+      "QuoteFolderIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "quoteMasterId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "folder": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "breakout": {
+            "type": "string",
+            "nullable": true
+          },
+          "selectedVendor": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalNonAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalNonAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "estimatorInitials": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedSelectedVendorTotal": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quoteItems": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/QuoteItemIntegrationDto"
+            }
+          }
+        }
+      },
+      "QuoteItemIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "quoteFolderId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "biditem": {
+            "type": "string",
+            "nullable": true
+          },
+          "activity": {
+            "type": "string",
+            "nullable": true
+          },
+          "resource": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantityAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quantityAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quantityNonAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quantityNonAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "selfAmount": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "selectedVendor": {
+            "type": "string",
+            "nullable": true
+          },
+          "alternateDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "addendumNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "alternateQuantity": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "unitCostInEstimate": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "clientNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "quotes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/QuoteIntegrationDto"
+            }
+          }
+        }
+      },
+      "QuoteIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "quoteItemId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "quoteVendorId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "quoteVendorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousPrice": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "previousUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantityAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quantityAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quantityNonAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quantityNonAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalNonAdditiveFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalNonAdditiveNonFactored": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quoteUnit": {
+            "type": "string",
+            "nullable": true
+          },
+          "quotePrice": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "quoteCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "plugIndicator": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ODataQueryOptionsOfQuoteFolderIntegrationDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ODataQueryOptions"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "ifMatch": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ETagOfQuoteFolderIntegrationDto"
+                  }
+                ]
+              },
+              "ifNoneMatch": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ETagOfQuoteFolderIntegrationDto"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "ETagOfQuoteFolderIntegrationDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ETag"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IntegrationResponseSingleOfQuoteFolderIntegrationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "description": "Response data",
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/QuoteFolderIntegrationDto"
               }
             ]
           }

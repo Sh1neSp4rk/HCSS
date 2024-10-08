@@ -1,1 +1,41 @@
-{}
+{
+    "HeavyBid Estimate Insights": {
+        "base": "https://api.hcssapps.com/",
+        "v2": {
+            "base": "v2/",
+            "GET": [
+                "integration/businessunits/{businessUnitId}/activities",
+                "integration/businessunits/{businessUnitId}/activities/{id}",
+                "integration/businessunits/{businessUnitId}/activitycodebook",
+                "integration/businessunits/{businessUnitId}/activitycodebook/{id}",
+                "integration/businessunits/{businessUnitId}/activitycodebookresource",
+                "integration/businessunits/{businessUnitId}/activitycodebookresource/{id}",
+                "integration/businessunits/{businessUnitId}/estimates/{estimateId}/attachments",
+                "integration/businessunits/{businessUnitId}/estimates/{estimateId}/attachments/{attachmentId}",
+                "integration/businessunits/{businessUnitId}/biditemcodebook",
+                "integration/businessunits/{businessUnitId}/biditemcodebook/{id}",
+                "integration/businessunits/{businessUnitId}/biditems",
+                "integration/businessunits/{businessUnitId}/biditems/{id}",
+                "integration/businessunits",
+                "integration/businessunits/{businessUnitId}/estimates",
+                "integration/businessunits/{businessUnitId}/estimates/{id}",
+                "integration/businessunits/{businessUnitId}/estimates/{id}/kpis",
+                "integration/businessunits/{businessUnitId}/materialcodebook",
+                "integration/businessunits/{businessUnitId}/materialcodebook/{id}",
+                "integration/businessunits/{businessUnitId}/estimates/{estimateId}/materials/{materialType}",
+                "integration/businessunits/{businessUnitId}/partitions",
+                "integration/businessunits/{businessUnitId}/partitions/{id}",
+                "integration/businessunits/{businessUnitId}/estimates/{estimateId}/quoteFolders",
+                "integration/businessunits/{businessUnitId}/quoteFolders/{id}",
+                "integration/businessunits/{businessUnitId}/resources",
+                "integration/businessunits/{businessUnitId}/resources/{id}"
+            ],
+            "PUT": [
+                "integration/businessunits/{businessUnitId}/materialcodebook/{id}"
+            ],
+            "POST": [],
+            "DELETE": [],
+            "PATCH": []
+        }
+    }
+}
