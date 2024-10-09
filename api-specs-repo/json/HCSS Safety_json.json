@@ -40,7 +40,7 @@
           "AccessGroups"
         ],
         "summary": "Gets a list of access groups",
-        "description": "Gets a list of access groups\r\n\r\n---\r\n\r\n**Note:** This API is not yet available but is coming soon. If you want early access, you can request it by calling Support at [855-231-7878](tel:855-231-7878)\r\n\r\n---\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "description": "Gets a list of access groups\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
         "operationId": "AccessGroups_GetAccessGroups",
         "consumes": [],
         "produces": [
@@ -49,22 +49,24 @@
         ],
         "parameters": [
           {
-            "name": "isDeleted",
+            "name": "request.isDeleted",
             "in": "query",
             "description": "If true, returns deleted access groups.",
             "required": false,
             "type": "boolean"
           },
           {
-            "name": "limit",
+            "name": "request.limit",
             "in": "query",
-            "description": "The maximum number of results that should be returned. Default to 100",
+            "description": "The maximum number of results that should be returned. Default to 1000. Cannot be more than 1000.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "maximum": 1000,
+            "minimum": 1
           },
           {
-            "name": "cursor",
+            "name": "request.cursor",
             "in": "query",
             "description": "When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.",
             "required": false,
@@ -75,16 +77,16 @@
           "200": {
             "description": "Access groups queried successfully",
             "schema": {
-              "$ref": "#/definitions/PaginatedResponse[ApiAccessGroup]"
+              "$ref": "#/definitions/PaginatedResponse+ApiAccessGroup"
             },
             "examples": {
               "application/json": {
                 "results": [
                   {
-                    "id": "65bdd6f4-fe6a-448f-865f-b7c7a4e1c4b9",
+                    "id": "e1f3049f-1a2d-4793-89c5-e42c89146339",
                     "name": "Name",
                     "description": "Description",
-                    "lastChangedById": "bc8ae8ef-aa0a-4358-baed-ef7e7f8fb3cf",
+                    "lastChangedById": "18d4b9cb-8547-45a2-bcf7-0fdc7e45181f",
                     "isDeleted": false
                   }
                 ],
@@ -144,11 +146,11 @@
                     "Phone": "555-111-4444",
                     "Email": "employee04@company.com",
                     "JobTitle": "Contractor",
-                    "DateOfHire": "2024-10-02T16:33:22.0190823Z",
+                    "DateOfHire": "2024-10-08T20:26:29.5445952Z",
                     "YearsWithCompanyString": "1",
                     "YearsInConstructionString": "3",
                     "DescriptionOfInjury": "Minor cut on left arm",
-                    "TimeStartedWork": "2024-10-02T08:00:00Z",
+                    "TimeStartedWork": "2024-10-08T08:00:00Z",
                     "ActivityAtTime": "Working on XYZ",
                     "InjuryClassificationString": "illness/injury classification",
                     "NatureOfInjuryCategoryString": "nature of injury category",
@@ -174,14 +176,14 @@
                     "ClassificationString": "injury classification",
                     "DateOfDeath": "0001-01-01T00:00:00",
                     "DaysAwayFromWork": {
-                      "FirstDay": "2024-10-03T00:00:00Z",
-                      "LastDay": "2024-10-05T00:00:00Z",
+                      "FirstDay": "2024-10-09T00:00:00Z",
+                      "LastDay": "2024-10-11T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
                     "DaysOnJobTransfer": {
-                      "FirstDay": "2024-10-03T00:00:00Z",
-                      "LastDay": "2024-10-05T00:00:00Z",
+                      "FirstDay": "2024-10-09T00:00:00Z",
+                      "LastDay": "2024-10-11T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
@@ -215,8 +217,8 @@
                       "FuturePreventionString": "future prevention measures",
                       "PreventiveMeasuresNotes": "additional notes",
                       "AssigneeCode": "employee-code-07",
-                      "TargetCompletionDate": "2024-10-09T00:00:00Z",
-                      "CompletionDate": "2024-10-09T00:00:00Z",
+                      "TargetCompletionDate": "2024-10-15T00:00:00Z",
+                      "CompletionDate": "2024-10-15T00:00:00Z",
                       "PreventiveAccountabilityNotes": "additional notes"
                     }
                   }
@@ -255,8 +257,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-02T16:33:21.9253272Z",
-                "LastModifiedUtc": "2024-10-02T16:33:21.9253272Z",
+                "CreatedDateUtc": "2024-10-08T20:26:29.4352156Z",
+                "LastModifiedUtc": "2024-10-08T20:26:29.4352156Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -268,8 +270,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-03T16:33:21.9253272Z",
-                "ID": "22e0a142-9d36-48b9-b5d7-c9aa335568cb",
+                "DateInvestigationBegan": "2024-10-09T20:26:29.4352156Z",
+                "ID": "643d120f-baff-44c2-a2c4-8f21b04a5bdf",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -277,10 +279,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-02T16:33:21.9253272Z",
+                "ReportedDateUtc": "2024-10-08T20:26:29.4352156Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-02T15:33:21.9253272Z",
+                "IncidentDateUtc": "2024-10-08T19:26:29.4352156Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -364,11 +366,11 @@
                     "Phone": "555-111-4444",
                     "Email": "employee04@company.com",
                     "JobTitle": "Contractor",
-                    "DateOfHire": "2024-10-02T16:33:22.2222127Z",
+                    "DateOfHire": "2024-10-08T20:26:29.7164698Z",
                     "YearsWithCompanyString": "1",
                     "YearsInConstructionString": "3",
                     "DescriptionOfInjury": "Minor cut on left arm",
-                    "TimeStartedWork": "2024-10-02T08:00:00Z",
+                    "TimeStartedWork": "2024-10-08T08:00:00Z",
                     "ActivityAtTime": "Working on XYZ",
                     "InjuryClassificationString": "illness/injury classification",
                     "NatureOfInjuryCategoryString": "nature of injury category",
@@ -394,14 +396,14 @@
                     "ClassificationString": "injury classification",
                     "DateOfDeath": "0001-01-01T00:00:00",
                     "DaysAwayFromWork": {
-                      "FirstDay": "2024-10-03T00:00:00Z",
-                      "LastDay": "2024-10-05T00:00:00Z",
+                      "FirstDay": "2024-10-09T00:00:00Z",
+                      "LastDay": "2024-10-11T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
                     "DaysOnJobTransfer": {
-                      "FirstDay": "2024-10-03T00:00:00Z",
-                      "LastDay": "2024-10-05T00:00:00Z",
+                      "FirstDay": "2024-10-09T00:00:00Z",
+                      "LastDay": "2024-10-11T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
@@ -435,8 +437,8 @@
                       "FuturePreventionString": "future prevention measures",
                       "PreventiveMeasuresNotes": "additional notes",
                       "AssigneeCode": "employee-code-07",
-                      "TargetCompletionDate": "2024-10-09T00:00:00Z",
-                      "CompletionDate": "2024-10-09T00:00:00Z",
+                      "TargetCompletionDate": "2024-10-15T00:00:00Z",
+                      "CompletionDate": "2024-10-15T00:00:00Z",
                       "PreventiveAccountabilityNotes": "additional notes"
                     }
                   }
@@ -475,8 +477,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-02T16:33:22.1128336Z",
-                "LastModifiedUtc": "2024-10-02T16:33:22.1128336Z",
+                "CreatedDateUtc": "2024-10-08T20:26:29.6227223Z",
+                "LastModifiedUtc": "2024-10-08T20:26:29.6227223Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -488,8 +490,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-03T16:33:22.1128336Z",
-                "ID": "0c863ba7-8977-416b-89a6-8e7dbbcae2ca",
+                "DateInvestigationBegan": "2024-10-09T20:26:29.6227223Z",
+                "ID": "1d73b786-826a-4edc-bb1b-e0de536ef2f1",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -497,10 +499,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-02T16:33:22.1128336Z",
+                "ReportedDateUtc": "2024-10-08T20:26:29.6227223Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-02T15:33:22.1128336Z",
+                "IncidentDateUtc": "2024-10-08T19:26:29.6227223Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -603,8 +605,8 @@
             "examples": {
               "application/json": [
                 {
-                  "CreatedDateUtc": "2024-10-02T16:33:22.2222127Z",
-                  "LastModifiedUtc": "2024-10-02T16:33:22.2222127Z",
+                  "CreatedDateUtc": "2024-10-08T20:26:29.7320974Z",
+                  "LastModifiedUtc": "2024-10-08T20:26:29.7320974Z",
                   "BusinessUnitDescription": "BU-123 description",
                   "ReportingStatus": "ReportedToThirdPartyCarrier",
                   "InsuranceCompanyName": "Allstate",
@@ -616,8 +618,8 @@
                   "AdjusterEmail": "adjuster@company.com",
                   "AdjusterPhone": "555-111-9999",
                   "AdjusterNotes": "adjuster notes",
-                  "DateInvestigationBegan": "2024-10-03T16:33:22.2222127Z",
-                  "ID": "2eddd9f1-5856-4b9a-980e-6eed5ccc1714",
+                  "DateInvestigationBegan": "2024-10-09T20:26:29.7320974Z",
+                  "ID": "fc063f3a-ea69-4e74-bcee-34deecda7181",
                   "CaseNumber": "injury-1234",
                   "Description": "Employee injured on-site",
                   "Notes": "Additional notes",
@@ -625,10 +627,10 @@
                   "JobCode": "construction-job-123",
                   "BusinessUnitCode": "BU-123",
                   "LocationDescription": "job site",
-                  "ReportedDateUtc": "2024-10-02T16:33:22.2222127Z",
+                  "ReportedDateUtc": "2024-10-08T20:26:29.7320974Z",
                   "RecorderCode": "employee-code-01",
                   "PersonInChargeCode": "employee-code-02",
-                  "IncidentDateUtc": "2024-10-02T15:33:22.2222127Z",
+                  "IncidentDateUtc": "2024-10-08T19:26:29.7320974Z",
                   "Status": "Reported",
                   "Latitude": 29.76,
                   "Longitude": 95.37,
@@ -899,8 +901,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-02T16:33:22.3003393Z",
-                "LastModifiedUtc": "2024-10-02T16:33:22.3003393Z",
+                "CreatedDateUtc": "2024-10-08T20:26:29.7789727Z",
+                "LastModifiedUtc": "2024-10-08T20:26:29.7789727Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -912,8 +914,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-03T16:33:22.3003393Z",
-                "ID": "88be2d5c-a006-401b-ad56-0fc5d68512a8",
+                "DateInvestigationBegan": "2024-10-09T20:26:29.7789727Z",
+                "ID": "ed896760-6a8a-4b34-9b08-a6775f21959e",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -921,10 +923,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-02T16:33:22.3003393Z",
+                "ReportedDateUtc": "2024-10-08T20:26:29.7789727Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-02T15:33:22.3003393Z",
+                "IncidentDateUtc": "2024-10-08T19:26:29.7789727Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -1041,11 +1043,11 @@
               "application/json": {
                 "Meetings": [
                   {
-                    "Id": "d5de1693-1041-4bee-9f53-cb972b7542da",
-                    "MeetingDate": "2024-10-02T16:33:22.4097176Z",
-                    "JobId": "fadaed49-3d13-4668-85ab-08f66a0a7cf1",
+                    "Id": "2dc02d31-e3c7-4f71-920e-aa0849010eb4",
+                    "MeetingDate": "2024-10-08T20:26:29.9196038Z",
+                    "JobId": "b33ae460-b21c-4e43-8658-5ad1e69fe23b",
                     "JobCode": "road-construction-123",
-                    "RecorderId": "901b231a-f50a-477e-bc2c-e37a43acc92b",
+                    "RecorderId": "085e952e-3ca2-4ed5-8a20-473733f25017",
                     "RecorderCode": "EMP-123",
                     "DurationMinutes": 60,
                     "Type": "Weekly check-in",
@@ -1091,13 +1093,128 @@
         }
       }
     },
+    "/v1/userAccessGroups/search": {
+      "post": {
+        "tags": [
+          "UserAccessGroups"
+        ],
+        "summary": "Returns list of users' access groups",
+        "description": "This call returns the users access groups.\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "operationId": "UserAccessGroups_SearchUserAccessGroups",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the user ids",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchUserAccessGroupsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PaginatedResponse+ApiUserAccessGroup"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "userId": "59c7ee37-2735-4251-b617-daddc9ff0204",
+                    "accessGroupId": "8625e069-0785-4642-b8f5-3cde90b2414c"
+                  }
+                ],
+                "metadata": {
+                  "nextCursor": "KySw1rGEukCz8ne2PqxXxg"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. This typically means one or more request validation errors occurred.\nCheck the response body for details.\nFor more help troubleshooting, please see https://dev-developer.hcssapps.com/getting-started/troubleshoot-bad-request"
+          }
+        }
+      }
+    },
+    "/v1/userAccessGroups": {
+      "patch": {
+        "tags": [
+          "UserAccessGroups"
+        ],
+        "summary": "Updates access group for users",
+        "description": "This call  updates the users' access group.\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "operationId": "UserAccessGroups_UpdateUserAccessGroups",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "List of items representing user access groups",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateUserAccessGroupRequest"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateUserAccessGroupsResponse"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "id": "c56ca7fa-ef07-4b92-875d-6471d1716970",
+                  "userId": "da76216d-b7c3-4e28-be1a-df501da3c6e9",
+                  "accessGroupId": "612e051b-1d1c-450c-89a5-2338989e40ff",
+                  "success": true,
+                  "message": ""
+                },
+                {
+                  "id": "9b28cf9c-1f1a-486c-b092-c3a0545ea766",
+                  "userId": "55d57a93-48a3-4514-affd-3c49cef0d9c5",
+                  "accessGroupId": "ba229f76-5f4c-42e7-850d-94767b4c5292",
+                  "success": false,
+                  "message": "The userId provided does not exist"
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request. This typically means one or more request validation errors occurred.\nCheck the response body for details.\nFor more help troubleshooting, please see https://dev-developer.hcssapps.com/getting-started/troubleshoot-bad-request"
+          }
+        }
+      }
+    },
     "/v1/users/{id}": {
       "get": {
         "tags": [
           "Users"
         ],
         "summary": "Gets a single user by ID.",
-        "description": "---\r\n\r\n**Note:** This API is not yet available but is coming soon. If you want early access, you can request it by calling Support at [855-231-7878](tel:855-231-7878)\r\n\r\n---\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "description": "For help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
         "operationId": "Users_Get",
         "consumes": [],
         "produces": [
@@ -1152,11 +1269,28 @@
     }
   },
   "definitions": {
-    "PaginatedResponse[ApiAccessGroup]": {
-      "required": [
-        "Results",
-        "Metadata"
-      ],
+    "GetAccessGroupsRequest": {
+      "description": "The request body for the endpoint that gets the access groups",
+      "type": "object",
+      "properties": {
+        "IsDeleted": {
+          "description": "If true, returns deleted access groups.",
+          "type": "boolean"
+        },
+        "Limit": {
+          "format": "int32",
+          "description": "The maximum number of results that should be returned. Default to 1000. Cannot be more than 1000.",
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "Cursor": {
+          "description": "When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedResponse+ApiAccessGroup": {
       "type": "object",
       "properties": {
         "Results": {
@@ -1167,7 +1301,7 @@
           "readOnly": true
         },
         "Metadata": {
-          "$ref": "#/definitions/ResponseMetadata[ApiAccessGroup]",
+          "$ref": "#/definitions/ResponseMetadata+ApiAccessGroup",
           "readOnly": true
         }
       }
@@ -1202,7 +1336,7 @@
         }
       }
     },
-    "ResponseMetadata[ApiAccessGroup]": {
+    "ResponseMetadata+ApiAccessGroup": {
       "type": "object",
       "properties": {
         "NextCursor": {
@@ -2873,6 +3007,125 @@
         "Attended": {
           "description": "Did this person attend?",
           "type": "boolean"
+        }
+      }
+    },
+    "SearchUserAccessGroupsRequest": {
+      "description": "The request body for the endpoint that searches for user access groups",
+      "type": "object",
+      "properties": {
+        "userIds": {
+          "description": "If provided, filter user access groups belong to these user ids",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "limit": {
+          "format": "int32",
+          "description": "The maximum number of results that should be returned. Default to 1000. Cannot be more than 1000.",
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "cursor": {
+          "description": "When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedResponse+ApiUserAccessGroup": {
+      "type": "object",
+      "properties": {
+        "Results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiUserAccessGroup"
+          },
+          "readOnly": true
+        },
+        "Metadata": {
+          "$ref": "#/definitions/ResponseMetadata+ApiUserAccessGroup",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiUserAccessGroup": {
+      "description": "An object with pairs of Users and Access Groups",
+      "type": "object",
+      "properties": {
+        "UserId": {
+          "format": "uuid",
+          "description": "The user ID",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "AccessGroupId": {
+          "format": "uuid",
+          "description": "The access group ID",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "ResponseMetadata+ApiUserAccessGroup": {
+      "type": "object",
+      "properties": {
+        "NextCursor": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateUserAccessGroupRequest": {
+      "description": "The request body for the endpoint that updates the user access groups",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "format": "uuid",
+          "description": "The user id that belongs to this access group",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "accessGroupId": {
+          "format": "uuid",
+          "description": "The access group id",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "UpdateUserAccessGroupsResponse": {
+      "description": "The response body of the endpoint that updates user access groups",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "description": "The id of the user - access group relation",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "UserId": {
+          "format": "uuid",
+          "description": "The user id belongs to this access group",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "AccessGroupId": {
+          "format": "uuid",
+          "description": "The access group id",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "Success": {
+          "description": "Whether or not the update was successful",
+          "type": "boolean"
+        },
+        "Message": {
+          "description": "A message status of the update",
+          "type": "string"
         }
       }
     },
