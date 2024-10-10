@@ -1,38 +1,53 @@
 {
-    "HCSS Safety": {
+    "Setups": {
         "base": "https://api.hcssapps.com/",
-        "incidents": {
-            "base": "incidents/",
+        "v1": {
+            "base": "v1/",
             "GET": [
-                "{id}",
-                "{id}"
+                "AccountingTemplate",
+                "BusinessUnit",
+                "BusinessUnit/default",
+                "CostCode",
+                "Employee",
+                "Equipment",
+                "Job",
+                "PayClass",
+                "RateSet/Employee",
+                "RateSet/PayClass",
+                "RateSet/Equipment",
+                "RateSet/CostAdjustment",
+                "RateSetGroup"
             ],
             "PUT": [
-                "{id}"
+                "CostCode/{id}",
+                "Employee/{id}",
+                "Equipment/{id}",
+                "Job/{id}",
+                "PayClass/{id}",
+                "RateSet/Employee/{id}",
+                "RateSet/PayClass/{id}",
+                "RateSet/Equipment/{id}",
+                "RateSet/CostAdjustment/{id}",
+                "RateSetGroup/{id}"
             ],
-            "POST": [],
-            "DELETE": [],
-            "PATCH": []
-        },
-        "userAccessGroups": {
-            "base": "userAccessGroups/",
-            "GET": [],
-            "PUT": [],
             "POST": [
-                "search"
+                "CostCode/bulk",
+                "BusinessUnit",
+                "CostCode",
+                "Employee",
+                "Equipment",
+                "Job",
+                "PayClass",
+                "RateSet/Employee",
+                "RateSet/PayClass",
+                "RateSet/Equipment",
+                "RateSet/CostAdjustment",
+                "RateSetGroup"
             ],
             "DELETE": [],
-            "PATCH": []
-        },
-        "users": {
-            "base": "users/",
-            "GET": [
-                "{id}"
-            ],
-            "PUT": [],
-            "POST": [],
-            "DELETE": [],
-            "PATCH": []
+            "PATCH": [
+                "CostCode"
+            ]
         }
     }
 }
