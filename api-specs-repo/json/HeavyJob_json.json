@@ -6407,16 +6407,103 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+              },
+              "example": {
+                "accountingCode": "ACCTCode1",
+                "accountingType": "AccountingType",
+                "company": "ABC Company",
+                "costType": "Truck",
+                "division": "Trucking Division",
+                "generalLedgerAccount": "GeneralLedger",
+                "meterType": "Meter",
+                "miscAccount": "Misc",
+                "usageCode": "UsageCode",
+                "equipmentId": "a25231b4-93e2-4b26-8e2c-c1c764054b25",
+                "equipmentCode": "EQ1",
+                "equipmentDescription": "Equipment 1",
+                "gpsDeviceTag": "GPSTag1",
+                "isRental": false,
+                "make": "Chevrolet",
+                "model": "Tahoe",
+                "licensePlate": "VSD 342K",
+                "serialNumber": "SerialNumber1",
+                "state": "TX",
+                "vendorId": "ccfafc90-941c-4b29-978b-d072d28fd6e5",
+                "year": 2024,
+                "isActive": true,
+                "operatorPayClassId": "c7499f28-679f-46a6-89c8-8459c9f6d022",
+                "equipmentTypeId": "c3310680-11a9-4a6c-a492-b04bf365d86f",
+                "fuelTypeId": "7d75dfe8-c4cb-4aff-a164-3b94eb41db67",
+                "fuelCapacity": 21.2,
+                "isFueler": false
               }
             },
             "text/json": {
               "schema": {
                 "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+              },
+              "example": {
+                "accountingCode": "ACCTCode1",
+                "accountingType": "AccountingType",
+                "company": "ABC Company",
+                "costType": "Truck",
+                "division": "Trucking Division",
+                "generalLedgerAccount": "GeneralLedger",
+                "meterType": "Meter",
+                "miscAccount": "Misc",
+                "usageCode": "UsageCode",
+                "equipmentId": "a25231b4-93e2-4b26-8e2c-c1c764054b25",
+                "equipmentCode": "EQ1",
+                "equipmentDescription": "Equipment 1",
+                "gpsDeviceTag": "GPSTag1",
+                "isRental": false,
+                "make": "Chevrolet",
+                "model": "Tahoe",
+                "licensePlate": "VSD 342K",
+                "serialNumber": "SerialNumber1",
+                "state": "TX",
+                "vendorId": "ccfafc90-941c-4b29-978b-d072d28fd6e5",
+                "year": 2024,
+                "isActive": true,
+                "operatorPayClassId": "c7499f28-679f-46a6-89c8-8459c9f6d022",
+                "equipmentTypeId": "c3310680-11a9-4a6c-a492-b04bf365d86f",
+                "fuelTypeId": "7d75dfe8-c4cb-4aff-a164-3b94eb41db67",
+                "fuelCapacity": 21.2,
+                "isFueler": false
               }
             },
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ApiEquipmentWithAccountingValuesWrite"
+              },
+              "example": {
+                "accountingCode": "ACCTCode1",
+                "accountingType": "AccountingType",
+                "company": "ABC Company",
+                "costType": "Truck",
+                "division": "Trucking Division",
+                "generalLedgerAccount": "GeneralLedger",
+                "meterType": "Meter",
+                "miscAccount": "Misc",
+                "usageCode": "UsageCode",
+                "equipmentId": "a25231b4-93e2-4b26-8e2c-c1c764054b25",
+                "equipmentCode": "EQ1",
+                "equipmentDescription": "Equipment 1",
+                "gpsDeviceTag": "GPSTag1",
+                "isRental": false,
+                "make": "Chevrolet",
+                "model": "Tahoe",
+                "licensePlate": "VSD 342K",
+                "serialNumber": "SerialNumber1",
+                "state": "TX",
+                "vendorId": "ccfafc90-941c-4b29-978b-d072d28fd6e5",
+                "year": 2024,
+                "isActive": true,
+                "operatorPayClassId": "c7499f28-679f-46a6-89c8-8459c9f6d022",
+                "equipmentTypeId": "c3310680-11a9-4a6c-a492-b04bf365d86f",
+                "fuelTypeId": "7d75dfe8-c4cb-4aff-a164-3b94eb41db67",
+                "fuelCapacity": 21.2,
+                "isFueler": false
               }
             }
           },
@@ -21885,7 +21972,15 @@
       "ApiEquipmentWithAccountingValuesWrite": {
         "required": [
           "equipmentCode",
-          "equipmentId"
+          "equipmentDescription",
+          "equipmentId",
+          "gpsDeviceTag",
+          "isActive",
+          "licensePlate",
+          "make",
+          "model",
+          "serialNumber",
+          "state"
         ],
         "type": "object",
         "properties": {
@@ -21903,14 +21998,12 @@
           "equipmentDescription": {
             "maxLength": 200,
             "type": "string",
-            "description": "The equipment description",
-            "nullable": true
+            "description": "The equipment description"
           },
           "gpsDeviceTag": {
             "maxLength": 50,
             "type": "string",
-            "description": "The GPS device tag.",
-            "nullable": true
+            "description": "The GPS device tag."
           },
           "isRental": {
             "type": "boolean",
@@ -21919,32 +22012,27 @@
           "make": {
             "maxLength": 50,
             "type": "string",
-            "description": "The make of the equipment.",
-            "nullable": true
+            "description": "The make of the equipment."
           },
           "model": {
             "maxLength": 50,
             "type": "string",
-            "description": "The model of the equipment.",
-            "nullable": true
+            "description": "The model of the equipment."
           },
           "licensePlate": {
             "maxLength": 20,
             "type": "string",
-            "description": "The license plate.",
-            "nullable": true
+            "description": "The license plate."
           },
           "serialNumber": {
             "maxLength": 50,
             "type": "string",
-            "description": "The serial number or VIN.",
-            "nullable": true
+            "description": "The serial number or VIN."
           },
           "state": {
             "maxLength": 20,
             "type": "string",
-            "description": "The state.",
-            "nullable": true
+            "description": "The state."
           },
           "vendorId": {
             "type": "string",
@@ -21959,8 +22047,7 @@
           },
           "isActive": {
             "type": "boolean",
-            "description": "The is Active flag.",
-            "nullable": true
+            "description": "The is Active flag."
           },
           "operatorPayClassId": {
             "type": "string",

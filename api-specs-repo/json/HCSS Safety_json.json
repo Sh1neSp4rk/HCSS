@@ -102,6 +102,105 @@
         }
       }
     },
+    "/v1/alert": {
+      "get": {
+        "tags": [
+          "Alert"
+        ],
+        "summary": "Gets a list of alerts",
+        "description": "Gets a list of alerts based on the provided parameters\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "operationId": "Alert_GetAllAlerts",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request.limit",
+            "in": "query",
+            "description": "The maximum number of results that should be returned. Default to 1000",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1000,
+            "minimum": 1
+          },
+          {
+            "name": "request.businessUnitID",
+            "in": "query",
+            "description": "The business unit id to filter the response",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request.cursor",
+            "in": "query",
+            "description": "The metadata nextCursor field should be passed to retrieve the next page of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alert queried successfully",
+            "schema": {
+              "$ref": "#/definitions/PaginatedResponse+ApiAlert"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "id": "a35bfadd-2150-4861-8621-2c9589bef77d",
+                    "email": "example@example.com",
+                    "phoneNumber": "+1234567890",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "providerID": "b5f3ff3a-0ea1-44f2-86a1-712a46a06ba1",
+                    "businessUnitID": "e80ac80c-acb2-4393-9ab0-a6bd715535a5",
+                    "carrierAddressOverride": "12345@carrier.com",
+                    "nearMiss": {
+                      "receiveAlert": false
+                    },
+                    "incidents": {
+                      "receiveAlert": true,
+                      "managerCreated": false,
+                      "managerUpdated": true,
+                      "fieldCreated": true,
+                      "fieldUpdated": false,
+                      "sendAllFormTypes": true,
+                      "formTypes": []
+                    },
+                    "inspections": {
+                      "receiveAlert": true,
+                      "allInspections": true,
+                      "inspectionsType": []
+                    },
+                    "observations": {
+                      "receiveAlert": true,
+                      "observationAlertFlag": 1,
+                      "severityThreshold": 3
+                    },
+                    "jobs": {
+                      "isAllJobs": false,
+                      "jobs": [
+                        "064d9d2e-d3a9-456f-91bf-1b0007afa068"
+                      ]
+                    }
+                  }
+                ],
+                "metadata": {
+                  "nextCursor": "KySw1rGEukCz8ne2PqxXxg"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. This typically means one or more request validation errors occurred.\nCheck the response body for details.\nFor more help troubleshooting, please see https://dev-developer.hcssapps.com/getting-started/troubleshoot-bad-request"
+          }
+        }
+      }
+    },
     "/v1/incidents/{id}": {
       "get": {
         "tags": [
@@ -146,11 +245,11 @@
                     "Phone": "555-111-4444",
                     "Email": "employee04@company.com",
                     "JobTitle": "Contractor",
-                    "DateOfHire": "2024-10-08T20:26:29.5445952Z",
+                    "DateOfHire": "2024-10-14T19:59:42.3393965Z",
                     "YearsWithCompanyString": "1",
                     "YearsInConstructionString": "3",
                     "DescriptionOfInjury": "Minor cut on left arm",
-                    "TimeStartedWork": "2024-10-08T08:00:00Z",
+                    "TimeStartedWork": "2024-10-14T08:00:00Z",
                     "ActivityAtTime": "Working on XYZ",
                     "InjuryClassificationString": "illness/injury classification",
                     "NatureOfInjuryCategoryString": "nature of injury category",
@@ -176,14 +275,14 @@
                     "ClassificationString": "injury classification",
                     "DateOfDeath": "0001-01-01T00:00:00",
                     "DaysAwayFromWork": {
-                      "FirstDay": "2024-10-09T00:00:00Z",
-                      "LastDay": "2024-10-11T00:00:00Z",
+                      "FirstDay": "2024-10-15T00:00:00Z",
+                      "LastDay": "2024-10-17T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
                     "DaysOnJobTransfer": {
-                      "FirstDay": "2024-10-09T00:00:00Z",
-                      "LastDay": "2024-10-11T00:00:00Z",
+                      "FirstDay": "2024-10-15T00:00:00Z",
+                      "LastDay": "2024-10-17T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
@@ -217,8 +316,8 @@
                       "FuturePreventionString": "future prevention measures",
                       "PreventiveMeasuresNotes": "additional notes",
                       "AssigneeCode": "employee-code-07",
-                      "TargetCompletionDate": "2024-10-15T00:00:00Z",
-                      "CompletionDate": "2024-10-15T00:00:00Z",
+                      "TargetCompletionDate": "2024-10-21T00:00:00Z",
+                      "CompletionDate": "2024-10-21T00:00:00Z",
                       "PreventiveAccountabilityNotes": "additional notes"
                     }
                   }
@@ -257,8 +356,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-08T20:26:29.4352156Z",
-                "LastModifiedUtc": "2024-10-08T20:26:29.4352156Z",
+                "CreatedDateUtc": "2024-10-14T19:59:42.2300167Z",
+                "LastModifiedUtc": "2024-10-14T19:59:42.2300167Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -270,8 +369,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-09T20:26:29.4352156Z",
-                "ID": "643d120f-baff-44c2-a2c4-8f21b04a5bdf",
+                "DateInvestigationBegan": "2024-10-15T19:59:42.2300167Z",
+                "ID": "c32ab494-4bb2-46f1-952c-f77dc512e4d6",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -279,10 +378,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-08T20:26:29.4352156Z",
+                "ReportedDateUtc": "2024-10-14T19:59:42.2300167Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-08T19:26:29.4352156Z",
+                "IncidentDateUtc": "2024-10-14T18:59:42.2300167Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -366,11 +465,11 @@
                     "Phone": "555-111-4444",
                     "Email": "employee04@company.com",
                     "JobTitle": "Contractor",
-                    "DateOfHire": "2024-10-08T20:26:29.7164698Z",
+                    "DateOfHire": "2024-10-14T19:59:42.511274Z",
                     "YearsWithCompanyString": "1",
                     "YearsInConstructionString": "3",
                     "DescriptionOfInjury": "Minor cut on left arm",
-                    "TimeStartedWork": "2024-10-08T08:00:00Z",
+                    "TimeStartedWork": "2024-10-14T08:00:00Z",
                     "ActivityAtTime": "Working on XYZ",
                     "InjuryClassificationString": "illness/injury classification",
                     "NatureOfInjuryCategoryString": "nature of injury category",
@@ -396,14 +495,14 @@
                     "ClassificationString": "injury classification",
                     "DateOfDeath": "0001-01-01T00:00:00",
                     "DaysAwayFromWork": {
-                      "FirstDay": "2024-10-09T00:00:00Z",
-                      "LastDay": "2024-10-11T00:00:00Z",
+                      "FirstDay": "2024-10-15T00:00:00Z",
+                      "LastDay": "2024-10-17T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
                     "DaysOnJobTransfer": {
-                      "FirstDay": "2024-10-09T00:00:00Z",
-                      "LastDay": "2024-10-11T00:00:00Z",
+                      "FirstDay": "2024-10-15T00:00:00Z",
+                      "LastDay": "2024-10-17T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
@@ -437,8 +536,8 @@
                       "FuturePreventionString": "future prevention measures",
                       "PreventiveMeasuresNotes": "additional notes",
                       "AssigneeCode": "employee-code-07",
-                      "TargetCompletionDate": "2024-10-15T00:00:00Z",
-                      "CompletionDate": "2024-10-15T00:00:00Z",
+                      "TargetCompletionDate": "2024-10-21T00:00:00Z",
+                      "CompletionDate": "2024-10-21T00:00:00Z",
                       "PreventiveAccountabilityNotes": "additional notes"
                     }
                   }
@@ -477,8 +576,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-08T20:26:29.6227223Z",
-                "LastModifiedUtc": "2024-10-08T20:26:29.6227223Z",
+                "CreatedDateUtc": "2024-10-14T19:59:42.4175255Z",
+                "LastModifiedUtc": "2024-10-14T19:59:42.4175255Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -490,8 +589,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-09T20:26:29.6227223Z",
-                "ID": "1d73b786-826a-4edc-bb1b-e0de536ef2f1",
+                "DateInvestigationBegan": "2024-10-15T19:59:42.4175255Z",
+                "ID": "bbb2f7e6-b466-49a9-987a-fdb5d8c78bc2",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -499,10 +598,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-08T20:26:29.6227223Z",
+                "ReportedDateUtc": "2024-10-14T19:59:42.4175255Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-08T19:26:29.6227223Z",
+                "IncidentDateUtc": "2024-10-14T18:59:42.4175255Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -605,8 +704,8 @@
             "examples": {
               "application/json": [
                 {
-                  "CreatedDateUtc": "2024-10-08T20:26:29.7320974Z",
-                  "LastModifiedUtc": "2024-10-08T20:26:29.7320974Z",
+                  "CreatedDateUtc": "2024-10-14T19:59:42.5268985Z",
+                  "LastModifiedUtc": "2024-10-14T19:59:42.5268985Z",
                   "BusinessUnitDescription": "BU-123 description",
                   "ReportingStatus": "ReportedToThirdPartyCarrier",
                   "InsuranceCompanyName": "Allstate",
@@ -618,8 +717,8 @@
                   "AdjusterEmail": "adjuster@company.com",
                   "AdjusterPhone": "555-111-9999",
                   "AdjusterNotes": "adjuster notes",
-                  "DateInvestigationBegan": "2024-10-09T20:26:29.7320974Z",
-                  "ID": "fc063f3a-ea69-4e74-bcee-34deecda7181",
+                  "DateInvestigationBegan": "2024-10-15T19:59:42.5268985Z",
+                  "ID": "cbcbd50f-7263-4311-9867-d01192e7d14e",
                   "CaseNumber": "injury-1234",
                   "Description": "Employee injured on-site",
                   "Notes": "Additional notes",
@@ -627,10 +726,10 @@
                   "JobCode": "construction-job-123",
                   "BusinessUnitCode": "BU-123",
                   "LocationDescription": "job site",
-                  "ReportedDateUtc": "2024-10-08T20:26:29.7320974Z",
+                  "ReportedDateUtc": "2024-10-14T19:59:42.5268985Z",
                   "RecorderCode": "employee-code-01",
                   "PersonInChargeCode": "employee-code-02",
-                  "IncidentDateUtc": "2024-10-08T19:26:29.7320974Z",
+                  "IncidentDateUtc": "2024-10-14T18:59:42.5268985Z",
                   "Status": "Reported",
                   "Latitude": 29.76,
                   "Longitude": 95.37,
@@ -901,8 +1000,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-08T20:26:29.7789727Z",
-                "LastModifiedUtc": "2024-10-08T20:26:29.7789727Z",
+                "CreatedDateUtc": "2024-10-14T19:59:42.5737729Z",
+                "LastModifiedUtc": "2024-10-14T19:59:42.5737729Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -914,8 +1013,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-09T20:26:29.7789727Z",
-                "ID": "ed896760-6a8a-4b34-9b08-a6775f21959e",
+                "DateInvestigationBegan": "2024-10-15T19:59:42.5737729Z",
+                "ID": "8baf54d7-b0c2-41f8-91b2-ed7d56b85d81",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -923,10 +1022,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-08T20:26:29.7789727Z",
+                "ReportedDateUtc": "2024-10-14T19:59:42.5737729Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-08T19:26:29.7789727Z",
+                "IncidentDateUtc": "2024-10-14T18:59:42.5737729Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -1043,11 +1142,11 @@
               "application/json": {
                 "Meetings": [
                   {
-                    "Id": "2dc02d31-e3c7-4f71-920e-aa0849010eb4",
-                    "MeetingDate": "2024-10-08T20:26:29.9196038Z",
-                    "JobId": "b33ae460-b21c-4e43-8658-5ad1e69fe23b",
+                    "Id": "20896b84-67ae-4c57-88ae-9d97fa68d646",
+                    "MeetingDate": "2024-10-14T19:59:42.6987791Z",
+                    "JobId": "350a7923-e562-42f2-821c-a964a4feb6fa",
                     "JobCode": "road-construction-123",
-                    "RecorderId": "085e952e-3ca2-4ed5-8a20-473733f25017",
+                    "RecorderId": "c9ad2a32-a99f-4c82-81c1-2da5cbbdcb0c",
                     "RecorderCode": "EMP-123",
                     "DurationMinutes": 60,
                     "Type": "Weekly check-in",
@@ -1342,6 +1441,226 @@
         "NextCursor": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "GetAlertRequest": {
+      "description": "The alertGetAll request",
+      "type": "object",
+      "properties": {
+        "Limit": {
+          "format": "int32",
+          "description": "The maximum number of results that should be returned. Default to 1000",
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "BusinessUnitID": {
+          "description": "The business unit id to filter the response",
+          "type": "string"
+        },
+        "Cursor": {
+          "description": "The metadata nextCursor field should be passed to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedResponse+ApiAlert": {
+      "type": "object",
+      "properties": {
+        "Results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiAlert"
+          },
+          "readOnly": true
+        },
+        "Metadata": {
+          "$ref": "#/definitions/ResponseMetadata+ApiAlert",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiAlert": {
+      "description": "The alert",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "description": "The alert id",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "Email": {
+          "description": "The Email to send the alert to",
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "description": "The phone number to send the alert to",
+          "type": "string"
+        },
+        "FirstName": {
+          "description": "The first name of the person receiving the alert",
+          "type": "string"
+        },
+        "LastName": {
+          "description": "The last name of the person receiving the alert",
+          "type": "string"
+        },
+        "ProviderID": {
+          "format": "uuid",
+          "description": "The id of provider who will send the message",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "BusinessUnitID": {
+          "format": "uuid",
+          "description": "The business unit that the alert belongs to",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "CarrierAddressOverride": {
+          "description": "Carrier address override if needed (SMS)",
+          "type": "string"
+        },
+        "NearMiss": {
+          "$ref": "#/definitions/NearMissSettings",
+          "description": "Near Miss settings"
+        },
+        "Incidents": {
+          "$ref": "#/definitions/IncidentSettings",
+          "description": "Incidents settings"
+        },
+        "Inspections": {
+          "$ref": "#/definitions/InspectionSettings",
+          "description": "Inspections settings"
+        },
+        "Observations": {
+          "$ref": "#/definitions/ObservationSettings",
+          "description": "Observations settings"
+        },
+        "Jobs": {
+          "$ref": "#/definitions/JobsSettings",
+          "description": "Jobs settings"
+        }
+      }
+    },
+    "ResponseMetadata+ApiAlert": {
+      "type": "object",
+      "properties": {
+        "NextCursor": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NearMissSettings": {
+      "description": "Near miss settings alert property",
+      "type": "object",
+      "properties": {
+        "ReceiveAlert": {
+          "description": "The alert should trigger in near misses (isReceiveNearMisses)",
+          "type": "boolean"
+        }
+      }
+    },
+    "IncidentSettings": {
+      "description": "Incident settings alert property",
+      "type": "object",
+      "properties": {
+        "ReceiveAlert": {
+          "description": "The alert should trigger in incidents (isReceiveIncidents)",
+          "type": "boolean"
+        },
+        "managerCreated": {
+          "description": "The alert will be sent when manager creates an incident (sendIncidentAlertForManager)",
+          "type": "boolean"
+        },
+        "managerUpdated": {
+          "description": "The alert will be sent when manager updates an incident (sendIncidentAlertForUpdates)",
+          "type": "boolean"
+        },
+        "fieldCreated": {
+          "description": "The alert should be sent when field app creates an incident (sendIncidentAlertForCreateField)",
+          "type": "boolean"
+        },
+        "fieldUpdated": {
+          "description": "The alert should be sent to when the field app updates an incident (sendIncidentAlertForUpdateField)",
+          "type": "boolean"
+        },
+        "SendAllFormTypes": {
+          "description": "The alert should trigger for incidents of all forms types (IsAllIncidentFormTypes)",
+          "type": "boolean"
+        },
+        "FormTypes": {
+          "description": "The list of all form types that should trigger the alert (if SendAllFormTypes is true will be empty)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InspectionSettings": {
+      "description": "Inspection settings alert property",
+      "type": "object",
+      "properties": {
+        "ReceiveAlert": {
+          "description": "The alert should trigger in inspections (isReceiveInspections)",
+          "type": "boolean"
+        },
+        "AllInspections": {
+          "description": "The alert should trigger for all inspections types (isAllInspectionTypes)",
+          "type": "boolean"
+        },
+        "InspectionsType": {
+          "description": "The list of all inspections type that should trigger the alert (if AllInspections is true will be empty)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ObservationSettings": {
+      "description": "Observation settings alert property",
+      "type": "object",
+      "properties": {
+        "ReceiveAlert": {
+          "description": "The alert should trigger observations",
+          "type": "boolean"
+        },
+        "ObservationAlertFlag": {
+          "description": "The alert should trigger based on observation flag (observationAlertFlag)",
+          "enum": [
+            "None",
+            "RecieveAlert",
+            "PositiveOnly",
+            "NegativeOnly"
+          ],
+          "type": "string"
+        },
+        "SeverityThreshold": {
+          "format": "int32",
+          "description": "The severity of observation that should trigger the alert (severityThreshold)",
+          "type": "integer"
+        }
+      }
+    },
+    "JobsSettings": {
+      "description": "Jobs settings alert property",
+      "type": "object",
+      "properties": {
+        "IsAllJobs": {
+          "description": "The alert should trigger in all Jobs (IsAllJobs)",
+          "type": "boolean"
+        },
+        "Jobs": {
+          "description": "The list of all jobs that should trigger the alert (if isAllJobs is true will be empty)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
