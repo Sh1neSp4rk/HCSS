@@ -7585,10 +7585,18 @@
           {
             "name": "businessUnitId",
             "in": "query",
-            "description": "The business unit id to query by. If omitted, returns all jobs.",
+            "description": "Filter by business unit id. If omitted, returns all jobs.",
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "jobStatus",
+            "in": "query",
+            "description": "Filter by job status. If omitted, returns all jobs.",
+            "schema": {
+              "$ref": "#/components/schemas/JobStatus"
             }
           }
         ],
@@ -33021,6 +33029,14 @@
           "isIncludeHBCodeList": {
             "type": "boolean",
             "description": "Flag to include/exclude HBCode list."
+          },
+          "jobStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobStatus"
+            },
+            "description": "Filter on job status.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
