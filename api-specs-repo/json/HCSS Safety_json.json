@@ -49,14 +49,14 @@
         ],
         "parameters": [
           {
-            "name": "request.isDeleted",
+            "name": "isDeleted",
             "in": "query",
             "description": "If true, returns deleted access groups.",
             "required": false,
             "type": "boolean"
           },
           {
-            "name": "request.limit",
+            "name": "limit",
             "in": "query",
             "description": "The maximum number of results that should be returned. Default to 1000. Cannot be more than 1000.",
             "required": false,
@@ -66,7 +66,7 @@
             "minimum": 1
           },
           {
-            "name": "request.cursor",
+            "name": "cursor",
             "in": "query",
             "description": "When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.",
             "required": false,
@@ -117,7 +117,7 @@
         ],
         "parameters": [
           {
-            "name": "request.limit",
+            "name": "limit",
             "in": "query",
             "description": "The maximum number of results that should be returned. Default to 1000",
             "required": false,
@@ -127,14 +127,14 @@
             "minimum": 1
           },
           {
-            "name": "request.businessUnitID",
+            "name": "businessUnitID",
             "in": "query",
             "description": "The business unit id to filter the response",
             "required": false,
             "type": "string"
           },
           {
-            "name": "request.cursor",
+            "name": "cursor",
             "in": "query",
             "description": "The metadata nextCursor field should be passed to retrieve the next page of results.",
             "required": false,
@@ -151,13 +151,13 @@
               "application/json": {
                 "results": [
                   {
-                    "id": "a35bfadd-2150-4861-8621-2c9589bef77d",
+                    "id": "c57a578f-0d8a-4422-8a7e-12bedf7edb3e",
                     "email": "example@example.com",
                     "phoneNumber": "+1234567890",
                     "firstName": "John",
                     "lastName": "Doe",
-                    "providerID": "b5f3ff3a-0ea1-44f2-86a1-712a46a06ba1",
-                    "businessUnitID": "e80ac80c-acb2-4393-9ab0-a6bd715535a5",
+                    "providerID": "3359426e-afaa-4b44-a0db-5ed54e76b642",
+                    "businessUnitID": "681a073d-987a-4253-8fe6-7474b3b9fa38",
                     "carrierAddressOverride": "12345@carrier.com",
                     "nearMiss": {
                       "receiveAlert": false
@@ -184,7 +184,7 @@
                     "jobs": {
                       "isAllJobs": false,
                       "jobs": [
-                        "064d9d2e-d3a9-456f-91bf-1b0007afa068"
+                        "641eb2f3-641e-4a7c-b3bf-ec68c022a04f"
                       ]
                     }
                   }
@@ -245,11 +245,11 @@
                     "Phone": "555-111-4444",
                     "Email": "employee04@company.com",
                     "JobTitle": "Contractor",
-                    "DateOfHire": "2024-10-14T19:59:42.3393965Z",
+                    "DateOfHire": "2024-10-23T20:05:43.2194745Z",
                     "YearsWithCompanyString": "1",
                     "YearsInConstructionString": "3",
                     "DescriptionOfInjury": "Minor cut on left arm",
-                    "TimeStartedWork": "2024-10-14T08:00:00Z",
+                    "TimeStartedWork": "2024-10-23T08:00:00Z",
                     "ActivityAtTime": "Working on XYZ",
                     "InjuryClassificationString": "illness/injury classification",
                     "NatureOfInjuryCategoryString": "nature of injury category",
@@ -275,14 +275,14 @@
                     "ClassificationString": "injury classification",
                     "DateOfDeath": "0001-01-01T00:00:00",
                     "DaysAwayFromWork": {
-                      "FirstDay": "2024-10-15T00:00:00Z",
-                      "LastDay": "2024-10-17T00:00:00Z",
+                      "FirstDay": "2024-10-24T00:00:00Z",
+                      "LastDay": "2024-10-26T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
                     "DaysOnJobTransfer": {
-                      "FirstDay": "2024-10-15T00:00:00Z",
-                      "LastDay": "2024-10-17T00:00:00Z",
+                      "FirstDay": "2024-10-24T00:00:00Z",
+                      "LastDay": "2024-10-26T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
@@ -316,8 +316,8 @@
                       "FuturePreventionString": "future prevention measures",
                       "PreventiveMeasuresNotes": "additional notes",
                       "AssigneeCode": "employee-code-07",
-                      "TargetCompletionDate": "2024-10-21T00:00:00Z",
-                      "CompletionDate": "2024-10-21T00:00:00Z",
+                      "TargetCompletionDate": "2024-10-30T00:00:00Z",
+                      "CompletionDate": "2024-10-30T00:00:00Z",
                       "PreventiveAccountabilityNotes": "additional notes"
                     }
                   }
@@ -356,8 +356,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-14T19:59:42.2300167Z",
-                "LastModifiedUtc": "2024-10-14T19:59:42.2300167Z",
+                "CreatedDateUtc": "2024-10-23T20:05:43.1257212Z",
+                "LastModifiedUtc": "2024-10-23T20:05:43.1257212Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -369,8 +369,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-15T19:59:42.2300167Z",
-                "ID": "c32ab494-4bb2-46f1-952c-f77dc512e4d6",
+                "DateInvestigationBegan": "2024-10-24T20:05:43.1257212Z",
+                "ID": "b4788201-ba73-4f74-9a7f-6ee641a6cd51",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -378,10 +378,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-14T19:59:42.2300167Z",
+                "ReportedDateUtc": "2024-10-23T20:05:43.1257212Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-14T18:59:42.2300167Z",
+                "IncidentDateUtc": "2024-10-23T19:05:43.1257212Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -465,11 +465,11 @@
                     "Phone": "555-111-4444",
                     "Email": "employee04@company.com",
                     "JobTitle": "Contractor",
-                    "DateOfHire": "2024-10-14T19:59:42.511274Z",
+                    "DateOfHire": "2024-10-23T20:05:43.3444779Z",
                     "YearsWithCompanyString": "1",
                     "YearsInConstructionString": "3",
                     "DescriptionOfInjury": "Minor cut on left arm",
-                    "TimeStartedWork": "2024-10-14T08:00:00Z",
+                    "TimeStartedWork": "2024-10-23T08:00:00Z",
                     "ActivityAtTime": "Working on XYZ",
                     "InjuryClassificationString": "illness/injury classification",
                     "NatureOfInjuryCategoryString": "nature of injury category",
@@ -495,14 +495,14 @@
                     "ClassificationString": "injury classification",
                     "DateOfDeath": "0001-01-01T00:00:00",
                     "DaysAwayFromWork": {
-                      "FirstDay": "2024-10-15T00:00:00Z",
-                      "LastDay": "2024-10-17T00:00:00Z",
+                      "FirstDay": "2024-10-24T00:00:00Z",
+                      "LastDay": "2024-10-26T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
                     "DaysOnJobTransfer": {
-                      "FirstDay": "2024-10-15T00:00:00Z",
-                      "LastDay": "2024-10-17T00:00:00Z",
+                      "FirstDay": "2024-10-24T00:00:00Z",
+                      "LastDay": "2024-10-26T00:00:00Z",
                       "IncludeWeekends": true,
                       "DaysAway": 3
                     },
@@ -536,8 +536,8 @@
                       "FuturePreventionString": "future prevention measures",
                       "PreventiveMeasuresNotes": "additional notes",
                       "AssigneeCode": "employee-code-07",
-                      "TargetCompletionDate": "2024-10-21T00:00:00Z",
-                      "CompletionDate": "2024-10-21T00:00:00Z",
+                      "TargetCompletionDate": "2024-10-30T00:00:00Z",
+                      "CompletionDate": "2024-10-30T00:00:00Z",
                       "PreventiveAccountabilityNotes": "additional notes"
                     }
                   }
@@ -576,8 +576,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-14T19:59:42.4175255Z",
-                "LastModifiedUtc": "2024-10-14T19:59:42.4175255Z",
+                "CreatedDateUtc": "2024-10-23T20:05:43.2507753Z",
+                "LastModifiedUtc": "2024-10-23T20:05:43.2507753Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -589,8 +589,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-15T19:59:42.4175255Z",
-                "ID": "bbb2f7e6-b466-49a9-987a-fdb5d8c78bc2",
+                "DateInvestigationBegan": "2024-10-24T20:05:43.2507753Z",
+                "ID": "1ff9f507-854f-49f8-84a7-b41ae13a67a1",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -598,10 +598,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-14T19:59:42.4175255Z",
+                "ReportedDateUtc": "2024-10-23T20:05:43.2507753Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-14T18:59:42.4175255Z",
+                "IncidentDateUtc": "2024-10-23T19:05:43.2507753Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -704,8 +704,8 @@
             "examples": {
               "application/json": [
                 {
-                  "CreatedDateUtc": "2024-10-14T19:59:42.5268985Z",
-                  "LastModifiedUtc": "2024-10-14T19:59:42.5268985Z",
+                  "CreatedDateUtc": "2024-10-23T20:05:43.3444779Z",
+                  "LastModifiedUtc": "2024-10-23T20:05:43.3444779Z",
                   "BusinessUnitDescription": "BU-123 description",
                   "ReportingStatus": "ReportedToThirdPartyCarrier",
                   "InsuranceCompanyName": "Allstate",
@@ -717,8 +717,8 @@
                   "AdjusterEmail": "adjuster@company.com",
                   "AdjusterPhone": "555-111-9999",
                   "AdjusterNotes": "adjuster notes",
-                  "DateInvestigationBegan": "2024-10-15T19:59:42.5268985Z",
-                  "ID": "cbcbd50f-7263-4311-9867-d01192e7d14e",
+                  "DateInvestigationBegan": "2024-10-24T20:05:43.3444779Z",
+                  "ID": "d995d2ba-c97e-4d3d-a101-d6ee03b42ea8",
                   "CaseNumber": "injury-1234",
                   "Description": "Employee injured on-site",
                   "Notes": "Additional notes",
@@ -726,10 +726,10 @@
                   "JobCode": "construction-job-123",
                   "BusinessUnitCode": "BU-123",
                   "LocationDescription": "job site",
-                  "ReportedDateUtc": "2024-10-14T19:59:42.5268985Z",
+                  "ReportedDateUtc": "2024-10-23T20:05:43.3444779Z",
                   "RecorderCode": "employee-code-01",
                   "PersonInChargeCode": "employee-code-02",
-                  "IncidentDateUtc": "2024-10-14T18:59:42.5268985Z",
+                  "IncidentDateUtc": "2024-10-23T19:05:43.3444779Z",
                   "Status": "Reported",
                   "Latitude": 29.76,
                   "Longitude": 95.37,
@@ -1000,8 +1000,8 @@
                   "ZipCode": "77042",
                   "Country": "US"
                 },
-                "CreatedDateUtc": "2024-10-14T19:59:42.5737729Z",
-                "LastModifiedUtc": "2024-10-14T19:59:42.5737729Z",
+                "CreatedDateUtc": "2024-10-23T20:05:43.3757648Z",
+                "LastModifiedUtc": "2024-10-23T20:05:43.3757648Z",
                 "BusinessUnitDescription": "BU-123 description",
                 "ReportingStatus": "ReportedToThirdPartyCarrier",
                 "InsuranceCompanyName": "Allstate",
@@ -1013,8 +1013,8 @@
                 "AdjusterEmail": "adjuster@company.com",
                 "AdjusterPhone": "555-111-9999",
                 "AdjusterNotes": "adjuster notes",
-                "DateInvestigationBegan": "2024-10-15T19:59:42.5737729Z",
-                "ID": "8baf54d7-b0c2-41f8-91b2-ed7d56b85d81",
+                "DateInvestigationBegan": "2024-10-24T20:05:43.3757648Z",
+                "ID": "e40f2a35-087c-420c-86f1-21c40c553659",
                 "CaseNumber": "injury-1234",
                 "Description": "Employee injured on-site",
                 "Notes": "Additional notes",
@@ -1022,10 +1022,10 @@
                 "JobCode": "construction-job-123",
                 "BusinessUnitCode": "BU-123",
                 "LocationDescription": "job site",
-                "ReportedDateUtc": "2024-10-14T19:59:42.5737729Z",
+                "ReportedDateUtc": "2024-10-23T20:05:43.3757648Z",
                 "RecorderCode": "employee-code-01",
                 "PersonInChargeCode": "employee-code-02",
-                "IncidentDateUtc": "2024-10-14T18:59:42.5737729Z",
+                "IncidentDateUtc": "2024-10-23T19:05:43.3757648Z",
                 "Status": "Reported",
                 "Latitude": 29.76,
                 "Longitude": 95.37,
@@ -1044,6 +1044,84 @@
                 "SiteDescription": "Work site description",
                 "AccidentInjuryExplanation": "Employee injured left arm while working on XYZ",
                 "StepsToPreventFutureOccurrences": "Hazard control steps will be attached to equipment"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. This typically means one or more request validation errors occurred.\nCheck the response body for details.\nFor more help troubleshooting, please see https://dev-developer.hcssapps.com/getting-started/troubleshoot-bad-request"
+          }
+        }
+      }
+    },
+    "/v1/inspectionTypes": {
+      "get": {
+        "tags": [
+          "InspectionTypes"
+        ],
+        "summary": "Gets a list of inspection types",
+        "description": "Gets a list of inspection types based on the provided parameters\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens",
+        "operationId": "InspectionTypes_GetInspectionTypes",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results that should be returned. Default to 1000",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1000,
+            "minimum": 1
+          },
+          {
+            "name": "businessUnitID",
+            "in": "query",
+            "description": "The business unit id to filter the response",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "The metadata nextCursor field should be passed to retrieve the next page of results",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeInactive",
+            "in": "query",
+            "description": "The flag to include inactive inspectionTypes on the request. Default false",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Inspection types queried successfully",
+            "schema": {
+              "$ref": "#/definitions/PaginatedResponse+ApiInspectionTypes"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "id": "255c76ac-2772-46c4-ac57-a05c520efb3d",
+                    "name": "example@example.com",
+                    "isActive": true,
+                    "businessUnitID": "91419737-1dbe-4297-8727-92622455e55b",
+                    "isEquipmentType": false,
+                    "createdByID": "3d90692d-0794-46e5-b384-d515658a5fa9",
+                    "modifiedByID": "f7257c81-57c6-4214-af47-69b814967dfc",
+                    "createdDate": "2024-10-23T20:05:43.4694841Z"
+                  }
+                ],
+                "metadata": {
+                  "nextCursor": "KySw1rGEukCz8ne2PqxXxg"
+                }
               }
             }
           },
@@ -1142,11 +1220,11 @@
               "application/json": {
                 "Meetings": [
                   {
-                    "Id": "20896b84-67ae-4c57-88ae-9d97fa68d646",
-                    "MeetingDate": "2024-10-14T19:59:42.6987791Z",
-                    "JobId": "350a7923-e562-42f2-821c-a964a4feb6fa",
+                    "Id": "f3bf9d9b-0a75-4eb8-ab17-c42e1a9482e4",
+                    "MeetingDate": "2024-10-23T20:05:43.4851126Z",
+                    "JobId": "330038d2-97f0-48b3-95b6-d80a6840c3b4",
                     "JobCode": "road-construction-123",
-                    "RecorderId": "c9ad2a32-a99f-4c82-81c1-2da5cbbdcb0c",
+                    "RecorderId": "9eeb966a-8c93-40de-951b-5fa65778f235",
                     "RecorderCode": "EMP-123",
                     "DurationMinutes": 60,
                     "Type": "Weekly check-in",
@@ -3175,6 +3253,103 @@
         "IncludeWeekends": {
           "description": "If weekends are included in calculating total days away",
           "type": "boolean"
+        }
+      }
+    },
+    "GetInspectionTypesRequest": {
+      "description": "The GetInspectionTypes request",
+      "type": "object",
+      "properties": {
+        "Limit": {
+          "format": "int32",
+          "description": "The maximum number of results that should be returned. Default to 1000",
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "BusinessUnitID": {
+          "description": "The business unit id to filter the response",
+          "type": "string"
+        },
+        "Cursor": {
+          "description": "The metadata nextCursor field should be passed to retrieve the next page of results",
+          "type": "string"
+        },
+        "IncludeInactive": {
+          "description": "The flag to include inactive inspectionTypes on the request. Default false",
+          "type": "boolean"
+        }
+      }
+    },
+    "PaginatedResponse+ApiInspectionTypes": {
+      "type": "object",
+      "properties": {
+        "Results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiInspectionTypes"
+          },
+          "readOnly": true
+        },
+        "Metadata": {
+          "$ref": "#/definitions/ResponseMetadata+ApiInspectionTypes",
+          "readOnly": true
+        }
+      }
+    },
+    "ApiInspectionTypes": {
+      "description": "The inspection type",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "description": "The inspection type id",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "Name": {
+          "description": "The inspection type name",
+          "type": "string"
+        },
+        "IsActive": {
+          "description": "If the inspection type is active",
+          "type": "boolean"
+        },
+        "BusinessUnitID": {
+          "format": "uuid",
+          "description": "The businessUnitId that inspection type is related to",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "IsEquipmentType": {
+          "description": "If the inspection type is an equipment type",
+          "type": "boolean"
+        },
+        "CreatedByID": {
+          "format": "uuid",
+          "description": "The id of who created the inspection type",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "ModifiedByID": {
+          "format": "uuid",
+          "description": "Last id to modified the inspection type",
+          "type": "string",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "CreatedDate": {
+          "format": "date-time",
+          "description": "The date that the inspection type was created",
+          "type": "string"
+        }
+      }
+    },
+    "ResponseMetadata+ApiInspectionTypes": {
+      "type": "object",
+      "properties": {
+        "NextCursor": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
