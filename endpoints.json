@@ -1,6 +1,16 @@
 {
     "HCSS Safety": {
         "base": "https://api.hcssapps.com/",
+        "alerts": {
+            "base": "alerts/",
+            "GET": [],
+            "PUT": [],
+            "POST": [],
+            "DELETE": [
+                "{alertID}"
+            ],
+            "PATCH": []
+        },
         "incidents": {
             "base": "incidents/",
             "GET": [
