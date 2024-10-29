@@ -5083,6 +5083,7 @@ paths:
                   legacyId: 626de5a7-b252-4348-bfdb-c003a6e00fcb
                   code: HCSS-BLDG3
                   description: Third building on the HCSS campus
+                  payItemSetupType: costCodeDriven
                   businessUnitId: 4a5d0072-9e2e-48b3-a37e-571bd296ca06
                   status: active
                   isDeleted: false
@@ -5253,6 +5254,7 @@ paths:
                   legacyId: 626de5a7-b252-4348-bfdb-c003a6e00fcb
                   code: HCSS-BLDG3
                   description: Third building on the HCSS campus
+                  payItemSetupType: costCodeDriven
                   businessUnitId: 4a5d0072-9e2e-48b3-a37e-571bd296ca06
                   status: active
                   isDeleted: false
@@ -16770,6 +16772,8 @@ components:
           type: string
           description: An optional description.
           nullable: true
+        payItemSetupType:
+          $ref: '#/components/schemas/PayItemSetupType'
         businessUnitId:
           type: string
           description: The business unit guid.
@@ -16956,6 +16960,8 @@ components:
           type: string
           description: An optional description.
           nullable: true
+        payItemSetupType:
+          $ref: '#/components/schemas/PayItemSetupType'
         businessUnitId:
           type: string
           description: The business unit guid.
@@ -19236,6 +19242,8 @@ components:
           type: string
           description: An optional description.
           nullable: true
+        payItemSetupType:
+          $ref: '#/components/schemas/PayItemSetupType'
         businessUnitId:
           type: string
           description: The business unit guid.
@@ -24618,6 +24626,11 @@ components:
         - undefined
         - issue
         - rfi
+      type: string
+    PayItemSetupType:
+      enum:
+        - costCodeDriven
+        - payItemDriven
       type: string
     PayItemStatus:
       enum:

@@ -59,7 +59,7 @@ paths:
         '200':
           description: Access groups queried successfully
           schema:
-            $ref: '#/definitions/PaginatedResponse+ApiAccessGroup'
+            $ref: '#/definitions/PaginatedResponseApiAccessGroup'
           examples:
             application/json:
               results:
@@ -109,17 +109,17 @@ paths:
         '200':
           description: Alert queried successfully
           schema:
-            $ref: '#/definitions/PaginatedResponse+ApiAlert'
+            $ref: '#/definitions/PaginatedResponseApiAlert'
           examples:
             application/json:
               results:
-                - id: 6d0f3d8d-ec4d-4b7a-b2ff-f4a50fb73958
+                - id: c51dbc2f-bbca-465b-8b56-c90624705a1f
                   email: example@example.com
                   phoneNumber: '+1234567890'
                   firstName: John
                   lastName: Doe
-                  providerID: 28ba96f6-5b98-4aa2-a7fd-d9caa30e7caf
-                  businessUnitID: 6a1a4b27-4be6-4dc5-81d5-d387e8635c31
+                  providerID: eb10d5bb-7732-43e7-b886-230bc326d75e
+                  businessUnitID: c64cf61b-70b0-4505-933d-ad2680d5f544
                   carrierAddressOverride: 12345@carrier.com
                   nearMiss:
                     receiveAlert: false
@@ -142,7 +142,7 @@ paths:
                   jobs:
                     isAllJobs: false
                     jobs:
-                      - a00800b4-9600-4446-8bad-a788a4798b56
+                      - 59557e8d-e79c-4786-aabc-55a1e285b72a
               metadata:
                 nextCursor: KySw1rGEukCz8ne2PqxXxg
         '400':
@@ -216,11 +216,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-10-24T15:02:03.1817333Z'
+                  DateOfHire: '2024-10-28T17:54:31.9134334Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-10-24T08:00:00Z'
+                  TimeStartedWork: '2024-10-28T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -246,13 +246,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-10-25T00:00:00Z'
-                    LastDay: '2024-10-27T00:00:00Z'
+                    FirstDay: '2024-10-29T00:00:00Z'
+                    LastDay: '2024-10-31T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-10-25T00:00:00Z'
-                    LastDay: '2024-10-27T00:00:00Z'
+                    FirstDay: '2024-10-29T00:00:00Z'
+                    LastDay: '2024-10-31T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -282,8 +282,8 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-10-31T00:00:00Z'
-                    CompletionDate: '2024-10-31T00:00:00Z'
+                    TargetCompletionDate: '2024-11-04T00:00:00Z'
+                    CompletionDate: '2024-11-04T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
               Attachments:
                 - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
@@ -309,8 +309,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-10-24T15:02:03.0722962Z'
-              LastModifiedUtc: '2024-10-24T15:02:03.0722962Z'
+              CreatedDateUtc: '2024-10-28T17:54:31.7884367Z'
+              LastModifiedUtc: '2024-10-28T17:54:31.7884367Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -321,8 +321,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-10-25T15:02:03.0722962Z'
-              ID: c7a6a995-69b0-4cfd-8da5-fe7226b3e30d
+              DateInvestigationBegan: '2024-10-29T17:54:31.7884367Z'
+              ID: 94272c45-0071-4b7b-a42e-c2ecd00ab71f
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -330,10 +330,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-10-24T15:02:03.0722962Z'
+              ReportedDateUtc: '2024-10-28T17:54:31.7884367Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-10-24T14:02:03.0722962Z'
+              IncidentDateUtc: '2024-10-28T16:54:31.7884367Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -402,11 +402,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-10-24T15:02:03.3379253Z'
+                  DateOfHire: '2024-10-28T17:54:32.0696939Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-10-24T08:00:00Z'
+                  TimeStartedWork: '2024-10-28T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -432,13 +432,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-10-25T00:00:00Z'
-                    LastDay: '2024-10-27T00:00:00Z'
+                    FirstDay: '2024-10-29T00:00:00Z'
+                    LastDay: '2024-10-31T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-10-25T00:00:00Z'
-                    LastDay: '2024-10-27T00:00:00Z'
+                    FirstDay: '2024-10-29T00:00:00Z'
+                    LastDay: '2024-10-31T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -468,8 +468,8 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-10-31T00:00:00Z'
-                    CompletionDate: '2024-10-31T00:00:00Z'
+                    TargetCompletionDate: '2024-11-04T00:00:00Z'
+                    CompletionDate: '2024-11-04T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
               Attachments:
                 - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
@@ -495,8 +495,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-10-24T15:02:03.2442358Z'
-              LastModifiedUtc: '2024-10-24T15:02:03.2442358Z'
+              CreatedDateUtc: '2024-10-28T17:54:31.9759475Z'
+              LastModifiedUtc: '2024-10-28T17:54:31.9759475Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -507,8 +507,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-10-25T15:02:03.2442358Z'
-              ID: 67ead940-4b77-4a37-87b1-0401fa239f79
+              DateInvestigationBegan: '2024-10-29T17:54:31.9759475Z'
+              ID: 9dbf5b2e-480d-47a1-b5cc-71893cd8448d
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -516,10 +516,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-10-24T15:02:03.2442358Z'
+              ReportedDateUtc: '2024-10-28T17:54:31.9759475Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-10-24T14:02:03.2442358Z'
+              IncidentDateUtc: '2024-10-28T16:54:31.9759475Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -600,8 +600,8 @@ paths:
               $ref: '#/definitions/ApiIncident'
           examples:
             application/json:
-              - CreatedDateUtc: '2024-10-24T15:02:03.3379253Z'
-                LastModifiedUtc: '2024-10-24T15:02:03.3379253Z'
+              - CreatedDateUtc: '2024-10-28T17:54:32.0696939Z'
+                LastModifiedUtc: '2024-10-28T17:54:32.0696939Z'
                 BusinessUnitDescription: BU-123 description
                 ReportingStatus: ReportedToThirdPartyCarrier
                 InsuranceCompanyName: Allstate
@@ -612,8 +612,8 @@ paths:
                 AdjusterEmail: adjuster@company.com
                 AdjusterPhone: 555-111-9999
                 AdjusterNotes: adjuster notes
-                DateInvestigationBegan: '2024-10-25T15:02:03.3379253Z'
-                ID: 7c236038-a641-4850-9783-30b6378ad02c
+                DateInvestigationBegan: '2024-10-29T17:54:32.0696939Z'
+                ID: 3234c02f-3cd3-4dca-b02e-427cdc312057
                 CaseNumber: injury-1234
                 Description: Employee injured on-site
                 Notes: Additional notes
@@ -621,10 +621,10 @@ paths:
                 JobCode: construction-job-123
                 BusinessUnitCode: BU-123
                 LocationDescription: job site
-                ReportedDateUtc: '2024-10-24T15:02:03.3379253Z'
+                ReportedDateUtc: '2024-10-28T17:54:32.0696939Z'
                 RecorderCode: employee-code-01
                 PersonInChargeCode: employee-code-02
-                IncidentDateUtc: '2024-10-24T14:02:03.3379253Z'
+                IncidentDateUtc: '2024-10-28T16:54:32.0696939Z'
                 Status: Reported
                 Latitude: 29.76
                 Longitude: 95.37
@@ -817,8 +817,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-10-24T15:02:03.3848063Z'
-              LastModifiedUtc: '2024-10-24T15:02:03.3848063Z'
+              CreatedDateUtc: '2024-10-28T17:54:32.1165734Z'
+              LastModifiedUtc: '2024-10-28T17:54:32.1165734Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -829,8 +829,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-10-25T15:02:03.3848063Z'
-              ID: b793d15f-5b97-4366-95cb-c2cd2f5a731e
+              DateInvestigationBegan: '2024-10-29T17:54:32.1165734Z'
+              ID: f57cf2a9-bd37-4abc-a2fc-611d9e4f75a2
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -838,10 +838,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-10-24T15:02:03.3848063Z'
+              ReportedDateUtc: '2024-10-28T17:54:32.1165734Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-10-24T14:02:03.3848063Z'
+              IncidentDateUtc: '2024-10-28T16:54:32.1165734Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -904,18 +904,75 @@ paths:
         '200':
           description: Inspection types queried successfully
           schema:
-            $ref: '#/definitions/PaginatedResponse+ApiInspectionTypes'
+            $ref: '#/definitions/PaginatedResponseApiInspectionTypes'
           examples:
             application/json:
               results:
-                - id: 5583ea4d-a2cd-47ea-8a84-5883ab8725ed
+                - id: 13194936-7fd2-4cc2-9268-a155824f3607
                   name: example@example.com
                   isActive: true
-                  businessUnitID: 822b1f31-746d-4678-9b05-eaeb5e2d2fad
+                  businessUnitID: db53271b-161c-41e0-9f4c-27cc315e8fd0
                   isEquipmentType: false
-                  createdByID: fbb2e3d1-1250-4d4c-b8c0-f2620dad5146
-                  modifiedByID: c4816cbb-12a0-4054-a628-710a73052efa
-                  createdDate: '2024-10-24T15:02:03.5098552Z'
+                  createdByID: cc27f057-c78b-4b66-ac17-9ba36dc47e80
+                  modifiedByID: a57271bf-45d8-48ea-97ed-7bf7cdd16817
+                  createdDate: '2024-10-28T17:54:32.2416509Z'
+              metadata:
+                nextCursor: KySw1rGEukCz8ne2PqxXxg
+        '400':
+          description: |-
+            Bad Request. This typically means one or more request validation errors occurred.
+            Check the response body for details.
+            For more help troubleshooting, please see https://dev-developer.hcssapps.com/getting-started/troubleshoot-bad-request
+  /v1/jobs:
+    get:
+      tags:
+        - Jobs
+      summary: Gets a list of jobs for the specified business unit or all jobs if no business unit is specified.
+      description: "Gets a list of jobs for the specified business unit or all jobs if no business unit is specified.\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens"
+      operationId: Jobs_GetJobs
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+      parameters:
+        - name: limit
+          in: query
+          description: The maximum number of results that should be returned. Default to 1000. Cannot be more than 1000.
+          required: false
+          type: integer
+          format: int32
+          maximum: 1000
+          minimum: 1
+        - name: cursor
+          in: query
+          description: When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.
+          required: false
+          type: string
+        - name: businessUnitId
+          in: query
+          description: "The business unit id to query by. If omitted, returns all jobs.\r\n<example>\r\nFor example: \r\n<code>550e8400-e29b-41d4-a716-446655440000</code></example>"
+          required: false
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Jobs queried successfully
+          schema:
+            $ref: '#/definitions/PaginatedResponseApiAccessGroup'
+          examples:
+            application/json:
+              results:
+                - id: e1f3049f-1a2d-4793-89c5-e42c89146339
+                  businessUnitId: 7d22e129-5437-4370-a2d5-9754f8a77a76
+                  code: '0000123'
+                  description: Description
+                  status: Status
+                  latitude: -29.79623
+                  longitude: 31.03655
+                  locationTypeId: 1
+                  isDeleted: false
+                  startDate: '2021-01-01T00:00:00'
+                  endDate: '2022-01-01T00:00:00'
               metadata:
                 nextCursor: KySw1rGEukCz8ne2PqxXxg
         '400':
@@ -991,11 +1048,11 @@ paths:
           examples:
             application/json:
               Meetings:
-                - Id: f97b5dc3-872d-4485-a2fe-81353da4fc2e
-                  MeetingDate: '2024-10-24T15:02:03.5254769Z'
-                  JobId: 0b415a22-f39f-48d8-a14a-b2cb03c01c5d
+                - Id: b26213cb-5df5-4511-bc18-25b79d60c963
+                  MeetingDate: '2024-10-28T17:54:32.2573139Z'
+                  JobId: e6f1a141-abd7-4f7f-a77e-b5700cff5dcc
                   JobCode: road-construction-123
-                  RecorderId: 50fa6412-741d-4029-8e37-bf69d52f9532
+                  RecorderId: e741c914-b38d-45ff-b716-d85a17ef4a7e
                   RecorderCode: EMP-123
                   DurationMinutes: 60
                   Type: Weekly check-in
@@ -1047,7 +1104,7 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/PaginatedResponse+ApiUserAccessGroup'
+            $ref: '#/definitions/PaginatedResponseApiUserAccessGroup'
           examples:
             application/json:
               results:
@@ -1169,7 +1226,7 @@ definitions:
       Cursor:
         description: When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.
         type: string
-  PaginatedResponse+ApiAccessGroup:
+  PaginatedResponseApiAccessGroup:
     type: object
     properties:
       Results:
@@ -1178,7 +1235,7 @@ definitions:
           $ref: '#/definitions/ApiAccessGroup'
         readOnly: true
       Metadata:
-        $ref: '#/definitions/ResponseMetadata+ApiAccessGroup'
+        $ref: '#/definitions/ResponseMetadataApiAccessGroup'
         readOnly: true
   ApiAccessGroup:
     description: The access group
@@ -1203,7 +1260,7 @@ definitions:
       IsDeleted:
         description: Is the role deleted
         type: boolean
-  ResponseMetadata+ApiAccessGroup:
+  ResponseMetadataApiAccessGroup:
     type: object
     properties:
       NextCursor:
@@ -1225,7 +1282,7 @@ definitions:
       Cursor:
         description: The metadata nextCursor field should be passed to retrieve the next page of results.
         type: string
-  PaginatedResponse+ApiAlert:
+  PaginatedResponseApiAlert:
     type: object
     properties:
       Results:
@@ -1234,7 +1291,7 @@ definitions:
           $ref: '#/definitions/ApiAlert'
         readOnly: true
       Metadata:
-        $ref: '#/definitions/ResponseMetadata+ApiAlert'
+        $ref: '#/definitions/ResponseMetadataApiAlert'
         readOnly: true
   ApiAlert:
     description: The alert
@@ -1285,7 +1342,7 @@ definitions:
       Jobs:
         $ref: '#/definitions/JobsSettings'
         description: Jobs settings
-  ResponseMetadata+ApiAlert:
+  ResponseMetadataApiAlert:
     type: object
     properties:
       NextCursor:
@@ -2543,7 +2600,7 @@ definitions:
       IncludeInactive:
         description: The flag to include inactive inspectionTypes on the request. Default false
         type: boolean
-  PaginatedResponse+ApiInspectionTypes:
+  PaginatedResponseApiInspectionTypes:
     type: object
     properties:
       Results:
@@ -2552,7 +2609,7 @@ definitions:
           $ref: '#/definitions/ApiInspectionTypes'
         readOnly: true
       Metadata:
-        $ref: '#/definitions/ResponseMetadata+ApiInspectionTypes'
+        $ref: '#/definitions/ResponseMetadataApiInspectionTypes'
         readOnly: true
   ApiInspectionTypes:
     description: The inspection type
@@ -2591,12 +2648,30 @@ definitions:
         format: date-time
         description: The date that the inspection type was created
         type: string
-  ResponseMetadata+ApiInspectionTypes:
+  ResponseMetadataApiInspectionTypes:
     type: object
     properties:
       NextCursor:
         type: string
         readOnly: true
+  GetJobRequest:
+    description: Model for getting jobs
+    type: object
+    properties:
+      Limit:
+        format: int32
+        description: The maximum number of results that should be returned. Default to 1000. Cannot be more than 1000.
+        maximum: 1000
+        minimum: 1
+        type: integer
+      Cursor:
+        description: When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.
+        type: string
+      businessUnitId:
+        format: uuid
+        description: "The business unit id to query by. If omitted, returns all jobs.\r\n<example>\r\nFor example: \r\n<code>550e8400-e29b-41d4-a716-446655440000</code></example>"
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
   GetMeetingsResponse:
     type: object
     properties:
@@ -2727,7 +2802,7 @@ definitions:
       cursor:
         description: When there are additional results, the metadata nextCursor field should be passed to retrieve the next page of results.
         type: string
-  PaginatedResponse+ApiUserAccessGroup:
+  PaginatedResponseApiUserAccessGroup:
     type: object
     properties:
       Results:
@@ -2736,7 +2811,7 @@ definitions:
           $ref: '#/definitions/ApiUserAccessGroup'
         readOnly: true
       Metadata:
-        $ref: '#/definitions/ResponseMetadata+ApiUserAccessGroup'
+        $ref: '#/definitions/ResponseMetadataApiUserAccessGroup'
         readOnly: true
   ApiUserAccessGroup:
     description: An object with pairs of Users and Access Groups
@@ -2752,7 +2827,7 @@ definitions:
         description: The access group ID
         type: string
         example: 00000000-0000-0000-0000-000000000000
-  ResponseMetadata+ApiUserAccessGroup:
+  ResponseMetadataApiUserAccessGroup:
     type: object
     properties:
       NextCursor:
