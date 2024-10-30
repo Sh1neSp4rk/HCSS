@@ -920,6 +920,16 @@
         "Name": {
           "type": "string"
         },
+        "Discriminator": {
+          "maxLength": 30,
+          "minLength": 0,
+          "type": "string"
+        },
+        "MimeType": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
         "ThumbnailUrl": {
           "type": "string"
         },

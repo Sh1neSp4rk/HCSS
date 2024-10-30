@@ -113,13 +113,13 @@ paths:
           examples:
             application/json:
               results:
-                - id: c51dbc2f-bbca-465b-8b56-c90624705a1f
+                - id: 3a49fb48-26fe-4b14-8fd5-51a101bf68e1
                   email: example@example.com
                   phoneNumber: '+1234567890'
                   firstName: John
                   lastName: Doe
-                  providerID: eb10d5bb-7732-43e7-b886-230bc326d75e
-                  businessUnitID: c64cf61b-70b0-4505-933d-ad2680d5f544
+                  providerID: 6afcf765-7bab-4ad1-88a5-f92646455809
+                  businessUnitID: 64f1c0dc-dc48-4eeb-9258-5c6399e3aa47
                   carrierAddressOverride: 12345@carrier.com
                   nearMiss:
                     receiveAlert: false
@@ -142,7 +142,7 @@ paths:
                   jobs:
                     isAllJobs: false
                     jobs:
-                      - 59557e8d-e79c-4786-aabc-55a1e285b72a
+                      - 5f61ee5b-db23-406d-9a37-535b17fc7440
               metadata:
                 nextCursor: KySw1rGEukCz8ne2PqxXxg
         '400':
@@ -216,11 +216,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-10-28T17:54:31.9134334Z'
+                  DateOfHire: '2024-10-29T13:48:54.9647451Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-10-28T08:00:00Z'
+                  TimeStartedWork: '2024-10-29T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -246,13 +246,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-10-29T00:00:00Z'
-                    LastDay: '2024-10-31T00:00:00Z'
+                    FirstDay: '2024-10-30T00:00:00Z'
+                    LastDay: '2024-11-01T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-10-29T00:00:00Z'
-                    LastDay: '2024-10-31T00:00:00Z'
+                    FirstDay: '2024-10-30T00:00:00Z'
+                    LastDay: '2024-11-01T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -282,8 +282,8 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-11-04T00:00:00Z'
-                    CompletionDate: '2024-11-04T00:00:00Z'
+                    TargetCompletionDate: '2024-11-05T00:00:00Z'
+                    CompletionDate: '2024-11-05T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
               Attachments:
                 - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
@@ -309,8 +309,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-10-28T17:54:31.7884367Z'
-              LastModifiedUtc: '2024-10-28T17:54:31.7884367Z'
+              CreatedDateUtc: '2024-10-29T13:48:54.8553781Z'
+              LastModifiedUtc: '2024-10-29T13:48:54.8553781Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -321,8 +321,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-10-29T17:54:31.7884367Z'
-              ID: 94272c45-0071-4b7b-a42e-c2ecd00ab71f
+              DateInvestigationBegan: '2024-10-30T13:48:54.8553781Z'
+              ID: e342ec0e-9d37-4f7c-a63e-ae829692fc9d
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -330,10 +330,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-10-28T17:54:31.7884367Z'
+              ReportedDateUtc: '2024-10-29T13:48:54.8553781Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-10-28T16:54:31.7884367Z'
+              IncidentDateUtc: '2024-10-29T12:48:54.8553781Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -402,11 +402,11 @@ paths:
                   Phone: 555-111-4444
                   Email: employee04@company.com
                   JobTitle: Contractor
-                  DateOfHire: '2024-10-28T17:54:32.0696939Z'
+                  DateOfHire: '2024-10-29T13:48:55.1522533Z'
                   YearsWithCompanyString: '1'
                   YearsInConstructionString: '3'
                   DescriptionOfInjury: Minor cut on left arm
-                  TimeStartedWork: '2024-10-28T08:00:00Z'
+                  TimeStartedWork: '2024-10-29T08:00:00Z'
                   ActivityAtTime: Working on XYZ
                   InjuryClassificationString: illness/injury classification
                   NatureOfInjuryCategoryString: nature of injury category
@@ -432,13 +432,13 @@ paths:
                   ClassificationString: injury classification
                   DateOfDeath: '0001-01-01T00:00:00'
                   DaysAwayFromWork:
-                    FirstDay: '2024-10-29T00:00:00Z'
-                    LastDay: '2024-10-31T00:00:00Z'
+                    FirstDay: '2024-10-30T00:00:00Z'
+                    LastDay: '2024-11-01T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   DaysOnJobTransfer:
-                    FirstDay: '2024-10-29T00:00:00Z'
-                    LastDay: '2024-10-31T00:00:00Z'
+                    FirstDay: '2024-10-30T00:00:00Z'
+                    LastDay: '2024-11-01T00:00:00Z'
                     IncludeWeekends: true
                     DaysAway: 3
                   Notes: Additional injury notes
@@ -468,8 +468,8 @@ paths:
                     FuturePreventionString: future prevention measures
                     PreventiveMeasuresNotes: additional notes
                     AssigneeCode: employee-code-07
-                    TargetCompletionDate: '2024-11-04T00:00:00Z'
-                    CompletionDate: '2024-11-04T00:00:00Z'
+                    TargetCompletionDate: '2024-11-05T00:00:00Z'
+                    CompletionDate: '2024-11-05T00:00:00Z'
                     PreventiveAccountabilityNotes: additional notes
               Attachments:
                 - AttachmentUrl: https://attachments.hcssapps.com/injury-photo.png
@@ -495,8 +495,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-10-28T17:54:31.9759475Z'
-              LastModifiedUtc: '2024-10-28T17:54:31.9759475Z'
+              CreatedDateUtc: '2024-10-29T13:48:55.0272578Z'
+              LastModifiedUtc: '2024-10-29T13:48:55.0272578Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -507,8 +507,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-10-29T17:54:31.9759475Z'
-              ID: 9dbf5b2e-480d-47a1-b5cc-71893cd8448d
+              DateInvestigationBegan: '2024-10-30T13:48:55.0272578Z'
+              ID: 5a02743a-3d29-4ed7-940e-9e917d1708ef
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -516,10 +516,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-10-28T17:54:31.9759475Z'
+              ReportedDateUtc: '2024-10-29T13:48:55.0272578Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-10-28T16:54:31.9759475Z'
+              IncidentDateUtc: '2024-10-29T12:48:55.0272578Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -600,8 +600,8 @@ paths:
               $ref: '#/definitions/ApiIncident'
           examples:
             application/json:
-              - CreatedDateUtc: '2024-10-28T17:54:32.0696939Z'
-                LastModifiedUtc: '2024-10-28T17:54:32.0696939Z'
+              - CreatedDateUtc: '2024-10-29T13:48:55.1678809Z'
+                LastModifiedUtc: '2024-10-29T13:48:55.1678809Z'
                 BusinessUnitDescription: BU-123 description
                 ReportingStatus: ReportedToThirdPartyCarrier
                 InsuranceCompanyName: Allstate
@@ -612,8 +612,8 @@ paths:
                 AdjusterEmail: adjuster@company.com
                 AdjusterPhone: 555-111-9999
                 AdjusterNotes: adjuster notes
-                DateInvestigationBegan: '2024-10-29T17:54:32.0696939Z'
-                ID: 3234c02f-3cd3-4dca-b02e-427cdc312057
+                DateInvestigationBegan: '2024-10-30T13:48:55.1678809Z'
+                ID: e80417d0-370b-45d0-b3f4-27d8bb4c88d2
                 CaseNumber: injury-1234
                 Description: Employee injured on-site
                 Notes: Additional notes
@@ -621,10 +621,10 @@ paths:
                 JobCode: construction-job-123
                 BusinessUnitCode: BU-123
                 LocationDescription: job site
-                ReportedDateUtc: '2024-10-28T17:54:32.0696939Z'
+                ReportedDateUtc: '2024-10-29T13:48:55.1678809Z'
                 RecorderCode: employee-code-01
                 PersonInChargeCode: employee-code-02
-                IncidentDateUtc: '2024-10-28T16:54:32.0696939Z'
+                IncidentDateUtc: '2024-10-29T12:48:55.1678809Z'
                 Status: Reported
                 Latitude: 29.76
                 Longitude: 95.37
@@ -817,8 +817,8 @@ paths:
                 State: TX
                 ZipCode: '77042'
                 Country: US
-              CreatedDateUtc: '2024-10-28T17:54:32.1165734Z'
-              LastModifiedUtc: '2024-10-28T17:54:32.1165734Z'
+              CreatedDateUtc: '2024-10-29T13:48:55.2147609Z'
+              LastModifiedUtc: '2024-10-29T13:48:55.2147609Z'
               BusinessUnitDescription: BU-123 description
               ReportingStatus: ReportedToThirdPartyCarrier
               InsuranceCompanyName: Allstate
@@ -829,8 +829,8 @@ paths:
               AdjusterEmail: adjuster@company.com
               AdjusterPhone: 555-111-9999
               AdjusterNotes: adjuster notes
-              DateInvestigationBegan: '2024-10-29T17:54:32.1165734Z'
-              ID: f57cf2a9-bd37-4abc-a2fc-611d9e4f75a2
+              DateInvestigationBegan: '2024-10-30T13:48:55.2147609Z'
+              ID: 7c3db774-d4d3-4d22-9a02-d1aa263819b6
               CaseNumber: injury-1234
               Description: Employee injured on-site
               Notes: Additional notes
@@ -838,10 +838,10 @@ paths:
               JobCode: construction-job-123
               BusinessUnitCode: BU-123
               LocationDescription: job site
-              ReportedDateUtc: '2024-10-28T17:54:32.1165734Z'
+              ReportedDateUtc: '2024-10-29T13:48:55.2147609Z'
               RecorderCode: employee-code-01
               PersonInChargeCode: employee-code-02
-              IncidentDateUtc: '2024-10-28T16:54:32.1165734Z'
+              IncidentDateUtc: '2024-10-29T12:48:55.2147609Z'
               Status: Reported
               Latitude: 29.76
               Longitude: 95.37
@@ -908,14 +908,14 @@ paths:
           examples:
             application/json:
               results:
-                - id: 13194936-7fd2-4cc2-9268-a155824f3607
+                - id: 492af98a-b454-4854-a7df-133d150ca51f
                   name: example@example.com
                   isActive: true
-                  businessUnitID: db53271b-161c-41e0-9f4c-27cc315e8fd0
+                  businessUnitID: e1a9d525-6dfa-4542-9f6d-72dfe5562d02
                   isEquipmentType: false
-                  createdByID: cc27f057-c78b-4b66-ac17-9ba36dc47e80
-                  modifiedByID: a57271bf-45d8-48ea-97ed-7bf7cdd16817
-                  createdDate: '2024-10-28T17:54:32.2416509Z'
+                  createdByID: b22044d3-a49b-4174-ad21-933118020163
+                  modifiedByID: f1696b83-1428-4d97-b27b-46d60ffeb170
+                  createdDate: '2024-10-29T13:48:55.3397518Z'
               metadata:
                 nextCursor: KySw1rGEukCz8ne2PqxXxg
         '400':
@@ -1048,11 +1048,11 @@ paths:
           examples:
             application/json:
               Meetings:
-                - Id: b26213cb-5df5-4511-bc18-25b79d60c963
-                  MeetingDate: '2024-10-28T17:54:32.2573139Z'
-                  JobId: e6f1a141-abd7-4f7f-a77e-b5700cff5dcc
+                - Id: 810e051b-9589-4744-ad35-e9e79ff84171
+                  MeetingDate: '2024-10-29T13:48:55.3709991Z'
+                  JobId: d35e4a8f-89af-4b72-9203-fa0121da5200
                   JobCode: road-construction-123
-                  RecorderId: e741c914-b38d-45ff-b716-d85a17ef4a7e
+                  RecorderId: 248e4e69-66fe-4146-9122-4ab4fe92031d
                   RecorderCode: EMP-123
                   DurationMinutes: 60
                   Type: Weekly check-in
@@ -1076,6 +1076,34 @@ paths:
                       Note: Client manager
                       OnSite: true
                       Attended: true
+        '400':
+          description: |-
+            Bad Request. This typically means one or more request validation errors occurred.
+            Check the response body for details.
+            For more help troubleshooting, please see https://dev-developer.hcssapps.com/getting-started/troubleshoot-bad-request
+  /v1/providers:
+    get:
+      tags:
+        - Providers
+      summary: Gets a list of SMS Providers
+      description: "Gets a list of SMS Providers for safety alerts\r\n\r\nFor help with authorization, please visit https://developer.hcssapps.com/getting-started/request-tokens"
+      operationId: Providers_GetAllProviders
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Providers queried successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApiProvider'
+          examples:
+            application/json:
+              - id: a9983748-b73e-4b7f-b63d-00a2de3c08ba
+                name: AT&T
+                domain: mms.att.net
         '400':
           description: |-
             Bad Request. This typically means one or more request validation errors occurred.
@@ -2782,6 +2810,21 @@ definitions:
       Attended:
         description: Did this person attend?
         type: boolean
+  ApiProvider:
+    description: The SMS provider for Safety Alerts
+    type: object
+    properties:
+      Id:
+        format: uuid
+        description: The id of the provider
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      Name:
+        description: The name of the provider
+        type: string
+      Domain:
+        description: The domain of the provider
+        type: string
   SearchUserAccessGroupsRequest:
     description: The request body for the endpoint that searches for user access groups
     type: object
