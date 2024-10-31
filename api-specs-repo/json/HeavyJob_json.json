@@ -7055,6 +7055,7 @@
               "example": {
                 "businessUnitId": "c2e2ddb8-513d-424d-a65f-99feae96551e",
                 "includeAllJobs": true,
+                "includeInactiveEmployees": false,
                 "modifiedSince": "2022-08-06T00:00:00",
                 "employeeIds": [
                   "c2e2ddb8-513d-424d-a65f-99feae96551e",
@@ -7082,6 +7083,7 @@
               "example": {
                 "businessUnitId": "c2e2ddb8-513d-424d-a65f-99feae96551e",
                 "includeAllJobs": true,
+                "includeInactiveEmployees": false,
                 "modifiedSince": "2022-08-06T00:00:00",
                 "employeeIds": [
                   "c2e2ddb8-513d-424d-a65f-99feae96551e",
@@ -7109,6 +7111,7 @@
               "example": {
                 "businessUnitId": "c2e2ddb8-513d-424d-a65f-99feae96551e",
                 "includeAllJobs": true,
+                "includeInactiveEmployees": false,
                 "modifiedSince": "2022-08-06T00:00:00",
                 "employeeIds": [
                   "c2e2ddb8-513d-424d-a65f-99feae96551e",
@@ -7262,6 +7265,7 @@
               "example": {
                 "businessUnitId": "c2e2ddb8-513d-424d-a65f-99feae96551e",
                 "includeAllJobs": true,
+                "includeInactiveEquipment": false,
                 "equipmentIds": [
                   "c2e2ddb8-513d-424d-a65f-99feae96551e",
                   "8cb64519-9938-43e0-a947-4002f1dcc6e5"
@@ -7293,6 +7297,7 @@
               "example": {
                 "businessUnitId": "c2e2ddb8-513d-424d-a65f-99feae96551e",
                 "includeAllJobs": true,
+                "includeInactiveEquipment": false,
                 "equipmentIds": [
                   "c2e2ddb8-513d-424d-a65f-99feae96551e",
                   "8cb64519-9938-43e0-a947-4002f1dcc6e5"
@@ -7324,6 +7329,7 @@
               "example": {
                 "businessUnitId": "c2e2ddb8-513d-424d-a65f-99feae96551e",
                 "includeAllJobs": true,
+                "includeInactiveEquipment": false,
                 "equipmentIds": [
                   "c2e2ddb8-513d-424d-a65f-99feae96551e",
                   "8cb64519-9938-43e0-a947-4002f1dcc6e5"
@@ -32679,6 +32685,10 @@
             "type": "boolean",
             "description": "If the other job filters are not used, and parameter is set to true,\r\ntransactions for active and non-active jobs will be returned."
           },
+          "includeInactiveEmployees": {
+            "type": "boolean",
+            "description": "Filter to include inactive employees."
+          },
           "modifiedSince": {
             "type": "string",
             "description": "The modifiedSince datetime.",
@@ -32760,6 +32770,10 @@
           "includeAllJobs": {
             "type": "boolean",
             "description": "If the other job filters are not used, and parameter is set to true,\r\ntransactions for active and non-active jobs will be returned."
+          },
+          "includeInactiveEquipment": {
+            "type": "boolean",
+            "description": "Filter to include inactive equipment."
           },
           "equipmentIds": {
             "type": "array",
