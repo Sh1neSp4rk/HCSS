@@ -10936,6 +10936,13 @@ components:
             format: uuid
           description: List of cost code Tag Ids
           nullable: true
+        costCodeTransactionTagIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of cost code Transaction Tag Ids
+          nullable: true
         includeDeleted:
           type: boolean
           description: Include deleted cost codes.
@@ -23750,6 +23757,13 @@ components:
             format: uuid
           description: List of cost code Tag Ids
           nullable: true
+        costCodeTransactionTagIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of cost code Transaction Tag Ids
+          nullable: true
         cursor:
           type: string
           description: "Optional.  \r\nWhen there are additional results, the metadata nextCursor\r\nfield should be passed to retrieve the next page of results."
@@ -23840,6 +23854,13 @@ components:
             type: string
             format: uuid
           description: List of cost code Tag Ids
+          nullable: true
+        costCodeTransactionTagIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of cost code Transaction Tag Ids
           nullable: true
         cursor:
           type: string
